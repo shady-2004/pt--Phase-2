@@ -6,7 +6,7 @@ class CHexagon :
 private:
     Point Center;
 public:
-    CHexagon(Point, GfxInfo FigureGfxInfo);
+    CHexagon(Point, GfxInfo FigureGfxInfo, int ID);
     virtual void Draw(Output* pOut) const;
     virtual void Save(ofstream& OutFile);
 };

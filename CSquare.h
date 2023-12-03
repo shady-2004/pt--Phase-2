@@ -7,7 +7,7 @@ private:
 	Point Center;
 
 public:
-	CSquare(Point, GfxInfo FigureGfxInfo);
+	CSquare(Point, GfxInfo FigureGfxInfo, int ID);
 	virtual void Draw(Output* pOut) const;
 	virtual void Save(ofstream& OutFile);
 };

@@ -1,8 +1,9 @@
 #include "CSquare.h"
 #include <fstream>
 
-CSquare::CSquare(Point P, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo)
+CSquare::CSquare(Point P, GfxInfo FigureGfxInfo, int ID):CFigure(FigureGfxInfo)
 {
+	id = ID;
 	Center = P;
 }
 

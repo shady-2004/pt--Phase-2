@@ -1,8 +1,9 @@
 #include "CTriangle.h"
 #include <fstream>
 
-CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
+CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo, int ID) :CFigure(FigureGfxInfo)
 {
+	id = ID;
 	vertex1 = P1;
 	vertex2 = P2;
 	vertex3 = P3;

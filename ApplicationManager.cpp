@@ -1,5 +1,9 @@
 #include "ApplicationManager.h"
 #include "Actions\AddRectAction.h"
+#include "AddSqrAction.h"
+#include "AddCircAction.h"
+#include "AddTriAction.h"
+#include "AddHexAction.h"
 #include "SaveAction.h"
 #include <fstream>
 
@@ -36,8 +40,26 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	switch (ActType)
 	{
 		case DRAW_RECT:
+
 			pAct = new AddRectAction(this);
 			break;
+
+		case DRAW_SQUARE:
+			pAct = new AddSqrAction(this);
+			break;
+
+		case DRAW_CIRCLE:
+			pAct = new AddCircAction(this);
+			break;
+
+		case DRAW_TRIANGLE:
+			pAct = new AddTriAction(this);
+			break;
+
+		case DRAW_HEXAGON:
+			pAct = new AddHexAction(this);
+			break;
+
 		case TO_SAVE_GRAPH:
 			pAct = new SaveAction(this);
 			break;
@@ -57,6 +79,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		delete pAct;	//You may need to change this line depending to your implementation
 		pAct = NULL;
 	}
+}
+int ApplicationManager::getfigcount()
+{
+	return FigCount;
 }
 //==================================================================================//
 //						Figures Management Functions								//
