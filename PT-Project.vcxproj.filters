@@ -166,10 +166,11 @@
     <ClCompile Include="AddTriAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="AddCircAction.cpp">
+    <ClCompile Include="AddHexAction.cpp" />
+    <ClCompile Include="SaveAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="AddHexAction.cpp" />
+    <ClCompile Include="AddCircAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -272,13 +273,14 @@
     <ClInclude Include="AddSqrAction.h">
       <Filter>Figures Classes</Filter>
     </ClInclude>
-    <ClInclude Include="AddCircAction.h">
-      <Filter>Action Classes</Filter>
-    </ClInclude>
     <ClInclude Include="AddTriAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="AddHexAction.h" />
+    <ClInclude Include="SaveAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="AddCircAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

@@ -1,5 +1,7 @@
 #include "ApplicationManager.h"
 #include "Actions\AddRectAction.h"
+#include "SaveAction.h"
+#include <fstream>
 
 
 //Constructor
@@ -36,7 +38,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case DRAW_RECT:
 			pAct = new AddRectAction(this);
 			break;
-
+		case TO_SAVE_GRAPH:
+			pAct = new SaveAction(this);
+			break;
 		case EXIT:
 			///create ExitAction here
 			
@@ -88,12 +92,29 @@ void ApplicationManager::UpdateInterface() const
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
-Input *ApplicationManager::GetInput() const
-{	return pIn; }
+Input* ApplicationManager::GetInput() const
+{
+	return pIn;
+}
 //Return a pointer to the output
-Output *ApplicationManager::GetOutput() const
-{	return pOut; }
+Output* ApplicationManager::GetOutput() const
+{
+	return pOut;
+}
 ////////////////////////////////////////////////////////////////////////////////////
+
+//==================================================================================//
+//							Saving All Figures Function							    //
+//==================================================================================//
+
+void ApplicationManager::SaveAll(ofstream &OutFile) {
+	OutFile << "DRWCLR" << "\t" << "FCLR" << endl;
+	OutFile << FigCount << endl;
+	for (int i = 0; i < FigCount; i++)
+		FigList[i]->Save(OutFile);
+}
+
+
 //Destructor
 ApplicationManager::~ApplicationManager()
 {

@@ -4,7 +4,7 @@
 #include"GUI/Output.h"
 #include"ApplicationManager.h"
 
-AddCircAction::AddCircAction(ApplicationManager* pApp):Action(pApp)
+AddCircAction::AddCircAction(ApplicationManager* pApp) :Action(pApp)
 {
 }
 
@@ -44,4 +44,3 @@ void AddCircAction::Execute()
 	//Add the cirlce to the list of figures
 	pManager->AddFigure(C);
 }
-

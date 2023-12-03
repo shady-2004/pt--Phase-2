@@ -3,8 +3,8 @@
 
 //Add Circle Action class
 class AddCircAction :
-    public Action
-	
+	public Action
+
 {
 private:
 	Point Center, Radius; //Center and Radius of the circle
@@ -13,7 +13,7 @@ public:
 	AddCircAction(ApplicationManager* pApp);
 
 	//Reads Circle parameters
-	virtual void ReadActionParameters();
+	void ReadActionParameters();
 
 	//Add Circle to the ApplicationManager
 	virtual void Execute();
