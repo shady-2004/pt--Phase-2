@@ -15,6 +15,6 @@ void CSquare::Draw(Output* pOut) const
 
 void CSquare::Save(ofstream& OutFile) {
 	string dclr = "DRWCLR", fclr = "FCLR";
-	OutFile << "SQUARE\t" << ID << "\t" << Center.x << "\t" << Center.y << "\t" << dclr << "\t" << fclr << endl;
+	OutFile << "SQUARE\t" << id << "\t" << Center.x << "\t" << Center.y << "\t" << dclr << "\t" << fclr << endl;
 }
 

@@ -16,5 +16,5 @@ void CCircle::Draw(Output* pOut) const
 
 void CCircle::Save(ofstream& OutFile) {
 	string dclr = "DRWCLR", fclr = "FCLR";
-	OutFile << "CIRCLE\t" << ID << "\t" << Center.x << "\t" << Center.y << "\t" << Radius.x << "\t" << Radius.y << "\t" << dclr << "\t" << fclr << endl;
+	OutFile << "CIRCLE\t" << id << "\t" << Center.x << "\t" << Center.y << "\t" << Radius.x << "\t" << Radius.y << "\t" << dclr << "\t" << fclr << endl;
 }

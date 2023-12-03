@@ -15,5 +15,5 @@ void CHexagon::Draw(Output* pOut) const
 
 void CHexagon::Save(ofstream& OutFile) {
 	string dclr = "DRWCLR", fclr = "FCLR";
-	OutFile << "HEX\t" << ID << "\t" << Center.x << "\t" << Center.y << "\t" << dclr << "\t" << fclr << endl;
+	OutFile << "HEX\t" << id << "\t" << Center.x << "\t" << Center.y << "\t" << dclr << "\t" << fclr << endl;
 }

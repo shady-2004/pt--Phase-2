@@ -20,5 +20,6 @@ void SaveAction::Execute() {
 	ofstream OutFile;
 	OutFile.open("Saved Data/"+filename+".txt");
 	pManager->SaveAll(OutFile);
+	pManager->GetOutput()->PrintMessage("Your file has been saved successfully!");
 	OutFile.close();
 }
