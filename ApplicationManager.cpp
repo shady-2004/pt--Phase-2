@@ -1,5 +1,11 @@
 #include "ApplicationManager.h"
 #include "Actions\AddRectAction.h"
+#include "AddSqrAction.h"
+#include "AddCircAction.h"
+#include "AddTriAction.h"
+#include "AddHexAction.h"
+#include "SaveAction.h"
+#include <fstream>
 
 
 //Constructor
@@ -34,9 +40,29 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	switch (ActType)
 	{
 		case DRAW_RECT:
+
 			pAct = new AddRectAction(this);
 			break;
 
+		case DRAW_SQUARE:
+			pAct = new AddSqrAction(this);
+			break;
+
+		case DRAW_CIRCLE:
+			pAct = new AddCircAction(this);
+			break;
+
+		case DRAW_TRIANGLE:
+			pAct = new AddTriAction(this);
+			break;
+
+		case DRAW_HEXAGON:
+			pAct = new AddHexAction(this);
+			break;
+
+		case TO_SAVE_GRAPH:
+			pAct = new SaveAction(this);
+			break;
 		case EXIT:
 			///create ExitAction here
 			
@@ -53,6 +79,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		delete pAct;	//You may need to change this line depending to your implementation
 		pAct = NULL;
 	}
+}
+int ApplicationManager::getfigcount()
+{
+	return FigCount;
 }
 //==================================================================================//
 //						Figures Management Functions								//
@@ -88,12 +118,29 @@ void ApplicationManager::UpdateInterface() const
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
-Input *ApplicationManager::GetInput() const
-{	return pIn; }
+Input* ApplicationManager::GetInput() const
+{
+	return pIn;
+}
 //Return a pointer to the output
-Output *ApplicationManager::GetOutput() const
-{	return pOut; }
+Output* ApplicationManager::GetOutput() const
+{
+	return pOut;
+}
 ////////////////////////////////////////////////////////////////////////////////////
+
+//==================================================================================//
+//							Saving All Figures Function							    //
+//==================================================================================//
+
+void ApplicationManager::SaveAll(ofstream &OutFile) {
+	OutFile << "DRWCLR" << "\t" << "FCLR" << endl;
+	OutFile << FigCount << endl;
+	for (int i = 0; i < FigCount; i++)
+		FigList[i]->Save(OutFile);
+}
+
+
 //Destructor
 ApplicationManager::~ApplicationManager()
 {

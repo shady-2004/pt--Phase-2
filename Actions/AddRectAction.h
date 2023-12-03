@@ -13,7 +13,7 @@ public:
 	AddRectAction(ApplicationManager *pApp);
 
 	//Reads rectangle parameters
-	virtual void ReadActionParameters();
+	void ReadActionParameters();
 	
 	//Add rectangle to the ApplicationManager
 	virtual void Execute() ;
