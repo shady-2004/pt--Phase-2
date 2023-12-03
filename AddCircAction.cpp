@@ -19,7 +19,7 @@ void AddCircAction::ReadActionParameters()
 	//Read Center and store in point Center
 	pIn->GetPointClicked(Center.x, Center.y);
 
-	pOut->PrintMessage("New Center: Click at Radius");
+	pOut->PrintMessage("New Circle: Click at Radius");
 
 	//Read Radius and store in Radius
 	pIn->GetPointClicked(Radius.x, Radius.y);

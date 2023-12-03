@@ -129,6 +129,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AddCircAction.cpp" />
+    <ClCompile Include="AddHexAction.cpp" />
     <ClCompile Include="AddSqrAction.cpp" />
     <ClCompile Include="AddTriAction.cpp" />
     <ClCompile Include="CCircle.cpp" />
@@ -181,6 +182,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddCircAction.h" />
+    <ClInclude Include="AddHexAction.h" />
     <ClInclude Include="AddSqrAction.h" />
     <ClInclude Include="AddTriAction.h" />
     <ClInclude Include="CCircle.h" />
