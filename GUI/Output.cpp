@@ -217,7 +217,7 @@ int Output::getCrntPenWidth() const		//get current pen width
 //								Figures Drawing Functions								//
 //======================================================================================//
 
-void Output::DrawRect(Point& P1, Point& P2, GfxInfo RectGfxInfo, bool selected) const
+void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const
 {
 
 	while (!(P1.y >= UI.ToolBarHeight && P1.y < UI.height - UI.StatusBarHeight && P2.y >= UI.ToolBarHeight && P2.y < UI.height - UI.StatusBarHeight))
@@ -248,20 +248,10 @@ void Output::DrawRect(Point& P1, Point& P2, GfxInfo RectGfxInfo, bool selected) 
 
 }
 
-void Output::DrawSqr(Point& P1, GfxInfo SqrGfxInfo, bool selected) const
+void Output::DrawSqr(const Point& P1, GfxInfo SqrGfxInfo, bool selected) const
 {
 
-	while (!(P1.y >= UI.ToolBarHeight && P1.y < UI.height - UI.StatusBarHeight))
-	{
-		PrintMessage("Can't draw here!! Enter a valid point:");
-		pWind->WaitMouseClick(P1.x, P1.y);
-	}
-
-	while ((100 > P1.y - UI.ToolBarHeight) || 100 > UI.height - UI.StatusBarHeight - P1.y)
-	{
-		PrintMessage("Square too close to toolbar or status bar!! Enter a valid point:");
-		pWind->WaitMouseClick(P1.x, P1.y);
-	}
+	
 	color DrawingClr;
 	if (selected)
 		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
@@ -285,17 +275,9 @@ void Output::DrawSqr(Point& P1, GfxInfo SqrGfxInfo, bool selected) const
 
 }
 
-void Output::DrawTri(Point& P1, Point& P2, Point& P3, GfxInfo TriGfxInfo, bool selected) const
+void Output::DrawTri(const Point& P1, const Point& P2, const Point& P3, GfxInfo TriGfxInfo, bool selected) const
 {
 
-	while (!(P1.y >= UI.ToolBarHeight && P1.y < UI.height - UI.StatusBarHeight && P2.y >= UI.ToolBarHeight && P2.y < UI.height - UI.StatusBarHeight && P3.y >= UI.ToolBarHeight && P3.y < UI.height - UI.StatusBarHeight))
-	{
-		PrintMessage("Can't draw here!! Enter three valid points:");
-		pWind->WaitMouseClick(P1.x, P1.y);
-		pWind->WaitMouseClick(P2.x, P2.y);
-		pWind->WaitMouseClick(P3.x, P3.y);
-
-	}
 	color DrawingClr;
 	if (selected)
 		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
@@ -317,19 +299,9 @@ void Output::DrawTri(Point& P1, Point& P2, Point& P3, GfxInfo TriGfxInfo, bool s
 
 
 
-void Output::DrawHex(Point& P1, GfxInfo HexGfxInfo, bool selected) const
+void Output::DrawHex(const Point& P1, GfxInfo HexGfxInfo, bool selected) const
 {
-	while (!(P1.y >= UI.ToolBarHeight && P1.y < UI.height - UI.StatusBarHeight))
-	{
-		PrintMessage("Can't draw here!! Enter a valid point:");
-		pWind->WaitMouseClick(P1.x, P1.y);
-	}
-
-	while ((100 > P1.y - UI.ToolBarHeight) || 100 > UI.height - UI.StatusBarHeight - P1.y)
-	{
-		PrintMessage("Hexagon too close to toolbar or status bar!! Enter a valid point:");
-		pWind->WaitMouseClick(P1.x, P1.y);
-	}
+	
 	color DrawingClr;
 	if (selected)
 		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
@@ -352,27 +324,9 @@ void Output::DrawHex(Point& P1, GfxInfo HexGfxInfo, bool selected) const
 	pWind->DrawPolygon(p, a, 6, style);
 }
 
-void Output::DrawCirc(Point& P1, Point& P2, GfxInfo CircGfxInfo, bool selected) const
+void Output::DrawCirc(const Point& P1, const Point& P2, GfxInfo CircGfxInfo, bool selected) const
 {
 	int Radius = sqrt(pow(P1.x - P2.x, 2) + pow(P1.y - P2.y, 2));
-
-	while (!(P1.y >= UI.ToolBarHeight && P1.y < UI.height - UI.StatusBarHeight && P2.y >= UI.ToolBarHeight && P2.y < UI.height - UI.StatusBarHeight))
-	{
-		PrintMessage("Can't draw here!! Enter two valid points:");
-		pWind->WaitMouseClick(P1.x, P1.y);
-		pWind->WaitMouseClick(P2.x, P2.y);
-
-	}
-
-
-
-	while ((Radius > P1.y - UI.ToolBarHeight) || Radius > UI.height - UI.StatusBarHeight - P1.y)
-	{
-		PrintMessage("Circle too close to toolbar or status bar !! Enter two valid points:");
-		pWind->WaitMouseClick(P1.x, P1.y);
-		pWind->WaitMouseClick(P2.x, P2.y);
-		Radius = sqrt(pow(P1.x - P2.x, 2) + pow(P1.y - P2.y, 2));
-	}
 
 	color DrawingClr;
 	if (selected)
