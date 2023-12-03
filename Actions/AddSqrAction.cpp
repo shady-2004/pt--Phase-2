@@ -1,8 +1,8 @@
 #include "AddSqrAction.h"
-#include"CSquare.h"
-#include"GUI/Input.h"
-#include"GUI/Output.h"
-#include"ApplicationManager.h"
+#include"../Figures/CSquare.h"
+#include"../GUI/Input.h"
+#include"../GUI/Output.h"
+#include"../ApplicationManager.h"
 AddSqrAction::AddSqrAction(ApplicationManager* pApp):Action(pApp)
 {
 }

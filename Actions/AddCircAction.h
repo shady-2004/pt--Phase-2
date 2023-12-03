@@ -1,5 +1,5 @@
 #pragma once
-#include "Actions/Action.h"
+#include "Action.h"
 
 //Add Circle Action class
 class AddCircAction :

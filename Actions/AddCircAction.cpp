@@ -1,8 +1,8 @@
 #include "AddCircAction.h"
-#include"CCircle.h"
-#include"GUI/Input.h"
-#include"GUI/Output.h"
-#include"ApplicationManager.h"
+#include"../Figures/CCircle.h"
+#include"../GUI/Input.h"
+#include"../GUI/Output.h"
+#include"../ApplicationManager.h"
 
 AddCircAction::AddCircAction(ApplicationManager* pApp) :Action(pApp)
 {

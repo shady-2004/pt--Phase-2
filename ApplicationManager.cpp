@@ -1,10 +1,10 @@
 #include "ApplicationManager.h"
 #include "Actions\AddRectAction.h"
-#include "AddSqrAction.h"
-#include "AddCircAction.h"
-#include "AddTriAction.h"
-#include "AddHexAction.h"
-#include "SaveAction.h"
+#include "Actions\AddSqrAction.h"
+#include "Actions\AddCircAction.h"
+#include "Actions\AddTriAction.h"
+#include "Actions\AddHexAction.h"
+#include "Actions\SaveAction.h"
 #include <fstream>
 
 

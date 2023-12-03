@@ -1,8 +1,8 @@
 #include "AddTriAction.h"
-#include"CTriangle.h"
-#include"GUI/Input.h"
-#include"GUI/Output.h"
-#include"ApplicationManager.h"
+#include"../Figures/CTriangle.h"
+#include"../GUI/Input.h"
+#include"../GUI/Output.h"
+#include"../ApplicationManager.h"
 AddTriAction::AddTriAction(ApplicationManager* pApp):Action(pApp)
 {
 }

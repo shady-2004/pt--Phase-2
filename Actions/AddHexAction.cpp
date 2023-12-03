@@ -1,8 +1,8 @@
 #include "AddHexAction.h"
-#include"CHexagon.h"
-#include"GUI/Input.h"
-#include"GUI/Output.h"
-#include"ApplicationManager.h"
+#include"../Figures/CHexagon.h"
+#include"../GUI/Input.h"
+#include"../GUI/Output.h"
+#include"../ApplicationManager.h"
 
 AddHexAction::AddHexAction(ApplicationManager* pApp):Action(pApp)
 {
