@@ -1,7 +1,8 @@
 #include "CHexagon.h"
 
-CHexagon::CHexagon(Point P, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo)
+CHexagon::CHexagon(Point P, GfxInfo FigureGfxInfo, int ID):CFigure(FigureGfxInfo)
 {
+	id = ID;
 	Center = P;
 }
 

@@ -32,7 +32,7 @@ void AddSqrAction::Execute()
 	ReadActionParameters();
 
 	//Create a Square with the parameters read from the user
-	CSquare* S = new CSquare(P1,  SqrGfxInfo);
+	CSquare* S = new CSquare(P1,  SqrGfxInfo, (pManager->getfigcount()) + 1);
 
 	//Add the Square to the list of figures
 	pManager->AddFigure(S);

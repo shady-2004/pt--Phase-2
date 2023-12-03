@@ -8,7 +8,7 @@ private:
     Point vertex2;
     Point vertex3;
 public:
-    CTriangle(Point, Point, Point, GfxInfo FigureGfxInfo);
+    CTriangle(Point, Point, Point, GfxInfo FigureGfxInfo,int ID);
 
     virtual void Draw(Output* pOut) const;
 };
