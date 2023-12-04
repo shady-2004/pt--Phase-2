@@ -1,6 +1,10 @@
 #include "CSquare.h"
 #include <fstream>
 
+CSquare::CSquare() {
+
+}
+
 CSquare::CSquare(Point P, GfxInfo FigureGfxInfo, int ID):CFigure(FigureGfxInfo)
 {
 	id = ID;
@@ -16,6 +20,10 @@ void CSquare::Draw(Output* pOut) const
 void CSquare::Save(ofstream& OutFile) {
 	string dclr = "DRWCLR", fclr = "FCLR";
 	OutFile << "SQUARE\t" << id << "\t" << Center.x << "\t" << Center.y << "\t" << dclr << "\t" << fclr << endl;
+}
+
+void CSquare::Load(ifstream& InFile) {
+	InFile >> id >> Center.x >> Center.y;
 }
 
 bool CSquare::IsFound(int x, int y)

@@ -1,6 +1,10 @@
 #include "CRectangle.h"
 #include <fstream>
 
+CRectangle::CRectangle() {
+
+}
+
 CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo, int ID):CFigure(FigureGfxInfo)
 {
 	id = ID;
@@ -18,6 +22,10 @@ void CRectangle::Draw(Output* pOut) const
 void CRectangle::Save(ofstream& OutFile) {
 	string dclr = "DRWCLR", fclr = "FCLR";
 	OutFile << "RECT\t" << id << "\t" << Corner1.x << "\t" << Corner1.y << "\t" << Corner2.x << "\t" << Corner2.y << "\t" << dclr << "\t" << fclr << endl;
+}
+
+void CRectangle::Load(ifstream& InFile) {
+	InFile >> id >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y;
 }
 
 void CRectangle::Print(Output* pOut)
