@@ -11,6 +11,7 @@ class Action
 {
 protected:
 	ApplicationManager *pManager;	//Actions needs AppMngr to do their job
+	int id;
 
 public:
 
@@ -21,6 +22,7 @@ public:
 	
 	//Execute action (code depends on action type)
 	virtual void Execute() =0;
+
 
 };
 

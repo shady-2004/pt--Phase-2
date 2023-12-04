@@ -1,5 +1,5 @@
 #pragma once
-#include "Figures/CFigure.h"
+#include "CFigure.h"
 class CCircle :
     public CFigure
 {
@@ -10,5 +10,7 @@ public:
     CCircle(Point, Point, GfxInfo FigureGfxInfo, int ID);
     virtual void Draw(Output* pOut) const;
     virtual void Save(ofstream& OutFile);
+
+    virtual bool IsFound(int, int);
 };
 

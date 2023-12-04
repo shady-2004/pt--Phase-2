@@ -17,6 +17,9 @@ void SaveAction::ReadActionParameters() {
 
 void SaveAction::Execute() {
 	ReadActionParameters();
+
+	id = pManager->GetActionCount();
+
 	ofstream OutFile;
 	OutFile.open("Saved Data/"+filename+".txt");
 	pManager->SaveAll(OutFile);

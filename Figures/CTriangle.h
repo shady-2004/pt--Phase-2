@@ -1,5 +1,5 @@
 #pragma once
-#include "Figures/CFigure.h"
+#include "CFigure.h"
 class CTriangle :
     public CFigure
 {
@@ -13,5 +13,7 @@ public:
     virtual void Draw(Output* pOut) const;
 
     virtual void Save(ofstream& OutFile);
+
+    virtual bool IsFound(int, int);
 };
 

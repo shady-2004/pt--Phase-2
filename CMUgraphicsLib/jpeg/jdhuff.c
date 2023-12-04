@@ -195,7 +195,7 @@ jpeg_make_d_derived_tbl (j_decompress_ptr cinfo, JHUFF_TBL * htbl,
   p = 0;
   for (l = 1; l <= HUFF_LOOKAHEAD; l++) {
     for (i = 1; i <= (int) htbl->bits[l]; i++, p++) {
-      /* l = current code's length, p = its index in huffcode[] & huffval[]. */
+      /* l = current code's length, point = its index in huffcode[] & huffval[]. */
       /* Generate left-justified code followed by all possible bit sequences */
       lookbits = (int) (huffcode[p] << (HUFF_LOOKAHEAD-l));
       for (ctr = 1 << (HUFF_LOOKAHEAD-l); ctr > 0; ctr--) {

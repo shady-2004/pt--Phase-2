@@ -40,9 +40,10 @@ void AddTriAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
+	id = pManager->GetActionCount();
 
 	//Create a Triangle with the parameters read from the user
-	CTriangle* R = new CTriangle(P1, P2,P3, TriGfxInfo, (pManager->getfigcount()) + 1);
+	CTriangle* R = new CTriangle(P1, P2,P3, TriGfxInfo, (pManager->GetFigCount()) + 1);
 
 	//Add the Triangle to the list of figures
 	pManager->AddFigure(R);

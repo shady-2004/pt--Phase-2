@@ -18,3 +18,10 @@ void CSquare::Save(ofstream& OutFile) {
 	OutFile << "SQUARE\t" << id << "\t" << Center.x << "\t" << Center.y << "\t" << dclr << "\t" << fclr << endl;
 }
 
+bool CSquare::IsFound(int x, int y)
+{
+	if (abs(x-Center.x) <=100 && abs(y-Center.y) <=100)
+		return 1;
+	return 0;
+}
+

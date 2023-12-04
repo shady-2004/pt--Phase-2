@@ -148,32 +148,39 @@
     <ClCompile Include="CMUgraphicsLib\colors.cpp">
       <Filter>CMUgraphicsLib</Filter>
     </ClCompile>
-    <ClCompile Include="CSquare.cpp">
-      <Filter>Figures Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="CCircle.cpp">
-      <Filter>Figures Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="CTriangle.cpp">
-      <Filter>Figures Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="CHexagon.cpp">
-      <Filter>Figures Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="AddSqrAction.cpp">
-      <Filter>Action Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="AddTriAction.cpp">
-      <Filter>Action Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="AddHexAction.cpp" />
-    <ClCompile Include="SaveAction.cpp">
-      <Filter>Action Classes</Filter>
-    </ClCompile>
     <ClCompile Include="AddHexAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="AddCircAction.cpp" />
+    <ClCompile Include="Actions\AddSqrAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\AddTriAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\AddHexAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\AddCircAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Figures\CCircle.cpp">
+      <Filter>Figures Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Figures\CHexagon.cpp">
+      <Filter>Figures Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Figures\CSquare.cpp">
+      <Filter>Figures Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Figures\CTriangle.cpp">
+      <Filter>Figures Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\SaveAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\SelectAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -261,28 +268,6 @@
       <Filter>Application Manager</Filter>
     </ClInclude>
     <ClInclude Include="DEFS.h" />
-    <ClInclude Include="CSquare.h">
-      <Filter>Figures Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="CCircle.h">
-      <Filter>Figures Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="CTriangle.h">
-      <Filter>Figures Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="CHexagon.h">
-      <Filter>Figures Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="AddSqrAction.h">
-      <Filter>Figures Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="AddCircAction.h">
-      <Filter>Action Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="AddHexAction.h" />
-    <ClInclude Include="SaveAction.h">
-      <Filter>Action Classes</Filter>
-    </ClInclude>
     <ClInclude Include="AddHexAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
@@ -290,6 +275,36 @@
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="AddCircAction.h" />
+    <ClInclude Include="Actions\AddHexAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\AddSqrAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\AddTriAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\AddCircAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Figures\CCircle.h">
+      <Filter>Figures Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Figures\CHexagon.h">
+      <Filter>Figures Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Figures\CSquare.h">
+      <Filter>Figures Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Figures\CTriangle.h">
+      <Filter>Figures Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\SaveAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\SelectAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
