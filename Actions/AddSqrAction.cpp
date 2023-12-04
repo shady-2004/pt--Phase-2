@@ -1,8 +1,8 @@
 #include "AddSqrAction.h"
-#include"CSquare.h"
-#include"GUI/Input.h"
-#include"GUI/Output.h"
-#include"ApplicationManager.h"
+#include"../Figures/CSquare.h"
+#include"../GUI/Input.h"
+#include"../GUI/Output.h"
+#include"../ApplicationManager.h"
 AddSqrAction::AddSqrAction(ApplicationManager* pApp):Action(pApp)
 {
 }
@@ -30,9 +30,10 @@ void AddSqrAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
+	id = pManager->GetActionCount();
 
 	//Create a Square with the parameters read from the user
-	CSquare* S = new CSquare(P1,  SqrGfxInfo, (pManager->getfigcount()) + 1);
+	CSquare* S = new CSquare(P1,  SqrGfxInfo, (pManager->GetFigCount()) + 1);
 
 	//Add the Square to the list of figures
 	pManager->AddFigure(S);

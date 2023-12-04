@@ -2,6 +2,7 @@
 #define ACTION_H
 
 #include "..\DefS.h"
+#include "../Figures/CFigure.h"
 
 class ApplicationManager; //forward class declaration
 
@@ -11,6 +12,7 @@ class Action
 {
 protected:
 	ApplicationManager *pManager;	//Actions needs AppMngr to do their job
+	int id;
 
 public:
 
@@ -21,6 +23,7 @@ public:
 	
 	//Execute action (code depends on action type)
 	virtual void Execute() =0;
+
 
 };
 

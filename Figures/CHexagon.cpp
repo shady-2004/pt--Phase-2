@@ -17,3 +17,8 @@ void CHexagon::Save(ofstream& OutFile) {
 	string dclr = "DRWCLR", fclr = "FCLR";
 	OutFile << "HEX\t" << id << "\t" << Center.x << "\t" << Center.y << "\t" << dclr << "\t" << fclr << endl;
 }
+
+bool CHexagon::IsFound(int x, int y)
+{
+	return false;
+}

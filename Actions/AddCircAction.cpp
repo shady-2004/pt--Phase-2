@@ -1,8 +1,8 @@
 #include "AddCircAction.h"
-#include"CCircle.h"
-#include"GUI/Input.h"
-#include"GUI/Output.h"
-#include"ApplicationManager.h"
+#include"../Figures/CCircle.h"
+#include"../GUI/Input.h"
+#include"../GUI/Output.h"
+#include"../ApplicationManager.h"
 
 AddCircAction::AddCircAction(ApplicationManager* pApp) :Action(pApp)
 {
@@ -37,9 +37,10 @@ void AddCircAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
+	id = pManager->GetActionCount();
 
 	//Create a circle with the parameters read from the user
-	CCircle* C = new CCircle(Center, Radius, CircGfxInfo, (pManager->getfigcount()) + 1);
+	CCircle* C = new CCircle(Center, Radius, CircGfxInfo, (pManager->GetFigCount()) + 1);
 
 	//Add the cirlce to the list of figures
 	pManager->AddFigure(C);

@@ -20,3 +20,8 @@ void CFigure::ChngFillClr(color Fclr)
 	FigGfxInfo.isFilled = true;
 	FigGfxInfo.FillClr = Fclr; 
 }
+
+void CFigure::Print(Output* pOut)
+{
+	pOut->PrintMessage("Figure ID : " + to_string(id));
+}

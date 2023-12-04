@@ -21,3 +21,8 @@ void CTriangle::Save(ofstream& OutFile) {
 	OutFile << "TRIANGLE\t" << id << "\t" << vertex1.x << "\t" << vertex1.y << "\t" << vertex2.x << "\t" << vertex2.y << "\t"  << vertex3.x << "\t" << vertex3.y << "\t" << dclr << "\t" << fclr << endl;
 }
 
+bool CTriangle::IsFound(int, int)
+{
+	return false;
+}
+

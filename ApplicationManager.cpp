@@ -1,10 +1,14 @@
 #include "ApplicationManager.h"
 #include "Actions\AddRectAction.h"
-#include "AddSqrAction.h"
-#include "AddCircAction.h"
-#include "AddTriAction.h"
-#include "AddHexAction.h"
-#include "SaveAction.h"
+#include "Actions\AddSqrAction.h"
+#include "Actions\AddCircAction.h"
+#include "Actions\AddTriAction.h"
+#include "Actions\AddHexAction.h"
+#include "Actions\SaveAction.h"
+#include "Actions\SelectAction.h"
+#include "Actions\SwitchToPlayModeAction.h"
+#include "Actions\SwitchToDrawModeAction.h"
+#include "Actions\ExitAction.h"
 #include <fstream>
 
 
@@ -16,10 +20,14 @@ ApplicationManager::ApplicationManager()
 	pIn = pOut->CreateInput();
 	
 	FigCount = 0;
+	ActionCount = 0;
+	SelectedFig = NULL;
 		
 	//Create an array of figure pointers and set them to NULL		
 	for(int i=0; i<MaxFigCount; i++)
 		FigList[i] = NULL;	
+	for (int i = 0; i < MaxActions; i++)
+		ActionList[i] = NULL;
 }
 
 //==================================================================================//
@@ -35,6 +43,15 @@ ActionType ApplicationManager::GetUserAction() const
 void ApplicationManager::ExecuteAction(ActionType ActType) 
 {
 	Action* pAct = NULL;
+
+	ActionCount++;
+	if (ActionCount > MaxActions)						// Shifting The array of actions one to the left
+	{													// To make space for the new selected action
+		for (int i = 0; i < MaxActions-1; i++)
+			ActionList[i] = ActionList[i + 1];
+		
+		ActionCount = MaxActions;
+	}
 	
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
@@ -63,11 +80,19 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case TO_SAVE_GRAPH:
 			pAct = new SaveAction(this);
 			break;
-		case EXIT:
-			///create ExitAction here
-			
+		case TO_SELECT:
+			pAct = new SelectAction(this);
 			break;
-		
+		case TO_PLAY:
+			pAct = new SwitchToPlayModeAction(this);
+			break;
+		case TO_DRAW:
+			pAct = new SwitchToDrawModeAction(this);
+			break;
+		case TO_EXIT:
+			///create ExitAction here
+			pAct = new ExitAction(this);
+			break;
 		case STATUS:	//a click on the status bar ==> no action
 			return;
 	}
@@ -75,15 +100,23 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	//Execute the created action
 	if(pAct != NULL)
 	{
-		pAct->Execute();//Execute
-		delete pAct;	//You may need to change this line depending to your implementation
-		pAct = NULL;
+		ActionList[ActionCount - 1] = pAct;
+		ActionList[ActionCount-1]->Execute();//Execute
+		//delete pAct;	//You may need to change this line depending to your implementation
+		//pAct = NULL;
 	}
 }
-int ApplicationManager::getfigcount()
+
+Action** ApplicationManager::GetActionList()
 {
-	return FigCount;
+	return ActionList;
 }
+
+int ApplicationManager::GetActionCount()
+{
+	return ActionCount;
+}
+
 //==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//
@@ -99,12 +132,27 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 {
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
-
-
 	//Add your code here to search for a figure given a point x,y	
 	//Remember that ApplicationManager only calls functions do NOT implement it.
 
+	for (int i = 0; i < FigCount; i++)
+		if (FigList[i]->IsFound(x,y))
+			return FigList[i];
 	return NULL;
+}
+
+int ApplicationManager::GetFigCount()
+{
+	return FigCount;
+}
+
+void ApplicationManager::SetSelectedFig(CFigure* pFig)
+{
+	SelectedFig = pFig;
+}
+CFigure* ApplicationManager::GetSelectedFig()
+{
+	return SelectedFig;
 }
 //==================================================================================//
 //							Interface Management Functions							//

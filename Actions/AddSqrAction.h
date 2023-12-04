@@ -1,5 +1,5 @@
 #pragma once
-#include"Actions/Action.h"
+#include"Action.h"
 //Add Square Action class
 class AddSqrAction:public Action
 {

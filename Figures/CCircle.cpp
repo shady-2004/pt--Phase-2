@@ -18,3 +18,14 @@ void CCircle::Save(ofstream& OutFile) {
 	string dclr = "DRWCLR", fclr = "FCLR";
 	OutFile << "CIRCLE\t" << id << "\t" << Center.x << "\t" << Center.y << "\t" << Radius.x << "\t" << Radius.y << "\t" << dclr << "\t" << fclr << endl;
 }
+
+bool CCircle::IsFound(int x, int y)
+{
+	int Radius = sqrt(pow(this->Radius.x - Center.x, 2) + pow(this->Radius.y - Center.y, 2));
+
+	int distanceFromCenter = sqrt(pow(x - Center.x, 2) + pow(y - Center.y, 2));
+
+	if (distanceFromCenter <= Radius)
+		return 1;
+	return 0;
+}
