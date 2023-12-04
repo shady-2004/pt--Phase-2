@@ -40,8 +40,6 @@ void LoadAction::Execute() {
 		else if (shape == "HEX") fig = new CHexagon;
 		else if (shape == "CIRCLE") fig = new CCircle;
 		fig->Load(InFile);
-		InFile >> shape >> shape2;
-		
 		pManager->AddFigure(fig);
 	}
 }

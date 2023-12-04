@@ -22,12 +22,15 @@ void CCircle::Draw(Output* pOut) const
 }
 
 void CCircle::Save(ofstream& OutFile) {
-	string dclr = "DRWCLR", fclr = "FCLR";
+	string dclr = convertDrwColorToString(), fclr = convertFillColorToString();
 	OutFile << "CIRCLE\t" << id << "\t" << Center.x << "\t" << Center.y << "\t" << Radius.x << "\t" << Radius.y << "\t" << dclr << "\t" << fclr << endl;
 }
 
 void CCircle::Load(ifstream& InFile) {
-	InFile >> id >> Center.x >> Center.y >> Radius.x >> Radius.y;
+	string dclr, fclr;
+	InFile >> id >> Center.x >> Center.y >> Radius.x >> Radius.y >> dclr >> fclr;
+	FigGfxInfo.DrawClr = convertColorToClr(dclr);
+	FigGfxInfo.FillClr = convertColorToClr(fclr);
 }
 
 bool CCircle::IsFound(int x, int y)

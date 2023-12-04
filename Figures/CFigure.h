@@ -10,7 +10,6 @@ protected:
 	int id;		//Each figure has an ID
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
-	
 	/// Add more parameters if needed.
 
 public:
@@ -24,7 +23,9 @@ public:
 	
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
-
+	string convertDrwColorToString() const;
+	string convertFillColorToString() const;
+	color convertColorToClr(string) const;
 
 	virtual void Print(Output*);	//Prints the figure's info
 

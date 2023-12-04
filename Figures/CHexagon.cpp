@@ -18,12 +18,15 @@ void CHexagon::Draw(Output* pOut) const
 }
 
 void CHexagon::Save(ofstream& OutFile) {
-	string dclr = "DRWCLR", fclr = "FCLR";
+	string dclr = convertDrwColorToString(), fclr = convertFillColorToString();
 	OutFile << "HEX\t" << id << "\t" << Center.x << "\t" << Center.y << "\t" << dclr << "\t" << fclr << endl;
 }
 
 void CHexagon::Load(ifstream& InFile) {
-	InFile >> id >> Center.x >> Center.y;
+	string dclr, fclr;
+	InFile >> id >> Center.x >> Center.y >> dclr >> fclr;
+	FigGfxInfo.DrawClr = convertColorToClr(dclr);
+	FigGfxInfo.FillClr = convertColorToClr(fclr);
 }
 
 bool CHexagon::IsFound(int x, int y)
