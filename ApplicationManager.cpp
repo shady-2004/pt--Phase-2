@@ -9,6 +9,7 @@
 #include "Actions\SwitchToPlayModeAction.h"
 #include "Actions\SwitchToDrawModeAction.h"
 #include "Actions\ExitAction.h"
+#include"Actions/ChangeFigColorAction.h"
 #include <fstream>
 
 
@@ -82,6 +83,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case TO_SELECT:
 			pAct = new SelectAction(this);
+			break;
+		case TO_CHANGE_DRAW_COLOR:
+			pAct = new ChangeFigColorAction(this);
 			break;
 		case TO_PLAY:
 			pAct = new SwitchToPlayModeAction(this);

@@ -1,5 +1,5 @@
-#ifndef ADD_RECT_ACTION_H
-#define ADD_RECT_ACTION_H
+#pragma once
+
 
 #include "Action.h"
 
@@ -19,5 +19,3 @@ public:
 	virtual void Execute() ;
 	
 };
-
-#endif
