@@ -132,7 +132,10 @@
     <ClCompile Include="Actions\AddHexAction.cpp" />
     <ClCompile Include="Actions\AddSqrAction.cpp" />
     <ClCompile Include="Actions\AddTriAction.cpp" />
+    <ClCompile Include="Actions\ExitAction.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
+    <ClCompile Include="Actions\SwitchToDrawModeAction.cpp" />
+    <ClCompile Include="Actions\SwitchToPlayModeAction.cpp" />
     <ClCompile Include="Figures\CCircle.cpp" />
     <ClCompile Include="Figures\CHexagon.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
@@ -187,7 +190,10 @@
     <ClInclude Include="Actions\AddHexAction.h" />
     <ClInclude Include="Actions\AddSqrAction.h" />
     <ClInclude Include="Actions\AddTriAction.h" />
+    <ClInclude Include="Actions\ExitAction.h" />
     <ClInclude Include="Actions\SelectAction.h" />
+    <ClInclude Include="Actions\SwitchToDrawModeAction.h" />
+    <ClInclude Include="Actions\SwitchToPlayModeAction.h" />
     <ClInclude Include="Figures\CCircle.h" />
     <ClInclude Include="Figures\CHexagon.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />

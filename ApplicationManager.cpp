@@ -6,6 +6,9 @@
 #include "Actions\AddHexAction.h"
 #include "Actions\SaveAction.h"
 #include "Actions\SelectAction.h"
+#include "Actions\SwitchToPlayModeAction.h"
+#include "Actions\SwitchToDrawModeAction.h"
+#include "Actions\ExitAction.h"
 #include <fstream>
 
 
@@ -79,11 +82,17 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case TO_SELECT:
 			pAct = new SelectAction(this);
-		case EXIT:
-			///create ExitAction here
-			
 			break;
-		
+		case TO_PLAY:
+			pAct = new SwitchToPlayModeAction(this);
+			break;
+		case TO_DRAW:
+			pAct = new SwitchToDrawModeAction(this);
+			break;
+		case TO_EXIT:
+			///create ExitAction here
+			pAct = new ExitAction(this);
+			break;
 		case STATUS:	//a click on the status bar ==> no action
 			return;
 	}
