@@ -1,11 +1,10 @@
 #pragma once
 #include "Action.h"
-class ChangeFigColorAction :
-	public Action
+class ChangeFillColorAcion :
+    public Action
 {
-
 public:
-	ChangeFigColorAction(ApplicationManager* pApp);
+	ChangeFillColorAcion(ApplicationManager* pApp);
 
 	void ReadActionParameters();
 

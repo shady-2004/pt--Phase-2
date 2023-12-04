@@ -133,6 +133,7 @@
     <ClCompile Include="Actions\AddSqrAction.cpp" />
     <ClCompile Include="Actions\AddTriAction.cpp" />
     <ClCompile Include="Actions\ChangeFigColorAction.cpp" />
+    <ClCompile Include="Actions\ChangeFillColorAcion.cpp" />
     <ClCompile Include="Actions\ExitAction.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
     <ClCompile Include="Actions\SwitchToDrawModeAction.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Actions\AddSqrAction.h" />
     <ClInclude Include="Actions\AddTriAction.h" />
     <ClInclude Include="Actions\ChangeFigColorAction.h" />
+    <ClInclude Include="Actions\ChangeFillColorAcion.h" />
     <ClInclude Include="Actions\ExitAction.h" />
     <ClInclude Include="Actions\SelectAction.h" />
     <ClInclude Include="Actions\SwitchToDrawModeAction.h" />
