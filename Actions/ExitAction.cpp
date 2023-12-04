@@ -9,8 +9,12 @@ ExitAction::ExitAction(ApplicationManager* pApp):Action(pApp)
 void ExitAction::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 
-	pOut->PrintMessage(" Exit Action : You are about to exit this game ");
+	int x, y;
+	pOut->PrintMessage(" Exiting the program! Click anywhere. ");
+	pIn->GetPointClicked(x, y);
+	
 }
 
 void ExitAction::Execute()
