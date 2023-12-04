@@ -14,7 +14,7 @@ void ChangeFigColorAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 
-	pOut->PrintMessage("Select Color");
+	pOut->PrintMessage("Select Draw Color");
 
 	switch (pIn->GetcolorAction(pOut->colorpalette())) //Get Selected Color from pallete
 	{
@@ -24,7 +24,7 @@ void ChangeFigColorAction::ReadActionParameters()
 		break;
 	case CHOOSE_COLOR_BLUE:
 		UI.DrawColor = BLUE;
-		pOut->PrintMessage("Selected Color : BlUE");
+		pOut->PrintMessage("Selected Color : BLUE");
 		break;
 	case CHOOSE_COLOR_GREEN:
 		UI.DrawColor = GREEN;
@@ -44,7 +44,6 @@ void ChangeFigColorAction::ReadActionParameters()
 		break;
 	}
 	pOut->closeColorMenu();
-	pOut->ClearStatusBar();
 
 }
 
@@ -57,9 +56,9 @@ void ChangeFigColorAction::Execute()
 	CFigure*F = pManager->GetSelectedFig();//
 	if (F != NULL)//Checks if there is selected figure or not
 	{
+
 		F->ChngDrawClr(UI.DrawColor);
 		F->SetSelected(0);
-		pManager->SetSelectedFig(NULL);
 		pManager->UpdateInterface();
 	}
 }

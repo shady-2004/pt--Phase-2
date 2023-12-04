@@ -16,7 +16,7 @@ void ChangeFillColorAcion::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 
-	pOut->PrintMessage("Select Color");
+	pOut->PrintMessage("Select Fill Color");
 
 	switch (pIn->GetcolorAction(pOut->colorpalette())) //Get Selected Color from pallete
 	{
@@ -26,7 +26,7 @@ void ChangeFillColorAcion::ReadActionParameters()
 		break;
 	case CHOOSE_COLOR_BLUE:
 		UI.FillColor = BLUE;
-		pOut->PrintMessage("Selected Color : BlUE");
+		pOut->PrintMessage("Selected Color : BLUE");
 		break;
 	case CHOOSE_COLOR_GREEN:
 		UI.FillColor = GREEN;
@@ -46,7 +46,6 @@ void ChangeFillColorAcion::ReadActionParameters()
 		break;
 	}
 	pOut->closeColorMenu();
-	pOut->ClearStatusBar();
 
 }
 
@@ -61,7 +60,6 @@ void ChangeFillColorAcion::Execute()
 	{
 		F->ChngFillClr(UI.FillColor);
 		F->SetSelected(0);
-		pManager->SetSelectedFig(NULL);
 		pManager->UpdateInterface();
 	}
 }
