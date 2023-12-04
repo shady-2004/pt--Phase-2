@@ -57,11 +57,8 @@ void ChangeFillColorAcion::Execute()
 	ReadActionParameters();//This action needs to read some parameters first
 
 	CFigure* F = pManager->GetSelectedFig();//
-	if (F == NULL)//Checks if there is selected figure or not
+	if (F != NULL)//Checks if there is selected figure or not
 	{
-		pOut->PrintMessage("Please select figure first");
-	}
-	else {
 		F->ChngFillClr(UI.FillColor);
 		F->SetSelected(0);
 		pManager->SetSelectedFig(NULL);
