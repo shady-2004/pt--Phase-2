@@ -5,6 +5,7 @@
 #include "Actions\AddTriAction.h"
 #include "Actions\AddHexAction.h"
 #include "Actions\SaveAction.h"
+#include "Actions/LoadAction.h"
 #include "Actions\SelectAction.h"
 #include "Actions\SwitchToPlayModeAction.h"
 #include "Actions\SwitchToDrawModeAction.h"
@@ -81,6 +82,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 		case TO_SAVE_GRAPH:
 			pAct = new SaveAction(this);
+			break;
+		case TO_LOAD_GRAPH:
+			pAct = new LoadAction(this);
 			break;
 		case TO_SELECT:
 			pAct = new SelectAction(this);
@@ -190,7 +194,7 @@ Output* ApplicationManager::GetOutput() const
 //==================================================================================//
 
 void ApplicationManager::SaveAll(ofstream &OutFile) {
-	OutFile << "DRWCLR" << "\t" << "FCLR" << endl;
+	OutFile << pOut->getCrntColorAsString(UI.DrawColor) << "\t" << pOut->getCrntColorAsString(UI.FillColor) << endl;
 	OutFile << FigCount << endl;
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Save(OutFile);

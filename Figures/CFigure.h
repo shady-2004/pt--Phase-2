@@ -10,10 +10,10 @@ protected:
 	int id;		//Each figure has an ID
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
-	
 	/// Add more parameters if needed.
 
 public:
+	CFigure();
 	CFigure(GfxInfo FigureGfxInfo);
 
 	void SetSelected(bool s);	//select/unselect the figure
@@ -23,7 +23,9 @@ public:
 	
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
-
+	string convertDrwColorToString() const;
+	string convertFillColorToString() const;
+	color convertColorToClr(string) const;
 
 	virtual void Print(Output*);	//Prints the figure's info
 
@@ -36,7 +38,7 @@ public:
 
 
 	virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
-	//virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
+	virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
 
 	//virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
 };

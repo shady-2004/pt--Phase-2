@@ -9,10 +9,11 @@ private:
 	Point Corner1;	
 	Point Corner2;
 public:
+	CRectangle();
 	CRectangle(Point , Point, GfxInfo FigureGfxInfo, int ID);
 	virtual void Draw(Output* pOut) const;
 	virtual void Save(ofstream& OutFile);
-
+	virtual void Load(ifstream& InFile);
 	virtual void Print(Output*);	//Prints the figure's info
 
 	virtual bool IsFound(int, int);

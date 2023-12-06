@@ -8,12 +8,13 @@ private:
     Point vertex2;
     Point vertex3;
 public:
+    CTriangle();
     CTriangle(Point, Point, Point, GfxInfo FigureGfxInfo,int ID);
 
     virtual void Draw(Output* pOut) const;
 
     virtual void Save(ofstream& OutFile);
-
+    virtual void Load(ifstream& InFile);
     virtual bool IsFound(int, int);
 };
 

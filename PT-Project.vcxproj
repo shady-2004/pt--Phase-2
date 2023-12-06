@@ -135,6 +135,7 @@
     <ClCompile Include="Actions\ChangeFigColorAction.cpp" />
     <ClCompile Include="Actions\ChangeFillColorAcion.cpp" />
     <ClCompile Include="Actions\ExitAction.cpp" />
+    <ClCompile Include="Actions\LoadAction.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
     <ClCompile Include="Actions\SwitchToDrawModeAction.cpp" />
     <ClCompile Include="Actions\SwitchToPlayModeAction.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="Actions\ChangeFigColorAction.h" />
     <ClInclude Include="Actions\ChangeFillColorAcion.h" />
     <ClInclude Include="Actions\ExitAction.h" />
+    <ClInclude Include="Actions\LoadAction.h" />
     <ClInclude Include="Actions\SelectAction.h" />
     <ClInclude Include="Actions\SwitchToDrawModeAction.h" />
     <ClInclude Include="Actions\SwitchToPlayModeAction.h" />
