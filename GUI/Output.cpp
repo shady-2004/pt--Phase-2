@@ -244,7 +244,7 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 	else
 		DrawingClr = RectGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, 3);
 	drawstyle style;
 	if (RectGfxInfo.isFilled)
 	{
@@ -269,7 +269,7 @@ void Output::DrawSqr(const Point& P1, GfxInfo SqrGfxInfo, bool selected) const
 	else
 		DrawingClr = SqrGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, 3);
 	drawstyle style;
 	if (SqrGfxInfo.isFilled)
 	{
@@ -295,7 +295,7 @@ void Output::DrawTri(const Point& P1, const Point& P2, const Point& P3, GfxInfo 
 	else
 		DrawingClr = TriGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, 3);
 	drawstyle style;
 	if (TriGfxInfo.isFilled)
 	{
@@ -319,7 +319,7 @@ void Output::DrawHex(const Point& P1, GfxInfo HexGfxInfo, bool selected) const
 	else
 		DrawingClr = HexGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, 3);
 	drawstyle style;
 	if (HexGfxInfo.isFilled)
 	{
@@ -345,7 +345,7 @@ void Output::DrawCirc(const Point& P1, const Point& P2, GfxInfo CircGfxInfo, boo
 	else
 		DrawingClr = CircGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, 3);
 	drawstyle style;
 	if (CircGfxInfo.isFilled)
 	{
