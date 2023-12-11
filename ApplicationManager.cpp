@@ -194,7 +194,6 @@ Output* ApplicationManager::GetOutput() const
 //==================================================================================//
 
 void ApplicationManager::SaveAll(ofstream &OutFile) {
-	OutFile << pOut->getCrntColorAsString(UI.DrawColor) << "\t" << pOut->getCrntColorAsString(UI.FillColor) << endl;
 	OutFile << FigCount << endl;
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Save(OutFile);

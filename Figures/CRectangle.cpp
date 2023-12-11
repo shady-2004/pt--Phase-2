@@ -20,15 +20,13 @@ void CRectangle::Draw(Output* pOut) const
 }
 
 void CRectangle::Save(ofstream& OutFile) {
-	string dclr = convertDrwColorToString(), fclr = convertFillColorToString();
-	OutFile << "RECT\t" << id << "\t" << Corner1.x << "\t" << Corner1.y << "\t" << Corner2.x << "\t" << Corner2.y << "\t" << dclr << "\t" << fclr << endl;
+	OutFile << "RECT\t" << id << "\t" << Corner1.x << "\t" << Corner1.y << "\t" << Corner2.x << "\t" << Corner2.y << "\t" << FigGfxInfo.DrawClr << "\t";
+	if (FigGfxInfo.isFilled) OutFile << FigGfxInfo.FillClr << endl;
+	else OutFile << "NOFILL" << endl;
 }
 
 void CRectangle::Load(ifstream& InFile) {
-	string dclr, fclr;
-	InFile >> id >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y >> dclr >> fclr;
-	FigGfxInfo.DrawClr = convertColorToClr(dclr);
-	FigGfxInfo.FillClr = convertColorToClr(fclr);
+	InFile >> id >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y >> &FigGfxInfo.DrawClr >> &FigGfxInfo.FillClr;
 }
 
 void CRectangle::Print(Output* pOut)

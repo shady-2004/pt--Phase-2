@@ -24,14 +24,13 @@ void LoadAction::ReadActionParameters() {
 void LoadAction::Execute() {
 	ReadActionParameters();
 	id = pManager->GetActionCount();
-	string dclr, fclr;
 	int num;
 	ifstream InFile;
 	InFile.open("Saved Data/" + filename + ".txt");
 	if (InFile.fail()) { pManager->GetOutput()->PrintMessage("No such file to load. Enter a valid file!"); return; }
-	InFile >> dclr >> fclr >> num;
+	InFile >> &UI.DrawColor >> &UI.FillColor >> num;
 	while (num--) {
-		string shape,shape2;
+		string shape;
 		CFigure* fig;
 		InFile >> shape;
 		if (shape == "RECT") fig = new CRectangle;

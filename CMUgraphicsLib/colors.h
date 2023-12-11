@@ -7,6 +7,8 @@ This file was last modified on 05.16.1999
 #define COLORS_H
 
 #include "version.h"
+#include <iostream>
+using namespace std;
 
 class color {
 
@@ -17,7 +19,8 @@ class color {
         ucRed = Red;  ucGreen = Green;  ucBlue = Blue; 
     }
 
-
+    friend ostream& operator << (ostream& output, color a);
+    friend istream& operator >> (istream& input, color* a);
     // Color components.  0 = no intensity, 255 = full intensity
     unsigned char ucRed;
     unsigned char ucGreen;

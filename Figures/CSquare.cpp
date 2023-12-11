@@ -18,15 +18,13 @@ void CSquare::Draw(Output* pOut) const
 }
 
 void CSquare::Save(ofstream& OutFile) {
-	string dclr = convertDrwColorToString(), fclr = convertFillColorToString();
-	OutFile << "SQUARE\t" << id << "\t" << Center.x << "\t" << Center.y << "\t" << dclr << "\t" << fclr << endl;
+	OutFile << "SQUARE\t" << id << "\t" << Center.x << "\t" << Center.y << "\t" << FigGfxInfo.DrawClr << "\t";
+	if (FigGfxInfo.isFilled) OutFile << FigGfxInfo.FillClr << endl;
+	else OutFile << "NOFILL" << endl;
 }
 
 void CSquare::Load(ifstream& InFile) {
-	string dclr, fclr;
-	InFile >> id >> Center.x >> Center.y >> dclr >> fclr;
-	FigGfxInfo.DrawClr = convertColorToClr(dclr);
-	FigGfxInfo.FillClr = convertColorToClr(fclr);
+	InFile >> id >> Center.x >> Center.y >> &FigGfxInfo.DrawClr >> &FigGfxInfo.FillClr;
 }
 
 bool CSquare::IsFound(int x, int y)
