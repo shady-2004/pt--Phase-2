@@ -1,7 +1,7 @@
 #include "CFigure.h"
 
 CFigure::CFigure() {
-
+	Selected = false;
 }
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)
