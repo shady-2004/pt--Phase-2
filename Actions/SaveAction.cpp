@@ -22,6 +22,7 @@ void SaveAction::Execute() {
 
 	ofstream OutFile;
 	OutFile.open("Saved Data/"+filename+".txt");
+	if(OutFile.fail()) { pManager->GetOutput()->PrintMessage("An error has occured! Please try again!"); return; }
 	OutFile << UI.DrawColor << "\t" << UI.FillColor << endl;
 	pManager->SaveAll(OutFile);
 	pManager->GetOutput()->PrintMessage("Your file has been saved successfully!");

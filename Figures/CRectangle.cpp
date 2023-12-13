@@ -27,6 +27,7 @@ void CRectangle::Save(ofstream& OutFile) {
 
 void CRectangle::Load(ifstream& InFile) {
 	InFile >> id >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y >> &FigGfxInfo.DrawClr >> &FigGfxInfo.FillClr;
+	if (FigGfxInfo.FillClr == LIGHTGOLDENRODYELLOW) FigGfxInfo.isFilled = false;
 }
 
 void CRectangle::Print(Output* pOut)

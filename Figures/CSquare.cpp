@@ -25,6 +25,7 @@ void CSquare::Save(ofstream& OutFile) {
 
 void CSquare::Load(ifstream& InFile) {
 	InFile >> id >> Center.x >> Center.y >> &FigGfxInfo.DrawClr >> &FigGfxInfo.FillClr;
+	if (FigGfxInfo.FillClr == LIGHTGOLDENRODYELLOW) FigGfxInfo.isFilled = false;
 }
 
 bool CSquare::IsFound(int x, int y)

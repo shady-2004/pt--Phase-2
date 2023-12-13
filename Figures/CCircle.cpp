@@ -29,6 +29,7 @@ void CCircle::Save(ofstream& OutFile) {
 
 void CCircle::Load(ifstream& InFile) {
 	InFile >> id >> Center.x >> Center.y >> Radius.x >> Radius.y >> &FigGfxInfo.DrawClr >> &FigGfxInfo.FillClr;
+	if (FigGfxInfo.FillClr == LIGHTGOLDENRODYELLOW) FigGfxInfo.isFilled = false;
 }
 
 bool CCircle::IsFound(int x, int y)
