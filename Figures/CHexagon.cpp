@@ -2,18 +2,20 @@
 #include <fstream>
 
 CHexagon::CHexagon() {
-
+	ShapeType = ITM_HEXAGON;
 }
 
 CHexagon::CHexagon(Point P, GfxInfo FigureGfxInfo, int ID):CFigure(FigureGfxInfo)
 {
 	id = ID;
 	Center = P;
+	ShapeType = ITM_HEXAGON;
 }
 
 void CHexagon::Draw(Output* pOut) const
 {
 	//Call Output::DrawHex to draw a hexagon on the screen
+	if (!IsHidden)
 	pOut->DrawHex(Center, FigGfxInfo, Selected);
 }
 

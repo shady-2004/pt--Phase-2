@@ -12,6 +12,7 @@
 #include "Actions\ExitAction.h"
 #include"Actions/ChangeFigColorAction.h"
 #include"Actions/ChangeFillColorAcion.h"
+#include"Actions/PickByTypeAction.h"
 #include <fstream>
 
 
@@ -101,6 +102,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case TO_DRAW:
 			pAct = new SwitchToDrawModeAction(this);
 			break;
+		case PICK_FIG_TYPE:
+			pAct = new PickByTypeAction(this);
+			break;
 		case TO_EXIT:
 			///create ExitAction here
 			pAct = new ExitAction(this);
@@ -114,8 +118,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	{
 		ActionList[ActionCount - 1] = pAct;
 		ActionList[ActionCount-1]->Execute();//Execute
-		//delete pAct;	//You may need to change this line depending to your implementation
-		//pAct = NULL;
+		delete pAct;	//You may need to change this line depending to your implementation
+		pAct = NULL;
 	}
 }
 
@@ -147,9 +151,13 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 	//Add your code here to search for a figure given a point x,y	
 	//Remember that ApplicationManager only calls functions do NOT implement it.
 
-	for (int i = 0; i < FigCount; i++)
-		if (FigList[i]->IsFound(x,y))
+	for (int i = 0; i < FigCount; i++) {
+		if (FigList[i]->IsFound(x, y)) {
+			if (FigList[i]->getHidden())
+			continue;
 			return FigList[i];
+		}
+	}
 	return NULL;
 }
 
@@ -173,9 +181,34 @@ CFigure* ApplicationManager::GetSelectedFig()
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {	
-	for(int i=0; i<FigCount; i++)
-		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+	for (int i = 0; i < FigCount; i++) {
+		FigList[i]->Draw(pOut);
+	}
+	//Call Draw function (virtual member fn)
 }
+void ApplicationManager::resetHidden()
+{
+	for (int i = 0; i < FigCount; i++) {
+			FigList[i]->setIsHidden(0);
+	}
+}
+
+int ApplicationManager::getFigFillCount(int I)
+{
+	int FillColor = FigList[I]->getShapeFillColor();
+	int count=0;
+	for (int i = 0; i < FigCount; i++) {
+		if ((FigList[i]->getShapeFillColor()) == FillColor)
+			count++;
+	}
+	return count;
+}
+
+DrawMenuItem ApplicationManager::getFigType(int I)
+{
+	return FigList[I]->getShapeType();
+}
+
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
 Input* ApplicationManager::GetInput() const
@@ -194,9 +227,18 @@ Output* ApplicationManager::GetOutput() const
 //==================================================================================//
 
 void ApplicationManager::SaveAll(ofstream &OutFile) {
-	OutFile << FigCount << endl;
+	/*OutFile << FigCount << endl;*/
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Save(OutFile);
+}
+
+int ApplicationManager::GetTypeCount(DrawMenuItem P)
+{
+	int count=0;
+	for (int i = 0; i < FigCount; i++)
+		if (FigList[i]->getShapeType() == P)
+			count++;
+	return count;
 }
 
 

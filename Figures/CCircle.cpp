@@ -5,7 +5,7 @@
 using namespace std;
 
 CCircle::CCircle() {
-
+	ShapeType=ITM_CIRCLE;
 }
 
 CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo, int ID):CFigure(FigureGfxInfo)
@@ -13,11 +13,13 @@ CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo, int ID):CFigure(Figu
 	id = ID;
 	Center =  P1;
 	Radius = P2;
+	ShapeType = ITM_CIRCLE;
 }
 
 void CCircle::Draw(Output* pOut) const
 {
 	//Call Output::DrawCirc to draw a circle on the screen	
+	if(!IsHidden)
 	pOut->DrawCirc(Center, Radius, FigGfxInfo, Selected);
 }
 

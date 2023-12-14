@@ -2,7 +2,7 @@
 #include <fstream>
 
 CRectangle::CRectangle() {
-
+	ShapeType = ITM_RECT;
 }
 
 CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo, int ID):CFigure(FigureGfxInfo)
@@ -10,12 +10,14 @@ CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo, int ID):CFigur
 	id = ID;
 	Corner1 = P1;
 	Corner2 = P2;
+	ShapeType = ITM_RECT;
 }
 	
 
 void CRectangle::Draw(Output* pOut) const
 {
-	//Call Output::DrawRect to draw a rectangle on the screen	
+	//Call Output::DrawRect to draw a rectangle on the screen
+ if(!IsHidden)	
 	pOut->DrawRect(Corner1, Corner2, FigGfxInfo, Selected);
 }
 

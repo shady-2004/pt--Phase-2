@@ -10,7 +10,8 @@ protected:
 	int id;		//Each figure has an ID
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
-	/// Add more parameters if needed.
+	bool IsHidden;
+	DrawMenuItem ShapeType;
 
 public:
 	CFigure();
@@ -41,4 +42,8 @@ public:
 	virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
 
 	//virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
+	void setIsHidden(bool x);
+	bool getHidden();
+	DrawMenuItem getShapeType();
+	int getShapeFillColor();
 };

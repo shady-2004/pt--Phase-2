@@ -48,10 +48,15 @@ public:
 	
 	void SaveAll(ofstream& OutFile);
 
+	int GetTypeCount(DrawMenuItem P);
+
 	// -- Interface Management Functions
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output
 	void UpdateInterface() const;	//Redraws all the drawing window	
-};
+	void resetHidden();
+	int getFigFillCount(int I);
+	DrawMenuItem getFigType(int I);
+
 
 #endif

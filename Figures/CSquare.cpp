@@ -2,18 +2,20 @@
 #include <fstream>
 
 CSquare::CSquare() {
-
+	ShapeType = ITM_SQUARE;
 }
 
 CSquare::CSquare(Point P, GfxInfo FigureGfxInfo, int ID):CFigure(FigureGfxInfo)
 {
 	id = ID;
 	Center = P;
+	ShapeType = ITM_SQUARE;
 }
 
 void CSquare::Draw(Output* pOut) const
 {
 	//Call Output::DrawSqr to draw a square on the screen
+	if (!IsHidden)
 	pOut->DrawSqr(Center, FigGfxInfo, Selected);
 }
 

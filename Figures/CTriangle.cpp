@@ -2,7 +2,7 @@
 #include <fstream>
 
 CTriangle::CTriangle() {
-	
+	ShapeType = ITM_TRIANGLE;
 }
 
 CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo, int ID) :CFigure(FigureGfxInfo)
@@ -11,11 +11,13 @@ CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo, int ID
 	vertex1 = P1;
 	vertex2 = P2;
 	vertex3 = P3;
+	ShapeType = ITM_TRIANGLE;
 }
 
 void CTriangle::Draw(Output* pOut) const
 {
 	//Call Output::DrawTri to draw a triangle on the screen	
+	if (!IsHidden)
 	pOut->DrawTri(vertex1, vertex2, vertex3, FigGfxInfo, Selected);
 }
 

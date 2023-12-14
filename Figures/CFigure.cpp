@@ -2,12 +2,14 @@
 
 CFigure::CFigure() {
 	Selected = false;
+	IsHidden = 0;
 }
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)
 { 
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
 	Selected = false;
+	IsHidden = 0;
 }
 
 void CFigure::SetSelected(bool s)
@@ -57,4 +59,38 @@ color CFigure::convertColorToClr(string clr) const {
 void CFigure::Print(Output* pOut)
 {
 	pOut->PrintMessage("Figure ID : " + to_string(id));
+}
+
+void CFigure::setIsHidden(bool x)
+{
+	IsHidden = x;
+}
+
+bool CFigure::getHidden()
+{
+	return IsHidden;
+}
+
+DrawMenuItem CFigure::getShapeType()
+{
+	return ShapeType;
+}
+
+int CFigure::getShapeFillColor()
+{
+	if (!FigGfxInfo.isFilled)
+		return 10;//Refers to Unfilled
+	if (FigGfxInfo.FillClr == RED)
+		return 0;
+	if (FigGfxInfo.FillClr == BLUE)
+		return 1;
+	if (FigGfxInfo.FillClr == GREEN)
+		return 2;
+	if (FigGfxInfo.FillClr == ORANGE)
+		return 3;
+	if (FigGfxInfo.FillClr == YELLOW)
+		return 4;
+	if (FigGfxInfo.FillClr == BLACK)
+		return 5;
+
 }
