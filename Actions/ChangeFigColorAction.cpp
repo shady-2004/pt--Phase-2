@@ -59,6 +59,5 @@ void ChangeFigColorAction::Execute()
 
 		F->ChngDrawClr(UI.DrawColor);
 		F->SetSelected(0);
-		pManager->UpdateInterface();
 	}
 }
