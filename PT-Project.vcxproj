@@ -138,6 +138,7 @@
     <ClCompile Include="Actions\LoadAction.cpp" />
     <ClCompile Include="Actions\PickByFillColorAction.cpp" />
     <ClCompile Include="Actions\PickByTypeAction.cpp" />
+    <ClCompile Include="Actions\PickByTypeAndFillColorAction.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
     <ClCompile Include="Actions\SwitchToDrawModeAction.cpp" />
     <ClCompile Include="Actions\SwitchToPlayModeAction.cpp" />
@@ -201,6 +202,7 @@
     <ClInclude Include="Actions\LoadAction.h" />
     <ClInclude Include="Actions\PickByFillColorAction.h" />
     <ClInclude Include="Actions\PickByTypeAction.h" />
+    <ClInclude Include="Actions\PickByTypeAndFillColorAction.h" />
     <ClInclude Include="Actions\SelectAction.h" />
     <ClInclude Include="Actions\SwitchToDrawModeAction.h" />
     <ClInclude Include="Actions\SwitchToPlayModeAction.h" />

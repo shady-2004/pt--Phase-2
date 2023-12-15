@@ -13,6 +13,7 @@
 #include"Actions/ChangeFigColorAction.h"
 #include"Actions/ChangeFillColorAcion.h"
 #include"Actions/PickByTypeAction.h"
+#include"Actions/PickByFillColorAction.h"
 #include <fstream>
 
 
@@ -105,6 +106,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case PICK_FIG_TYPE:
 			pAct = new PickByTypeAction(this);
 			break;
+
+		case PICK_FIG_FILL_COLOR:
+			pAct = new PickByFillColorAction(this);
+			break;
 		case TO_EXIT:
 			///create ExitAction here
 			pAct = new ExitAction(this);
@@ -193,15 +198,20 @@ void ApplicationManager::resetHidden()
 	}
 }
 
-int ApplicationManager::getFigFillCount(int I)
+
+int ApplicationManager::getFigFillCount(int x)
 {
-	int FillColor = FigList[I]->getShapeFillColor();
 	int count=0;
 	for (int i = 0; i < FigCount; i++) {
-		if ((FigList[i]->getShapeFillColor()) == FillColor)
+		if ((FigList[i]->getShapeFillColor()) == x)
 			count++;
 	}
 	return count;
+}
+
+int ApplicationManager::getFigFillColor(int I)
+{
+	return FigList[I]->getShapeFillColor();
 }
 
 DrawMenuItem ApplicationManager::getFigType(int I)

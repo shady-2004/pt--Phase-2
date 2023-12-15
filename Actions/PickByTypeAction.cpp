@@ -20,7 +20,8 @@ void PickByTypeAction::ReadActionParameters()
 	pIn->GetPointClicked(p.x, p.y);
 }
 void PickByTypeAction::Execute() {
-	Output* pOut = pManager->GetOutput()
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 		srand(time(0));//// This lines to random a shape
 	Figure = pManager->getFigType((rand() % pManager->GetFigCount()));
 		
@@ -48,6 +49,7 @@ void PickByTypeAction::Execute() {
 	while (1) {
 		ReadActionParameters();
 		choosedFig = pManager->GetFigure(p.x, p.y);
+		if(pIn)
 		if (choosedFig != NULL) {
 			if (Figure == (choosedFig->getShapeType())) {
 				NoOfCorrectPicks++;
