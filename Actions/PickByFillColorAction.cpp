@@ -18,7 +18,7 @@ void PickByFillColorAction::Execute()
 {
 	Output* pOut = pManager->GetOutput();
 	srand(time(0));//// This lines to random a shape
-	Fill = pManager->getFigFillColor((rand() % pManager->GetFigCount()));
+	Fill = pManager->getFigFillColor((rand() % pManager->GetFigCount()));//Random a shape idx and get its Fill color to make sure it will no random a shape not drawn
 	TypeCount = pManager->getFigFillCount(Fill);
 	switch (Fill) {
 	case COLOR_RED:

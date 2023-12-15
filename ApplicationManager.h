@@ -53,11 +53,13 @@ public:
 	// -- Interface Management Functions
 	Input* GetInput() const; //Return pointer to the input
 	Output* GetOutput() const; //Return pointer to the output
-	void UpdateInterface() const;	//Redraws all the drawing window	
+	void UpdateInterface() const;	//Redraws all the drawing window
+
+
 	void resetHidden();
 	int getFigFillCount(int x);
 	int getFigFillColor(int I);
 	DrawMenuItem getFigType(int I);
+	int getFigCountByFillAndType(DrawMenuItem Type, int fill);
 };
-
 #endif

@@ -21,9 +21,9 @@ void PickByTypeAction::ReadActionParameters()
 }
 void PickByTypeAction::Execute() {
 	Output* pOut = pManager->GetOutput();
-	Input* pIn = pManager->GetInput();
+	/*Input* pIn = pManager->GetInput();*/
 		srand(time(0));//// This lines to random a shape
-	Figure = pManager->getFigType((rand() % pManager->GetFigCount()));
+	Figure = pManager->getFigType((rand() % pManager->GetFigCount()));//Random a shape idx and get its Type to make sure it will no random a shape not drawn
 		
 	switch (Figure) {
 	case ITM_RECT:
@@ -49,7 +49,7 @@ void PickByTypeAction::Execute() {
 	while (1) {
 		ReadActionParameters();
 		choosedFig = pManager->GetFigure(p.x, p.y);
-		if(pIn)
+
 		if (choosedFig != NULL) {
 			if (Figure == (choosedFig->getShapeType())) {
 				NoOfCorrectPicks++;

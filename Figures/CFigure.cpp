@@ -81,16 +81,16 @@ int CFigure::getShapeFillColor()
 	if (!FigGfxInfo.isFilled)
 		return 10;//Refers to Unfilled
 	if (FigGfxInfo.FillClr == RED)
-		return 0;
+		return COLOR_RED;
 	if (FigGfxInfo.FillClr == BLUE)
-		return 1;
+		return COLOR_BLUE;
 	if (FigGfxInfo.FillClr == GREEN)
-		return 2;
+		return COLOR_GREEN;
 	if (FigGfxInfo.FillClr == ORANGE)
-		return 3;
+		return COLOR_ORANGE;
 	if (FigGfxInfo.FillClr == YELLOW)
-		return 4;
+		return COLOR_YELLOW;
 	if (FigGfxInfo.FillClr == BLACK)
-		return 5;
+		return COLOR_BLACK;
 
 }
