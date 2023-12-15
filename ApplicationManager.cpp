@@ -162,7 +162,7 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 
 	for (int i = 0; i < FigCount; i++) {
 		if (FigList[i]->IsFound(x, y)) {
-			if (FigList[i]->getHidden())
+			if (FigList[i]->IsHidden())
 			continue;
 			return FigList[i];
 		}
@@ -198,7 +198,7 @@ void ApplicationManager::UpdateInterface() const
 void ApplicationManager::resetHidden()
 {
 	for (int i = 0; i < FigCount; i++) {
-			FigList[i]->setIsHidden(0);
+			FigList[i]->SetHidden(0);
 	}
 }
 

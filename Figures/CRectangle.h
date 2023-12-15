@@ -14,9 +14,9 @@ public:
 	virtual void Draw(Output* pOut) const;
 	virtual void Save(ofstream& OutFile);
 	virtual void Load(ifstream& InFile);
-	virtual void Print(Output*);	//Prints the figure's info
+	virtual void PrintInfo(Output*);	//Prints the figure's info
 
-	virtual bool IsFound(int, int);
+	virtual bool IsFound(int x, int y);
 };
 
 #endif

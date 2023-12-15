@@ -27,7 +27,10 @@ void SelectAction::Execute()
 
 	{
 		if (pManager->GetSelectedFig() == SelectedFig)	//Case 1: User clicks on the same selected figure
+		{
 			SelectedFig->SetSelected(0);
+			pManager->SetSelectedFig(NULL);
+		}
 
 			
 		else if (SelectedFig == NULL)					//Case 2: User clicks on an empty area
@@ -39,14 +42,17 @@ void SelectAction::Execute()
 			pManager->GetSelectedFig()->SetSelected(0);
 			SelectedFig->SetSelected(1);
 			pManager->SetSelectedFig(SelectedFig);
-			SelectedFig->Print(pManager->GetOutput());
+			SelectedFig->PrintInfo(pManager->GetOutput());
 		}
 	}
 	else												// This means that this is the first time the user selects a figure
 		{
+		if (SelectedFig != NULL)
+		{
 			SelectedFig->SetSelected(1);
 			pManager->SetSelectedFig(SelectedFig);
-			SelectedFig->Print(pManager->GetOutput());
+			SelectedFig->PrintInfo(pManager->GetOutput());
+		}
 		}
 
 }
