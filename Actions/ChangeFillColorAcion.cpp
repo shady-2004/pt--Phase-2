@@ -60,6 +60,5 @@ void ChangeFillColorAcion::Execute()
 	{
 		F->ChngFillClr(UI.FillColor);
 		F->SetSelected(0);
-		pManager->UpdateInterface();
 	}
 }
