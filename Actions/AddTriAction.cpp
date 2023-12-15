@@ -32,6 +32,8 @@ void AddTriAction::ReadActionParameters()
 	//get drawing, filling colors and pen width from the interface
 	TriGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	TriGfxInfo.FillClr = pOut->getCrntFillColor();
+	TriGfxInfo.isFilled = pOut->getCrntFillStatues();
+
 
 	pOut->ClearStatusBar();
 

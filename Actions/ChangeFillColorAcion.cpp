@@ -54,7 +54,7 @@ void ChangeFillColorAcion::Execute()
 	Output* pOut = pManager->GetOutput();
 
 	ReadActionParameters();//This action needs to read some parameters first
-
+	UI.IsFilled = true;
 	CFigure* F = pManager->GetSelectedFig();//
 	if (F != NULL)//Checks if there is selected figure or not
 	{
