@@ -22,6 +22,7 @@ void AddSqrAction::ReadActionParameters()
 	//get drawing, filling colors and pen width from the interface
 	SqrGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	SqrGfxInfo.FillClr = pOut->getCrntFillColor();
+	SqrGfxInfo.isFilled = pOut->getCrntFillStatues();
 
 	pOut->ClearStatusBar();
 }
