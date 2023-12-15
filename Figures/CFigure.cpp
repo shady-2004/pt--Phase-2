@@ -2,14 +2,14 @@
 
 CFigure::CFigure() {
 	Selected = false;
-	IsHidden = 0;
+	Hidden = 0;
 }
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)
 { 
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
 	Selected = false;
-	IsHidden = 0;
+	Hidden = 0;
 }
 
 void CFigure::SetSelected(bool s)
@@ -56,19 +56,15 @@ color CFigure::convertColorToClr(string clr) const {
 	else return WHITE;
 }
 
-void CFigure::Print(Output* pOut)
+
+void CFigure::SetHidden(bool x)
 {
-	pOut->PrintMessage("Figure ID : " + to_string(id));
+	Hidden = x;
 }
 
-void CFigure::setIsHidden(bool x)
+bool CFigure::IsHidden()
 {
-	IsHidden = x;
-}
-
-bool CFigure::getHidden()
-{
-	return IsHidden;
+	return Hidden;
 }
 
 DrawMenuItem CFigure::getShapeType()

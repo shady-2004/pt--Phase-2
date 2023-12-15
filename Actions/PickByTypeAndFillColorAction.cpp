@@ -81,7 +81,7 @@ void PickByTypeAndFillColorAction::Execute()
 			else
 				NoOfWrongPicks++;
 
-			choosedFig->setIsHidden(1);
+			choosedFig->SetHidden(1);
 			pOut->ClearDrawArea();
 			pManager->UpdateInterface();
 			pOut->PrintMessage(" Correct Picks : " + to_string(NoOfCorrectPicks) + "   ""Wrong Picks : " + to_string(NoOfWrongPicks));
