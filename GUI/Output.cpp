@@ -18,6 +18,7 @@ Output::Output()
 
 	UI.DrawColor = BLUE;	//Drawing color
 	UI.FillColor = GREEN;	//Filling color
+	UI.IsFilled = 0;
 	UI.MsgColor = RED;		//Messages color
 	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	//Background color
 	UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
@@ -230,6 +231,11 @@ string Output::getCrntColorAsString(color clr) const {
 int Output::getCrntPenWidth() const		//get current pen width
 {
 	return UI.PenWidth;
+}
+
+bool Output::getCrntFillStatues() const
+{
+	return UI.IsFilled;
 }
 
 //======================================================================================//

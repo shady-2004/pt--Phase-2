@@ -2,7 +2,7 @@
 #include <fstream>
 
 CTriangle::CTriangle() {
-	
+	ShapeType = ITM_TRIANGLE;
 }
 
 CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo, int ID) :CFigure(FigureGfxInfo)
@@ -11,11 +11,13 @@ CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo, int ID
 	vertex1 = P1;
 	vertex2 = P2;
 	vertex3 = P3;
+	ShapeType = ITM_TRIANGLE;
 }
 
 void CTriangle::Draw(Output* pOut) const
 {
 	//Call Output::DrawTri to draw a triangle on the screen	
+	if (!Hidden)
 	pOut->DrawTri(vertex1, vertex2, vertex3, FigGfxInfo, Selected);
 }
 
@@ -31,8 +33,34 @@ void CTriangle::Load(ifstream& InFile) {
 	if (FigGfxInfo.FillClr == LIGHTGOLDENRODYELLOW) FigGfxInfo.isFilled = false;
 }
 
-bool CTriangle::IsFound(int, int)
+bool CTriangle::IsFound(int x, int y)
 {
+	int intersections = 0;
+	int n = 3;
+	Point trianglePoints[] = { vertex1, vertex2, vertex3};
+	double x1, y1, x2, y2;
+
+	double intersectionPoint;
+	for (int i = 0 , j = n-1; i < n; j = i++)
+	{
+		x1 = trianglePoints[i].x;
+		y1= trianglePoints[i].y;
+
+		x2= trianglePoints[j].x;
+		y2= trianglePoints[j].y;
+
+		intersectionPoint = x1 + (y - y1) / (y2 - y1) * (x2 - x1);
+		if ((y < y1 != y < y2) && x < intersectionPoint)
+			intersections++;
+	}
+	if (intersections % 2 == 1)
+		return true;
 	return false;
+}
+
+void CTriangle::PrintInfo(Output* pOut)
+{
+	pOut->PrintMessage("Figure Type : Triangle         Figure ID : " + to_string(id) + "         Vertex1 : " + to_string(vertex1.x) + "," + to_string(vertex1.y) + "   Vertex2: " + to_string(vertex2.x) + "," + to_string(vertex2.y) + "   Vertex3: " + to_string(vertex3.x) + "," + to_string(vertex3.y));
+
 }
 

@@ -15,6 +15,8 @@ public:
 
     virtual void Save(ofstream& OutFile);
     virtual void Load(ifstream& InFile);
-    virtual bool IsFound(int, int);
+    virtual bool IsFound(int x, int y);
+
+    virtual void PrintInfo(Output* pOut);
 };
 

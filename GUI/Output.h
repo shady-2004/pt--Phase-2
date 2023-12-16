@@ -48,6 +48,7 @@ public:
 	color getCrntFillColor() const;	//get current filling color
 	string getCrntColorAsString(color) const; //get the color as a string to facilitate using colors
 	int getCrntPenWidth() const;		//get current pen width
+	bool getCrntFillStatues() const;
 
 
 	~Output();

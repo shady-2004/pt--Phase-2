@@ -28,6 +28,7 @@ void AddCircAction::ReadActionParameters()
 	//get drawing, filling colors and pen width from the interface
 	CircGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	CircGfxInfo.FillClr = pOut->getCrntFillColor();
+	CircGfxInfo.isFilled= pOut->getCrntFillStatues();
 
 	pOut->ClearStatusBar();
 }

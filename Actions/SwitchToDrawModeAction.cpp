@@ -11,6 +11,7 @@ void SwitchToDrawModeAction::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
+	pManager->resetHidden();
 	//print a massage on the status bar
 	pOut->PrintMessage("Switch to draw mode: Click anywhere");
 }
