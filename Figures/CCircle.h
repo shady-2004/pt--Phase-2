@@ -19,5 +19,7 @@ public:
     virtual void PrintInfo(Output* pOut);
 
     int CalcRadius();
+
+    virtual ~CCircle();
 };
 

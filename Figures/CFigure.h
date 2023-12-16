@@ -45,4 +45,6 @@ public:
 	bool IsHidden();
 	DrawMenuItem getShapeType();
 	int getShapeFillColor();
+
+	virtual ~CFigure() = 0;
 };

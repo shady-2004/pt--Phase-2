@@ -42,3 +42,7 @@ void CSquare::PrintInfo(Output* pOut)
 	pOut->PrintMessage("Figure Type : Square          Figure ID : " + to_string(id) + "         Center : " + to_string(Center.x) + "," + to_string(Center.y));
 }
 
+CSquare::~CSquare()
+{
+}
+

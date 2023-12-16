@@ -45,6 +45,8 @@ public:
 	void SetSelectedFig(CFigure*);			// Setter for Selected Figure
 	CFigure* GetSelectedFig();				// Getter for Selected Figure
 
+	void DeleteFigure(CFigure* pFig);
+
 
 	void SaveAll(ofstream& OutFile);
 
@@ -61,5 +63,7 @@ public:
 	int getFigFillColor(int I);
 	DrawMenuItem getFigType(int I);
 	int getFigCountByFillAndType(DrawMenuItem Type, int fill);
+
+
 };
 #endif

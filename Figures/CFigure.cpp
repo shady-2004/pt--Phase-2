@@ -90,3 +90,7 @@ int CFigure::getShapeFillColor()
 		return COLOR_BLACK;
 
 }
+
+CFigure::~CFigure()
+{
+}

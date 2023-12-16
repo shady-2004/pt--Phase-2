@@ -18,11 +18,11 @@ void AddSqrAction::ReadActionParameters()
 	//Read center of square
 	pIn->GetPointClicked(P1.x, P1.y);
 
-	SqrGfxInfo.isFilled = false;	//default is not filled
+
 	//get drawing, filling colors and pen width from the interface
 	SqrGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	SqrGfxInfo.FillClr = pOut->getCrntFillColor();
-	SqrGfxInfo.isFilled = pOut->getCrntFillStatues();
+	SqrGfxInfo.isFilled = pOut->getCrntFillStatus();
 
 	pOut->ClearStatusBar();
 }

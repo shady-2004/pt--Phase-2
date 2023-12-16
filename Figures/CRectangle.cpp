@@ -44,3 +44,7 @@ bool CRectangle::IsFound(int x, int y)
 		return 1;
 	return 0;
 }
+
+CRectangle::~CRectangle()
+{
+}

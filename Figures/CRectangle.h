@@ -17,6 +17,8 @@ public:
 	virtual void PrintInfo(Output*);	//Prints the figure's info
 
 	virtual bool IsFound(int x, int y);
+
+	virtual ~CRectangle();
 };
 
 #endif

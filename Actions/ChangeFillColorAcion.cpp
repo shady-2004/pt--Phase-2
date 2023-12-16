@@ -16,6 +16,7 @@ void ChangeFillColorAcion::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 
+	UI.IsFilled = true;
 	pOut->PrintMessage("Select Fill Color");
 
 	switch (pIn->GetcolorAction(pOut->colorpalette())) //Get Selected Color from pallete
@@ -51,14 +52,14 @@ void ChangeFillColorAcion::ReadActionParameters()
 
 void ChangeFillColorAcion::Execute()
 {
-	Output* pOut = pManager->GetOutput();
+
+	CFigure* F = pManager->GetSelectedFig();
+
+	if (F == NULL)
+		return;
 
 	ReadActionParameters();//This action needs to read some parameters first
-	UI.IsFilled = true;
-	CFigure* F = pManager->GetSelectedFig();//
-	if (F != NULL)//Checks if there is selected figure or not
-	{
-		F->ChngFillClr(UI.FillColor);
-		F->SetSelected(0);
-	}
+
+	F->ChngFillClr(UI.FillColor);
+
 }

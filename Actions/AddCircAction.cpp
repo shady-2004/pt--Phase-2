@@ -24,11 +24,10 @@ void AddCircAction::ReadActionParameters()
 	//Read Radius and store in Radius
 	pIn->GetPointClicked(Radius.x, Radius.y);
 
-	CircGfxInfo.isFilled = false;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
 	CircGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	CircGfxInfo.FillClr = pOut->getCrntFillColor();
-	CircGfxInfo.isFilled= pOut->getCrntFillStatues();
+	CircGfxInfo.isFilled= pOut->getCrntFillStatus();
 
 	pOut->ClearStatusBar();
 }

@@ -64,3 +64,7 @@ void CTriangle::PrintInfo(Output* pOut)
 
 }
 
+CTriangle::~CTriangle()
+{
+}
+

@@ -18,5 +18,7 @@ public:
     virtual bool IsFound(int x, int y);
 
     virtual void PrintInfo(Output* pOut);
+
+    virtual ~CTriangle();
 };
 

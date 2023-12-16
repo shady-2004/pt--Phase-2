@@ -16,6 +16,8 @@
 #include"Actions/PickByFillColorAction.h"
 #include"Actions/PickByTypeAndFillColorAction.h"
 #include <fstream>
+#include "Actions/UndoAction.h"
+#include "Actions/DeleteAction.h"
 
 
 //Constructor
@@ -46,7 +48,7 @@ ActionType ApplicationManager::GetUserAction() const
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Creates an action and executes it
-void ApplicationManager::ExecuteAction(ActionType ActType) 
+void ApplicationManager::ExecuteAction(ActionType ActType)
 {
 	Action* pAct = NULL;
 
@@ -55,81 +57,92 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	{													// To make space for the new selected action
 		for (int i = 0; i < MaxActions-1; i++)
 			ActionList[i] = ActionList[i + 1];
-		
+
 		ActionCount = MaxActions;
 	}
-	
+
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
-		case DRAW_RECT:
+	case DRAW_RECT:
 
-			pAct = new AddRectAction(this);
-			break;
+		pAct = new AddRectAction(this);
+		break;
 
-		case DRAW_SQUARE:
-			pAct = new AddSqrAction(this);
-			break;
+	case DRAW_SQUARE:
+		pAct = new AddSqrAction(this);
+		break;
 
-		case DRAW_CIRCLE:
-			pAct = new AddCircAction(this);
-			break;
+	case DRAW_CIRCLE:
+		pAct = new AddCircAction(this);
+		break;
 
-		case DRAW_TRIANGLE:
-			pAct = new AddTriAction(this);
-			break;
+	case DRAW_TRIANGLE:
+		pAct = new AddTriAction(this);
+		break;
 
-		case DRAW_HEXAGON:
-			pAct = new AddHexAction(this);
-			break;
+	case DRAW_HEXAGON:
+		pAct = new AddHexAction(this);
+		break;
 
-		case TO_SAVE_GRAPH:
-			pAct = new SaveAction(this);
-			break;
-		case TO_LOAD_GRAPH:
-			pAct = new LoadAction(this);
-			break;
-		case TO_SELECT:
-			pAct = new SelectAction(this);
-			break;
-		case TO_CHANGE_DRAW_COLOR:
-			pAct = new ChangeFigColorAction(this);
-			break;
-		case TO_CHANGE_FILL_COLOR:
-			pAct = new ChangeFillColorAcion(this);
-			break;
-		case TO_PLAY:
-			pAct = new SwitchToPlayModeAction(this);
-			break;
-		case TO_DRAW:
-			pAct = new SwitchToDrawModeAction(this);
-			break;
-		case PICK_FIG_TYPE:
-			pAct = new PickByTypeAction(this);
-			break;
+	case TO_SAVE_GRAPH:
+		pAct = new SaveAction(this);
+		break;
+	case TO_LOAD_GRAPH:
+		pAct = new LoadAction(this);
+		break;
+	case TO_SELECT:
+		pAct = new SelectAction(this);
+		break;
+	case TO_CHANGE_DRAW_COLOR:
+		pAct = new ChangeFigColorAction(this);
+		break;
+	case TO_CHANGE_FILL_COLOR:
+		pAct = new ChangeFillColorAcion(this);
+		break;
+	case TO_PLAY:
+		pAct = new SwitchToPlayModeAction(this);
+		break;
+	case TO_DRAW:
+		pAct = new SwitchToDrawModeAction(this);
+		break;
+	case PICK_FIG_TYPE:
+		pAct = new PickByTypeAction(this);
+		break;
 
-		case PICK_FIG_FILL_COLOR:
-			pAct = new PickByFillColorAction(this);
-			break;
-		case PICK_FIG_TYPE_AND_FILL_COLOR:
-			pAct = new PickByTypeAndFillColorAction(this);
-			break;
-		case TO_EXIT:
-			///create ExitAction here
-			pAct = new ExitAction(this);
-			break;
-		case STATUS:	//a click on the status bar ==> no action
-			return;
+	case PICK_FIG_FILL_COLOR:
+		pAct = new PickByFillColorAction(this);
+		break;
+	case PICK_FIG_TYPE_AND_FILL_COLOR:
+		pAct = new PickByTypeAndFillColorAction(this);
+		break;
+
+	case TO_UNDO:
+		pAct = new UndoAction(this);
+		break;
+	case TO_DELETEE:
+		pAct = new DeleteAction(this);
+		break;
+	case TO_EXIT:
+		///create ExitAction here
+		pAct = new ExitAction(this);
+		break;
+	case STATUS:	//a click on the status bar ==> no action
+		return;
 	}
-	
-	//Execute the created action
-	if(pAct != NULL)
-	{
-		ActionList[ActionCount - 1] = pAct;
-		ActionList[ActionCount-1]->Execute();//Execute
-		delete pAct;	//You may need to change this line depending to your implementation
-		pAct = NULL;
-	}
+		//Execute the created action
+		if (pAct != NULL)
+		{
+			if (dynamic_cast<AddRectAction*>(pAct) || dynamic_cast<AddSqrAction*>(pAct) || dynamic_cast<AddCircAction*>(pAct) || dynamic_cast<AddTriAction*>(pAct) || dynamic_cast<AddHexAction*>(pAct) || dynamic_cast<ChangeFigColorAction*>(pAct) || dynamic_cast<ChangeFillColorAcion*>(pAct))
+
+				ActionList[ActionCount - 1] = pAct;
+
+
+			pAct->Execute();//Execute
+			delete pAct;	//You may need to change this line depending to your implementation
+			pAct = NULL;
+		}
+
 }
 
 Action** ApplicationManager::GetActionList()
@@ -183,6 +196,16 @@ CFigure* ApplicationManager::GetSelectedFig()
 {
 	return SelectedFig;
 }
+void ApplicationManager::DeleteFigure(CFigure* pFig)
+{
+	for (int i = 0; i < FigCount; i++)
+		if (FigList[i] == pFig)
+		{
+			delete FigList[i];
+			FigCount--;
+		}
+
+}
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
@@ -191,6 +214,7 @@ CFigure* ApplicationManager::GetSelectedFig()
 void ApplicationManager::UpdateInterface() const
 {	
 	for (int i = 0; i < FigCount; i++) {
+		if (FigList[i])
 		FigList[i]->Draw(pOut);
 	}
 	//Call Draw function (virtual member fn)

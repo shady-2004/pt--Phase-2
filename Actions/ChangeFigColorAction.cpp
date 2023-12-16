@@ -13,7 +13,6 @@ void ChangeFigColorAction::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
-
 	pOut->PrintMessage("Select Draw Color");
 
 	switch (pIn->GetcolorAction(pOut->colorpalette())) //Get Selected Color from pallete
@@ -49,15 +48,13 @@ void ChangeFigColorAction::ReadActionParameters()
 
 void ChangeFigColorAction::Execute()
 {
-	Output* pOut = pManager->GetOutput();
+	CFigure* F = pManager->GetSelectedFig();
+	
+	if (F== NULL)
+		return;
 
 	ReadActionParameters();//This action needs to read some parameters first
 
-	CFigure*F = pManager->GetSelectedFig();//
-	if (F != NULL)//Checks if there is selected figure or not
-	{
-
-		F->ChngDrawClr(UI.DrawColor);
-		F->SetSelected(0);
-	}
+	F->ChngDrawClr(UI.DrawColor);
+	F->SetSelected(0);
 }

@@ -20,11 +20,10 @@ void AddHexAction::ReadActionParameters()
 	pIn->GetPointClicked(Center.x, Center.y);
 
 
-	HexGfxInfo.isFilled = false;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
 	HexGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	HexGfxInfo.FillClr = pOut->getCrntFillColor();
-	HexGfxInfo.isFilled = pOut->getCrntFillStatues();
+	HexGfxInfo.isFilled = pOut->getCrntFillStatus();
 
 	pOut->ClearStatusBar();
 }

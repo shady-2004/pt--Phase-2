@@ -56,3 +56,7 @@ int CCircle::CalcRadius()
 	int Radius = sqrt(pow(this->Radius.x - Center.x, 2) + pow(this->Radius.y - Center.y, 2));
 	return Radius;
 }
+
+CCircle::~CCircle()
+{
+}
