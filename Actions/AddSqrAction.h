@@ -1,7 +1,7 @@
 #pragma once
-#include"Action.h"
+#include"AddFigureAction.h"
 //Add Square Action class
-class AddSqrAction:public Action
+class AddSqrAction:public AddFigureAction
 {
 	private:
 		Point P1; //Square Center
@@ -15,6 +15,7 @@ class AddSqrAction:public Action
 		//Add Square to the ApplicationManager
 		virtual void Execute();
 
+		virtual void UndoExecution();
 
 };
 

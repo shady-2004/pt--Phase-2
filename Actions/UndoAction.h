@@ -2,9 +2,15 @@
 #include "Action.h"
 class UndoAction : public Action
 {
+	enum {MaxActionsToUndo = 5};
+
 private:
-	Action* lastAction;
+	
+	Action* ActionsToUndo[MaxActionsToUndo];
+	int ActionsToUndoCount;
+
 public:
+	static int UndoCount;
 	UndoAction(ApplicationManager* pApp);
 
 	void ReadActionParameters();

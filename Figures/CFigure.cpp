@@ -23,8 +23,10 @@ void CFigure::ChngDrawClr(color Dclr)
 
 void CFigure::ChngFillClr(color Fclr)
 {	
-	FigGfxInfo.isFilled = true;
-	FigGfxInfo.FillClr = Fclr; 
+	FigGfxInfo.isFilled = UI.IsFilled;
+	if (UI.IsFilled == true)
+		FigGfxInfo.FillClr = Fclr; 
+	
 }
 
 string CFigure::convertDrwColorToString() const {

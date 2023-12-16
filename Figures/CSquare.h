@@ -5,6 +5,7 @@ class CSquare :
 {
 private:
 	Point Center;
+	Point PreviousCenter;
 
 public:
 	CSquare();
@@ -16,6 +17,9 @@ public:
 
 	virtual void PrintInfo(Output* pOut);
 
+
+	virtual void MoveFigure(int, int);
+	virtual void ReturnFigure();
 	virtual ~CSquare();
 };
 

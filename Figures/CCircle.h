@@ -4,8 +4,8 @@ class CCircle :
     public CFigure
 {
 private:
-    Point Center;
-    Point Radius;//distance from center to surface
+    Point Center, PreviousCenter;
+    Point PointOnRadius , PreviousPointOnRadius;//distance from center to surface
 public:
     CCircle();
     CCircle(Point, Point, GfxInfo FigureGfxInfo, int ID);
@@ -19,6 +19,10 @@ public:
     virtual void PrintInfo(Output* pOut);
 
     int CalcRadius();
+
+
+    virtual void MoveFigure(int, int);
+    virtual void ReturnFigure();
 
     virtual ~CCircle();
 };

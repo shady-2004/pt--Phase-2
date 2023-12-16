@@ -11,7 +11,7 @@ SwitchToPlayModeAction::SwitchToPlayModeAction(ApplicationManager* pApp):Action(
  {
 	 Output* pOut = pManager->GetOutput();
 	 Input* pIn = pManager->GetInput();
-	   //print a massare of the selected action
+	   //print a message of the selected action
 	 pOut->PrintMessage("Switch to play mode: Click anywhere");
 
  }

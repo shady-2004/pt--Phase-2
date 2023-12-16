@@ -23,7 +23,6 @@ void LoadAction::ReadActionParameters() {
 
 void LoadAction::Execute() {
 	ReadActionParameters();
-	id = pManager->GetActionCount();
 	int num;
 	ifstream InFile;
 	InFile.open("Saved Data/" + filename + ".txt");

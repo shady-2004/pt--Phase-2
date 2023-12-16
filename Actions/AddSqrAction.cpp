@@ -3,7 +3,7 @@
 #include"../GUI/Input.h"
 #include"../GUI/Output.h"
 #include"../ApplicationManager.h"
-AddSqrAction::AddSqrAction(ApplicationManager* pApp):Action(pApp)
+AddSqrAction::AddSqrAction(ApplicationManager* pApp):AddFigureAction(pApp)
 {
 }
 
@@ -31,11 +31,16 @@ void AddSqrAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
-	id = pManager->GetActionCount();
 
 	//Create a Square with the parameters read from the user
-	CSquare* S = new CSquare(P1,  SqrGfxInfo, (pManager->GetFigCount()) + 1);
+	F = new CSquare(P1,  SqrGfxInfo, (pManager->GetFigCount()) + 1);
 
 	//Add the Square to the list of figures
-	pManager->AddFigure(S);
+	pManager->AddFigure(F);
+}
+
+void AddSqrAction::UndoExecution()
+{
+	pManager->DeleteFigure(F);
+	pManager->GetOutput()->PrintMessage("Draw Square Action Undone");
 }

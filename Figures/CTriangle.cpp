@@ -64,6 +64,36 @@ void CTriangle::PrintInfo(Output* pOut)
 
 }
 
+void CTriangle::MoveFigure(int a, int b)  // a function that modify the center of the selected figure to the new center 
+{
+	PreviousVertex1 = vertex1;
+	PreviousVertex2 = vertex2;
+	PreviousVertex3 = vertex3;
+	
+	// calculate old centroid coordinates
+	int c1x = (vertex1.x + vertex2.x + vertex3.x) / 3.0;
+	int c1y = (vertex1.y + vertex2.y + vertex3.y) / 3.0;
+	// new centroid coordinates
+	int c2x = a;
+	int c2y = b;
+	// set vertex1 coordinates
+	vertex1.x = vertex1.x + c2x - c1x;
+	vertex1.y = vertex1.y + c2y - c1y;
+	// set vertex2 coordinates
+	vertex2.x = vertex2.x + c2x - c1x;
+	vertex2.y = vertex1.y + c2y - c1y;
+	// set vertex2 coordinates
+	vertex3.x = vertex3.x + c2x - c1x;
+	vertex3.y = vertex1.y + c2y - c1y;
+}
+
+void CTriangle::ReturnFigure()
+{
+	vertex1 = PreviousVertex1;
+	vertex2 = PreviousVertex2;
+	vertex3 = PreviousVertex3;
+}
+
 CTriangle::~CTriangle()
 {
 }

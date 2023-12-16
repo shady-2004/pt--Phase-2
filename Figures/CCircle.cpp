@@ -12,7 +12,7 @@ CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo, int ID):CFigure(Figu
 {
 	id = ID;
 	Center =  P1;
-	Radius = P2;
+	PointOnRadius = P2;
 	ShapeType = ITM_CIRCLE;
 }
 
@@ -20,17 +20,17 @@ void CCircle::Draw(Output* pOut) const
 {
 	//Call Output::DrawCirc to draw a circle on the screen	
 	if(!Hidden)
-	pOut->DrawCirc(Center, Radius, FigGfxInfo, Selected);
+	pOut->DrawCirc(Center, PointOnRadius, FigGfxInfo, Selected);
 }
 
 void CCircle::Save(ofstream& OutFile) {
-	OutFile << "CIRCLE\t" << id << "\t" << Center.x << "\t" << Center.y << "\t" << Radius.x << "\t" << Radius.y << "\t" << FigGfxInfo.DrawClr << "\t";
+	OutFile << "CIRCLE\t" << id << "\t" << Center.x << "\t" << Center.y << "\t" << PointOnRadius.x << "\t" << PointOnRadius.y << "\t" << FigGfxInfo.DrawClr << "\t";
 	if (FigGfxInfo.isFilled) OutFile << FigGfxInfo.FillClr << endl;
 	else OutFile << "NOFILL" << endl;
 }
 
 void CCircle::Load(ifstream& InFile) {
-	InFile >> id >> Center.x >> Center.y >> Radius.x >> Radius.y >> &FigGfxInfo.DrawClr >> &FigGfxInfo.FillClr;
+	InFile >> id >> Center.x >> Center.y >> PointOnRadius.x >> PointOnRadius.y >> &FigGfxInfo.DrawClr >> &FigGfxInfo.FillClr;
 	if (FigGfxInfo.FillClr == LIGHTGOLDENRODYELLOW) FigGfxInfo.isFilled = false;
 }
 
@@ -53,8 +53,31 @@ void CCircle::PrintInfo(Output* pOut)
 
 int CCircle::CalcRadius()
 {
-	int Radius = sqrt(pow(this->Radius.x - Center.x, 2) + pow(this->Radius.y - Center.y, 2));
+	int Radius = sqrt(pow(PointOnRadius.x - Center.x, 2) + pow(PointOnRadius.y - Center.y, 2));
 	return Radius;
+}
+
+
+void CCircle::MoveFigure(int a, int b)  // a function that modify the center of the selected figure to the new center 
+{
+	PreviousCenter = Center;
+	PreviousPointOnRadius = PointOnRadius;
+
+
+	// calculate the radius of the circle
+	int Radius = CalcRadius();
+	// set the old center to the new center 
+	Center.x = a;
+	Center.y = b;
+	// set the old radius to the new radius
+	PointOnRadius.x = Center.x;
+	PointOnRadius.y = Center.y + Radius;
+}
+
+void CCircle::ReturnFigure()
+{
+	Center = PreviousCenter;
+	PointOnRadius = PreviousPointOnRadius;
 }
 
 CCircle::~CCircle()

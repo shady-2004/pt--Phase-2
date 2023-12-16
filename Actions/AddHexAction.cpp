@@ -4,7 +4,7 @@
 #include"../GUI/Output.h"
 #include"../ApplicationManager.h"
 
-AddHexAction::AddHexAction(ApplicationManager* pApp):Action(pApp)
+AddHexAction::AddHexAction(ApplicationManager* pApp):AddFigureAction(pApp)
 {
 }
 
@@ -33,13 +33,18 @@ void AddHexAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
-	id = pManager->GetActionCount();
 
 	//Create a hexagon with the parameters read from the user
-	CHexagon* H = new CHexagon(Center, HexGfxInfo, (pManager->GetFigCount()) + 1);
+	F = new CHexagon(Center, HexGfxInfo, (pManager->GetFigCount()) + 1);
 
 	//Add the hexagon to the list of figures
-	pManager->AddFigure(H);
+	pManager->AddFigure(F);
+}
+
+void AddHexAction::UndoExecution()
+{
+	pManager->DeleteFigure(F);
+	pManager->GetOutput()->PrintMessage("Draw Hexagon Action Undone");
 }
 
 

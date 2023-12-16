@@ -45,6 +45,31 @@ bool CRectangle::IsFound(int x, int y)
 	return 0;
 }
 
+void CRectangle::MoveFigure(int a, int b)  // a function that modify the center of the selected figure to the new center 
+{
+	PreviousCorner1 = Corner1;
+	PreviousCorner2 = Corner2;
+	
+	// a and b represent the center of the moved triangle //
+// calculated the width of the triangle
+	int width = abs(Corner1.y - Corner2.y);
+	// calculated the length of the triangle
+	int length = abs(Corner1.x - Corner2.x);
+	//set the first corner to the new corner
+	Corner1.x = a - length / 2.0;
+	Corner1.y = b - width / 2.0;
+	// set the second corner to the new corner
+	Corner2.x = a + length / 2.0;
+	Corner2.y = b + width / 2.0;
+
+}
+
+void CRectangle::ReturnFigure()
+{
+	Corner1 = PreviousCorner1;
+	Corner2 = PreviousCorner2;
+}
+
 CRectangle::~CRectangle()
 {
 }

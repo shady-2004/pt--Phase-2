@@ -21,7 +21,6 @@ void SelectAction::ReadActionParameters()
 void SelectAction::Execute()
 {
 	ReadActionParameters();
-	id = pManager->GetActionCount();
 
 	if (pManager->GetSelectedFig() != NULL)			//This means that there is a figure previously selected
 

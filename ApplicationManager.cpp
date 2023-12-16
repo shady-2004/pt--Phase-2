@@ -17,7 +17,8 @@
 #include"Actions/PickByTypeAndFillColorAction.h"
 #include <fstream>
 #include "Actions/UndoAction.h"
-#include "Actions/DeleteAction.h"
+#include "Actions/DeleteFigureAction.h"
+#include "Actions\MoveFigureAction.h"
 
 
 //Constructor
@@ -52,14 +53,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 {
 	Action* pAct = NULL;
 
-	ActionCount++;
-	if (ActionCount > MaxActions)						// Shifting The array of actions one to the left
-	{													// To make space for the new selected action
-		for (int i = 0; i < MaxActions-1; i++)
-			ActionList[i] = ActionList[i + 1];
-
-		ActionCount = MaxActions;
-	}
 
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
@@ -120,8 +113,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case TO_UNDO:
 		pAct = new UndoAction(this);
 		break;
+	case TO_MOVE:
+		pAct = new MoveFigureAction(this);
+		break;
 	case TO_DELETEE:
-		pAct = new DeleteAction(this);
+		pAct = new DeleteFigureAction(this);
 		break;
 	case TO_EXIT:
 		///create ExitAction here
@@ -130,18 +126,20 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case STATUS:	//a click on the status bar ==> no action
 		return;
 	}
-		//Execute the created action
-		if (pAct != NULL)
+
+	
+	
+	//Execute the created action
+	if (pAct != NULL)
+	{
+		ActionList[ActionCount] = pAct;
+		ActionCount++;
+		if (dynamic_cast<UndoAction*>(pAct) == NULL)
 		{
-			if (dynamic_cast<AddRectAction*>(pAct) || dynamic_cast<AddSqrAction*>(pAct) || dynamic_cast<AddCircAction*>(pAct) || dynamic_cast<AddTriAction*>(pAct) || dynamic_cast<AddHexAction*>(pAct) || dynamic_cast<ChangeFigColorAction*>(pAct) || dynamic_cast<ChangeFillColorAcion*>(pAct))
-
-				ActionList[ActionCount - 1] = pAct;
-
-
-			pAct->Execute();//Execute
-			delete pAct;	//You may need to change this line depending to your implementation
-			pAct = NULL;
+			UndoAction::UndoCount = 0;
 		}
+		pAct->Execute();//Execute
+	}
 
 }
 
@@ -201,7 +199,8 @@ void ApplicationManager::DeleteFigure(CFigure* pFig)
 	for (int i = 0; i < FigCount; i++)
 		if (FigList[i] == pFig)
 		{
-			delete FigList[i];
+			FigList[i] = FigList[FigCount - 1];
+			FigList[FigCount - 1] = NULL;
 			FigCount--;
 		}
 
@@ -213,8 +212,8 @@ void ApplicationManager::DeleteFigure(CFigure* pFig)
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {	
+	pOut->ClearDrawArea();
 	for (int i = 0; i < FigCount; i++) {
-		if (FigList[i])
 		FigList[i]->Draw(pOut);
 	}
 	//Call Draw function (virtual member fn)
@@ -294,7 +293,12 @@ int ApplicationManager::GetTypeCount(DrawMenuItem P)
 ApplicationManager::~ApplicationManager()
 {
 	for(int i=0; i<FigCount; i++)
-		delete FigList[i];
+		if (FigList[i])
+			delete FigList[i];
+
+	for (int i = 0; i < ActionCount; i++)
+		if (ActionList[i])
+			delete ActionList[i];
 	delete pIn;
 	delete pOut;
 	

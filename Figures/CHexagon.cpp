@@ -72,6 +72,18 @@ void CHexagon::PrintInfo(Output* pOut)
 
 }
 
+
+void CHexagon::MoveFigure(int a, int b)  // a function that modify the center of the selected figure to the new center 
+{
+	PreviousCenter = Center;
+	Center.x = a;
+	Center.y = b;
+
+}
+void CHexagon::ReturnFigure()
+{
+	Center = PreviousCenter;
+}
 CHexagon::~CHexagon()
 {
 }

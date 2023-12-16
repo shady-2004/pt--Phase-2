@@ -4,9 +4,9 @@ class CTriangle :
     public CFigure
 {
 private:
-    Point vertex1;
-    Point vertex2;
-    Point vertex3;
+    Point vertex1, PreviousVertex1;
+    Point vertex2, PreviousVertex2;
+    Point vertex3, PreviousVertex3;
 public:
     CTriangle();
     CTriangle(Point, Point, Point, GfxInfo FigureGfxInfo,int ID);
@@ -18,6 +18,11 @@ public:
     virtual bool IsFound(int x, int y);
 
     virtual void PrintInfo(Output* pOut);
+
+
+    virtual void MoveFigure(int, int);
+
+    virtual void ReturnFigure();
 
     virtual ~CTriangle();
 };

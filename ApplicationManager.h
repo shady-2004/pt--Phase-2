@@ -10,7 +10,7 @@
 //Main class that manages everything in the application.
 class ApplicationManager
 {
-	enum { MaxFigCount = 200, MaxActions = 5 };	//Max no of figures
+	enum { MaxFigCount = 200, MaxActions = 100 };	//Max no of figures
 
 private:
 	int FigCount;		//Actual number of figures

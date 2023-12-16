@@ -3,7 +3,7 @@
 #include"../GUI/Input.h"
 #include"../GUI/Output.h"
 #include"../ApplicationManager.h"
-AddTriAction::AddTriAction(ApplicationManager* pApp):Action(pApp)
+AddTriAction::AddTriAction(ApplicationManager* pApp):AddFigureAction(pApp)
 {
 }
 
@@ -41,11 +41,16 @@ void AddTriAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
-	id = pManager->GetActionCount();
 
 	//Create a Triangle with the parameters read from the user
-	CTriangle* R = new CTriangle(P1, P2,P3, TriGfxInfo, (pManager->GetFigCount()) + 1);
+	F = new CTriangle(P1, P2,P3, TriGfxInfo, (pManager->GetFigCount()) + 1);
 
 	//Add the Triangle to the list of figures
-	pManager->AddFigure(R);
+	pManager->AddFigure(F);
+}
+
+void AddTriAction::UndoExecution()
+{
+	pManager->DeleteFigure(F);
+	pManager->GetOutput()->PrintMessage("Draw Triangle Action Undone");
 }

@@ -1,9 +1,9 @@
 #pragma once
-#include "Action.h"
+#include "AddFigureAction.h"
 
 //Add Triangle Action class
 class AddTriAction :
-    public Action
+    public AddFigureAction
 {
 	
 	private:
@@ -18,5 +18,6 @@ class AddTriAction :
 		//Add triangle to the ApplicationManager
 		virtual void Execute();
 
+		virtual void UndoExecution();
 };
 

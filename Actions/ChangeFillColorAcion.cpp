@@ -6,6 +6,8 @@
 
 ChangeFillColorAcion::ChangeFillColorAcion(ApplicationManager* pApp):Action(pApp)
 {
+	PreviousColor = UI.FillColor;
+	PreviousState = UI.IsFilled;
 }
 
 
@@ -53,13 +55,23 @@ void ChangeFillColorAcion::ReadActionParameters()
 void ChangeFillColorAcion::Execute()
 {
 
-	CFigure* F = pManager->GetSelectedFig();
+	SelectedFig = pManager->GetSelectedFig();
 
-	if (F == NULL)
+	if (SelectedFig == NULL)
 		return;
 
 	ReadActionParameters();//This action needs to read some parameters first
 
-	F->ChngFillClr(UI.FillColor);
+	SelectedFig->ChngFillClr(UI.FillColor);
 
+}
+
+void ChangeFillColorAcion::UndoExecution()
+{
+	if (SelectedFig == NULL)
+		return;
+	UI.IsFilled = PreviousState;
+	SelectedFig->ChngFillClr(PreviousColor);
+	pManager->GetOutput()->PrintMessage("Change Fill Color Action Undone");
+	
 }

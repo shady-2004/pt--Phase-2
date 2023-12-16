@@ -42,6 +42,20 @@ void CSquare::PrintInfo(Output* pOut)
 	pOut->PrintMessage("Figure Type : Square          Figure ID : " + to_string(id) + "         Center : " + to_string(Center.x) + "," + to_string(Center.y));
 }
 
+
+void CSquare::MoveFigure(int a, int b)  // a function that modify the center of the selected figure to the new center 
+{
+	PreviousCenter = Center;
+	Center.x = a;
+	Center.y = b;
+
+}
+
+void CSquare::ReturnFigure()
+{
+	Center = PreviousCenter;
+}
+
 CSquare::~CSquare()
 {
 }
