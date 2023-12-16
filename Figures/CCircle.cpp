@@ -5,7 +5,7 @@
 using namespace std;
 
 CCircle::CCircle() {
-
+	ShapeType=ITM_CIRCLE;
 }
 
 CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo, int ID):CFigure(FigureGfxInfo)
@@ -13,11 +13,13 @@ CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo, int ID):CFigure(Figu
 	id = ID;
 	Center =  P1;
 	Radius = P2;
+	ShapeType = ITM_CIRCLE;
 }
 
 void CCircle::Draw(Output* pOut) const
 {
 	//Call Output::DrawCirc to draw a circle on the screen	
+	if(!Hidden)
 	pOut->DrawCirc(Center, Radius, FigGfxInfo, Selected);
 }
 
@@ -34,11 +36,23 @@ void CCircle::Load(ifstream& InFile) {
 
 bool CCircle::IsFound(int x, int y)
 {
-	int Radius = sqrt(pow(this->Radius.x - Center.x, 2) + pow(this->Radius.y - Center.y, 2));
+	int Radius = CalcRadius();
 
 	int distanceFromCenter = sqrt(pow(x - Center.x, 2) + pow(y - Center.y, 2));
 
 	if (distanceFromCenter <= Radius)
 		return 1;
 	return 0;
+}
+
+void CCircle::PrintInfo(Output* pOut)
+{
+	pOut->PrintMessage("Figure Type : Circle        Figure ID : " + to_string(id) + "      Center : " + to_string(Center.x) + "," + to_string(Center.y) + "   Radius =  " + to_string(CalcRadius()));
+
+}
+
+int CCircle::CalcRadius()
+{
+	int Radius = sqrt(pow(this->Radius.x - Center.x, 2) + pow(this->Radius.y - Center.y, 2));
+	return Radius;
 }

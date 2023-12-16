@@ -2,7 +2,7 @@
 #include <fstream>
 
 CRectangle::CRectangle() {
-
+	ShapeType = ITM_RECT;
 }
 
 CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo, int ID):CFigure(FigureGfxInfo)
@@ -10,12 +10,14 @@ CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo, int ID):CFigur
 	id = ID;
 	Corner1 = P1;
 	Corner2 = P2;
+	ShapeType = ITM_RECT;
 }
 	
 
 void CRectangle::Draw(Output* pOut) const
 {
-	//Call Output::DrawRect to draw a rectangle on the screen	
+	//Call Output::DrawRect to draw a rectangle on the screen
+ if(!Hidden)	
 	pOut->DrawRect(Corner1, Corner2, FigGfxInfo, Selected);
 }
 
@@ -30,16 +32,15 @@ void CRectangle::Load(ifstream& InFile) {
 	if (FigGfxInfo.FillClr == LIGHTGOLDENRODYELLOW) FigGfxInfo.isFilled = false;
 }
 
-void CRectangle::Print(Output* pOut)
+void CRectangle::PrintInfo(Output* pOut)
 {
-	CFigure::Print(pOut);
-	pOut->PrintMessage("Corner1 : " + to_string(Corner1.x) + "," + to_string(Corner1.y) + "   Corner2: " + to_string(Corner2.x) + "," + to_string(Corner1.y));
+	pOut->PrintMessage("Figure Type : Rectangle          Figure ID : " + to_string(id) + "       Corner1 : " + to_string(Corner1.x) + "," + to_string(Corner1.y) + "   Corner2: " + to_string(Corner2.x) + "," + to_string(Corner1.y));
 
 }
 
 bool CRectangle::IsFound(int x, int y)
 {
-	if (x >= Corner1.x && x <= Corner2.x && y >= Corner1.y && y <= Corner2.y)
+	if ((x <= Corner1.x != x <= Corner2.x )&& (y <= Corner1.y != y <= Corner2.y))
 		return 1;
 	return 0;
 }

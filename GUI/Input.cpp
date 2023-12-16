@@ -120,7 +120,7 @@ ActionType Input::GetcolorAction(window* colorp) const
 	Point p;
 	colorp->WaitMouseClick(p.x, p.y);
 
-	int ClickedItemOrder = p.x / (40 + 10);
+	int ClickedItemOrder = p.x / (50);
 
 	switch (ClickedItemOrder) {
 	case COLOR_RED: return CHOOSE_COLOR_RED;
