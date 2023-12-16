@@ -187,6 +187,8 @@
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
+    <ClCompile Include="Actions\StartRecordingAction.cpp" />
+    <ClCompile Include="Actions\StopRecordingAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\AddCircAction.h" />
@@ -234,6 +236,8 @@
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="DEFS.h" />
     <ClInclude Include="Actions\SaveAction.h" />
+    <ClInclude Include="Actions\StartRecordingAction.h" />
+    <ClInclude Include="Actions\StopRecordingAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

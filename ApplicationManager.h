@@ -19,8 +19,11 @@ private:
 	CFigure* SelectedFig; //Pointer to the selected figure
 	
 	Action* ActionList[MaxActions];		//List of all actions (Array of pointers)
-	int ActionCount;					//Actual number of actions
-		
+	int ActionCount;	//Actual number of actions
+	
+	bool isRecording;
+	image RecordingList[20];
+	int RecordCount;
 	//Pointers to Input and Output classes
 	Input *pIn;
 	Output *pOut;
@@ -36,6 +39,8 @@ public:
 	Action** GetActionList();		// Getter for Action list
 	int GetActionCount();			// Getter for Action count
 	
+	image* GetRecordingList();
+	int GetRecordCount();
 	
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
@@ -45,6 +50,7 @@ public:
 	void SetSelectedFig(CFigure*);			// Setter for Selected Figure
 	CFigure* GetSelectedFig();				// Getter for Selected Figure
 
+	void setRecording(bool);
 	
 	void SaveAll(ofstream& OutFile);
 

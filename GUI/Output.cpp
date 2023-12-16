@@ -151,6 +151,14 @@ void Output::closeColorMenu() {
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
+void Output::screenshotWindow(image& img) {
+	pWind->StoreImage(img, 0, 0, 1250, 650);
+}
+
+void Output::redrawWindow(image img) {
+	pWind->DrawImage(img, 0, 0, 1250, 650);
+}
+
 void Output::CreatePlayToolBar() const
 {
 	UI.InterfaceMode = MODE_PLAY;

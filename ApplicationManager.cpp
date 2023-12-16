@@ -12,6 +12,8 @@
 #include "Actions\ExitAction.h"
 #include"Actions/ChangeFigColorAction.h"
 #include"Actions/ChangeFillColorAcion.h"
+#include "Actions/StartRecordingAction.h"
+#include "Actions/StopRecordingAction.h"
 #include <fstream>
 
 
@@ -24,6 +26,7 @@ ApplicationManager::ApplicationManager()
 	
 	FigCount = 0;
 	ActionCount = 0;
+	RecordCount = 0;
 	SelectedFig = NULL;
 		
 	//Create an array of figure pointers and set them to NULL		
@@ -86,6 +89,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case TO_LOAD_GRAPH:
 			pAct = new LoadAction(this);
 			break;
+		case TO_START_RECORDING:
+			pAct = new StartRecordingAction(this);
+			break;
+		case TO_STOP_RECORDING:
+			pAct = new StopRecordingAction(this);
+			break;
 		case TO_SELECT:
 			pAct = new SelectAction(this);
 			break;
@@ -108,6 +117,21 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case STATUS:	//a click on the status bar ==> no action
 			return;
 	}
+
+	if (isRecording && ActType != TO_START_RECORDING && ActType != TO_STOP_RECORDING) {
+		RecordCount++;
+		if (RecordCount > 20) {
+			for (int i = 1; i < 20; i++) {
+				image temp = RecordingList[i];
+				RecordingList[i] = RecordingList[i - 1];
+				RecordingList[i - 1] = temp;
+			}
+			RecordCount = 20;
+		}
+		image img;
+		GetOutput()->screenshotWindow(img);
+		RecordingList[RecordCount - 1] = img;
+	}
 	
 	//Execute the created action
 	if(pAct != NULL)
@@ -127,6 +151,14 @@ Action** ApplicationManager::GetActionList()
 int ApplicationManager::GetActionCount()
 {
 	return ActionCount;
+}
+
+image* ApplicationManager::GetRecordingList() {
+	return RecordingList;
+}
+
+int ApplicationManager::GetRecordCount() {
+	return RecordCount;
 }
 
 //==================================================================================//
@@ -165,6 +197,10 @@ void ApplicationManager::SetSelectedFig(CFigure* pFig)
 CFigure* ApplicationManager::GetSelectedFig()
 {
 	return SelectedFig;
+}
+
+void ApplicationManager::setRecording(bool r) {
+	isRecording = r;
 }
 //==================================================================================//
 //							Interface Management Functions							//

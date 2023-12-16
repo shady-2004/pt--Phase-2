@@ -18,6 +18,9 @@ public:
 	window* colorpalette();      //create color palette
 	void closeColorMenu();
 
+	void screenshotWindow(image&);
+	void redrawWindow(image);
+
 	//void CreateColorToolBar() const; //creates Color mode toolbar & menu
 
 	Input* CreateInput() const; //creates a pointer to the Input object	
