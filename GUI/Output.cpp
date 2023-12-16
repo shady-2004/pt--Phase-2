@@ -153,11 +153,11 @@ void Output::closeColorMenu() {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void Output::screenshotWindow(image& img) {
-	pWind->StoreImage(img, 0, 0, 1250, 650);
+	pWind->StoreImage(img, 0, 0, 1250, 600);
 }
 
 void Output::redrawWindow(image img) {
-	pWind->DrawImage(img, 0, 0, 1250, 650);
+	pWind->DrawImage(img, 0, 0, 1250, 600);
 }
 
 void Output::CreatePlayToolBar() const
@@ -214,17 +214,6 @@ color Output::getCrntDrawColor() const	//get current drawing color
 color Output::getCrntFillColor() const	//get current filling color
 {
 	return UI.FillColor;
-}
-/////////////////////////////////////////////////////////////////////////////////////////
-
-string Output::getCrntColorAsString(color clr) const {
-	if (clr == BLUE) return "BLUE";
-	else if (clr == GREEN) return "GREEN";
-	else if (clr == RED) return "RED";
-	else if (clr == YELLOW) return "YELLOW";
-	else if (clr == ORANGE) return "ORANGE";
-	else if (clr == BLACK) return "BLACK";
-	else return "NO FILL";
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 

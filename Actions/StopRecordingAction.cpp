@@ -8,7 +8,7 @@ StopRecordingAction::StopRecordingAction(ApplicationManager* pApp) : Action(pApp
 void StopRecordingAction::ReadActionParameters() {
 	Output* pOut = pManager->GetOutput();
 	pManager->setRecording(false);
-	pOut->PrintMessage("Recording stopped now playing");
+	pOut->PrintMessage("Recording stopped now playing!");
 }
 
 void StopRecordingAction::Execute() {
@@ -19,7 +19,7 @@ void StopRecordingAction::Execute() {
 	image* recordList = pManager->GetRecordingList();
 	for (int i = 0; i < count; i++) {
 		pOut->redrawWindow(recordList[i]);
-		Sleep(1000);
+		Sleep(1500);
 	}
 	pOut->PrintMessage("Done");
 }

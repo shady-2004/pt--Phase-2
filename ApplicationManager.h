@@ -20,8 +20,6 @@ private:
 
 	Action* ActionList[MaxActions];		//List of all actions (Array of pointers)
 	int ActionCount;					//Actual number of actions
-
-	int ActionCount;	//Actual number of actions
 	
 	bool isRecording;
 	image RecordingList[20];
