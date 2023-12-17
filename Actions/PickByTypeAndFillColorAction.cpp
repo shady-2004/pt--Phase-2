@@ -6,6 +6,7 @@ PickByTypeAndFillColorAction::PickByTypeAndFillColorAction(ApplicationManager* p
 	NoOfWrongPicks = 0;
 	pManager->resetHidden();
 	pManager->UpdateInterface();
+	restart = 0;
 }
 
 void PickByTypeAndFillColorAction::ReadActionParameters()
@@ -13,7 +14,10 @@ void PickByTypeAndFillColorAction::ReadActionParameters()
 
 	Input* pIn = pManager->GetInput();
 	pIn->GetPointClicked(p.x, p.y);
-	srand(time(0));//// This lines to random a shape
+	if ((p.x / (UI.MenuItemWidth + 10)) == FIG_TYPE_AND_FILL_COLOR && p.y <= UI.ToolBarHeight) {
+		pManager->ExecuteAction(PICK_FIG_TYPE_AND_FILL_COLOR);
+		restart = 1;
+	}
 }
 
 void PickByTypeAndFillColorAction::Execute()
@@ -73,6 +77,7 @@ void PickByTypeAndFillColorAction::Execute()
 
 	while (1) {
 		ReadActionParameters();
+		if (restart)return;
 		choosedFig = pManager->GetFigure(p.x, p.y);
 		if (choosedFig != NULL) {
 			if (Fill == (choosedFig->getShapeFillColor())&&Figure== (choosedFig->getShapeType())) {

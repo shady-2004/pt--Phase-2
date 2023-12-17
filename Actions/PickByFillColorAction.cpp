@@ -6,12 +6,17 @@ PickByFillColorAction::PickByFillColorAction(ApplicationManager* pApp):Action(pA
 	NoOfWrongPicks = 0;
 	pManager->resetHidden();
 	pManager->UpdateInterface();
+	restart = 0;
 }
 
 void PickByFillColorAction::ReadActionParameters()
 {
 	Input* pIn = pManager->GetInput();
 	pIn->GetPointClicked(p.x, p.y);
+	if ((p.x / (UI.MenuItemWidth + 10)) == FIG_FILL_COLOR && p.y <= UI.ToolBarHeight) {
+		pManager->ExecuteAction(PICK_FIG_FILL_COLOR);
+		restart = 1;
+	}
 }
 
 void PickByFillColorAction::Execute()
@@ -47,6 +52,7 @@ void PickByFillColorAction::Execute()
 
 	while (1) {
 		ReadActionParameters();
+		if (restart)return;
 		choosedFig = pManager->GetFigure(p.x, p.y);
 		if (choosedFig != NULL) {
 			if (Fill == (choosedFig->getShapeFillColor())) {

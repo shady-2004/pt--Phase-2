@@ -12,16 +12,20 @@ PickByTypeAction::PickByTypeAction(ApplicationManager* pApp) :Action(pApp)
 	NoOfWrongPicks = 0;
 	pManager->resetHidden();
 	pManager->UpdateInterface();
+	restart = false;
 }
 
 void PickByTypeAction::ReadActionParameters()
 {
 	Input* pIn = pManager->GetInput();
 	pIn->GetPointClicked(p.x, p.y);
+	if ((p.x / (UI.MenuItemWidth + 10)) == FIG_TYPE &&p.y<=UI.ToolBarHeight) {
+		pManager->ExecuteAction(PICK_FIG_TYPE);
+		restart = 1;
+	}
 }
 void PickByTypeAction::Execute() {
 	Output* pOut = pManager->GetOutput();
-	/*Input* pIn = pManager->GetInput();*/
 		srand(time(0));//// This lines to random a shape
 	Figure = pManager->getFigType((rand() % pManager->GetFigCount()));//Random a shape idx and get its Type to make sure it will no random a shape not drawn
 		
@@ -48,6 +52,7 @@ void PickByTypeAction::Execute() {
 
 	while (1) {
 		ReadActionParameters();
+		if (restart)return;
 		choosedFig = pManager->GetFigure(p.x, p.y);
 
 		if (choosedFig != NULL) {

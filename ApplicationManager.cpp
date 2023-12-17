@@ -127,8 +127,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	{
 		ActionList[ActionCount - 1] = pAct;
 		ActionList[ActionCount-1]->Execute();//Execute
-		delete pAct;	//You may need to change this line depending to your implementation
-		pAct = NULL;
+		//delete pAct;	//You may need to change this line depending to your implementation
+		//pAct = NULL;
 	}
 }
 

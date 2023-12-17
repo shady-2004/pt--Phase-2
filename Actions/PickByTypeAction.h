@@ -11,6 +11,7 @@ class PickByTypeAction :
     DrawMenuItem Figure;
     CFigure* choosedFig;
     int TypeCount;//No of this Type in Application manager array;
+    bool restart;
 
 
 public:

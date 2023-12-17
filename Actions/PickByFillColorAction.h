@@ -10,6 +10,7 @@ class PickByFillColorAction :
     int Fill;
     CFigure* choosedFig;
     int TypeCount;//No of this Type in Application manager array;
+    bool restart;
 
 
 public:
