@@ -81,45 +81,42 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new AddHexAction(this);
 		break;
 
-		case TO_SAVE_GRAPH:
-			pAct = new SaveAction(this);
-			break;
-		case TO_LOAD_GRAPH:
-			pAct = new LoadAction(this);
-			break;
-		case TO_START_RECORDING:
-			pAct = new StartRecordingAction(this);
-			break;
-		case TO_STOP_RECORDING:
-			pAct = new StopRecordingAction(this);
-			break;
-		case TO_SELECT:
-			pAct = new SelectAction(this);
-			break;
-		case TO_CHANGE_DRAW_COLOR:
-			pAct = new ChangeFigColorAction(this);
-			break;
-		case TO_CHANGE_FILL_COLOR:
-			pAct = new ChangeFillColorAcion(this);
-			break;
-		case TO_PLAY:
-			pAct = new SwitchToPlayModeAction(this);
-			break;
-		case TO_DRAW:
-			pAct = new SwitchToDrawModeAction(this);
-			break;
-		case PICK_FIG_TYPE:
-			pAct = new PickByTypeAction(this);
-			break;
-	
-
+	case TO_SAVE_GRAPH:
+		pAct = new SaveAction(this);
+		break;
+	case TO_LOAD_GRAPH:
+		pAct = new LoadAction(this);
+		break;
+	case TO_START_RECORDING:
+		pAct = new StartRecordingAction(this);
+		break;
+	case TO_STOP_RECORDING:
+		pAct = new StopRecordingAction(this);
+		break;
+	case TO_SELECT:
+		pAct = new SelectAction(this);
+		break;
+	case TO_CHANGE_DRAW_COLOR:
+		pAct = new ChangeFigColorAction(this);
+		break;
+	case TO_CHANGE_FILL_COLOR:
+		pAct = new ChangeFillColorAcion(this);
+		break;
+	case TO_PLAY:
+		pAct = new SwitchToPlayModeAction(this);
+		break;
+	case TO_DRAW:
+		pAct = new SwitchToDrawModeAction(this);
+		break;
+	case PICK_FIG_TYPE:
+		pAct = new PickByTypeAction(this);
+		break;
 	case PICK_FIG_FILL_COLOR:
 		pAct = new PickByFillColorAction(this);
 		break;
 	case PICK_FIG_TYPE_AND_FILL_COLOR:
 		pAct = new PickByTypeAndFillColorAction(this);
 		break;
-
 	case TO_UNDO:
 		pAct = new UndoAction(this);
 		break;
@@ -157,7 +154,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	{
 		ActionList[ActionCount] = pAct;
 		ActionCount++;
-		if (dynamic_cast<UndoAction*>(pAct) == NULL)
+		if (ActType != TO_UNDO)
 		{
 			UndoAction::UndoCount = 0;
 		}
