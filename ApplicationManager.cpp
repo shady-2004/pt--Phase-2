@@ -287,7 +287,7 @@ Output* ApplicationManager::GetOutput() const
 //==================================================================================//
 
 void ApplicationManager::SaveAll(ofstream &OutFile) {
-	/*OutFile << FigCount << endl;*/
+	OutFile << FigCount << endl;
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Save(OutFile);
 }
