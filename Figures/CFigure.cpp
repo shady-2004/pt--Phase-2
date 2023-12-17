@@ -46,8 +46,6 @@ DrawMenuItem CFigure::getShapeType()
 
 int CFigure::getShapeFillColor()
 {
-	if (!FigGfxInfo.isFilled)
-		return 10;//Refers to Unfilled
 	if (FigGfxInfo.FillClr == RED)
 		return COLOR_RED;
 	if (FigGfxInfo.FillClr == BLUE)
@@ -60,6 +58,8 @@ int CFigure::getShapeFillColor()
 		return COLOR_YELLOW;
 	if (FigGfxInfo.FillClr == BLACK)
 		return COLOR_BLACK;
+	else
+		return 10;//Refers to Unfilled
 
 }
 
