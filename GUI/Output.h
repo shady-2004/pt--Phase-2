@@ -18,6 +18,9 @@ public:
 	window* colorpalette();      //create color palette
 	void closeColorMenu();
 
+	void screenshotWindow(image&);
+	void redrawWindow(image);
+
 	//void CreateColorToolBar() const; //creates Color mode toolbar & menu
 
 	Input* CreateInput() const; //creates a pointer to the Input object	
@@ -43,7 +46,6 @@ public:
 
 	color getCrntDrawColor() const;	//get current drwawing color
 	color getCrntFillColor() const;	//get current filling color
-	string getCrntColorAsString(color) const; //get the color as a string to facilitate using colors
 	int getCrntPenWidth() const;		//get current pen width
 	bool getCrntFillStatus() const;
 

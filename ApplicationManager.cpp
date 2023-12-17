@@ -15,6 +15,8 @@
 #include"Actions/PickByTypeAction.h"
 #include"Actions/PickByFillColorAction.h"
 #include"Actions/PickByTypeAndFillColorAction.h"
+#include "Actions/StartRecordingAction.h"
+#include "Actions/StopRecordingAction.h"
 #include <fstream>
 #include "Actions/UndoAction.h"
 #include "Actions/DeleteFigureAction.h"
@@ -30,6 +32,7 @@ ApplicationManager::ApplicationManager()
 	
 	FigCount = 0;
 	ActionCount = 0;
+	RecordCount = 0;
 	SelectedFig = NULL;
 		
 	//Create an array of figure pointers and set them to NULL		
@@ -78,6 +81,36 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new AddHexAction(this);
 		break;
 
+		case TO_SAVE_GRAPH:
+			pAct = new SaveAction(this);
+			break;
+		case TO_LOAD_GRAPH:
+			pAct = new LoadAction(this);
+			break;
+		case TO_START_RECORDING:
+			pAct = new StartRecordingAction(this);
+			break;
+		case TO_STOP_RECORDING:
+			pAct = new StopRecordingAction(this);
+			break;
+		case TO_SELECT:
+			pAct = new SelectAction(this);
+			break;
+		case TO_CHANGE_DRAW_COLOR:
+			pAct = new ChangeFigColorAction(this);
+			break;
+		case TO_CHANGE_FILL_COLOR:
+			pAct = new ChangeFillColorAcion(this);
+			break;
+		case TO_PLAY:
+			pAct = new SwitchToPlayModeAction(this);
+			break;
+		case TO_DRAW:
+			pAct = new SwitchToDrawModeAction(this);
+			break;
+		case PICK_FIG_TYPE:
+			pAct = new PickByTypeAction(this);
+			break;
 	case TO_SAVE_GRAPH:
 		pAct = new SaveAction(this);
 		break;
@@ -127,7 +160,20 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		return;
 	}
 
-	
+	if (isRecording && ActType != TO_START_RECORDING && ActType != TO_STOP_RECORDING) {
+		RecordCount++;
+		if (RecordCount > 20) {
+			for (int i = 1; i < 20; i++) {
+				image temp = RecordingList[i];
+				RecordingList[i] = RecordingList[i - 1];
+				RecordingList[i - 1] = temp;
+			}
+			RecordCount = 20;
+		}
+		image img;
+		GetOutput()->screenshotWindow(img);
+		RecordingList[RecordCount - 1] = img;
+	}
 	
 	//Execute the created action
 	if (pAct != NULL)
@@ -151,6 +197,14 @@ Action** ApplicationManager::GetActionList()
 int ApplicationManager::GetActionCount()
 {
 	return ActionCount;
+}
+
+image* ApplicationManager::GetRecordingList() {
+	return RecordingList;
+}
+
+int ApplicationManager::GetRecordCount() {
+	return RecordCount;
 }
 
 //==================================================================================//
@@ -274,7 +328,7 @@ Output* ApplicationManager::GetOutput() const
 //==================================================================================//
 
 void ApplicationManager::SaveAll(ofstream &OutFile) {
-	/*OutFile << FigCount << endl;*/
+	OutFile << FigCount << endl;
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Save(OutFile);
 }
