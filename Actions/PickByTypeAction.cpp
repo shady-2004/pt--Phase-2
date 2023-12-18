@@ -19,9 +19,19 @@ void PickByTypeAction::ReadActionParameters()
 {
 	Input* pIn = pManager->GetInput();
 	pIn->GetPointClicked(p.x, p.y);
-	if ((p.x / (UI.MenuItemWidth + 10)) == FIG_TYPE &&p.y<=UI.ToolBarHeight) {
-		pManager->ExecuteAction(PICK_FIG_TYPE);
-		restart = 1;
+	if ((p.y<=UI.ToolBarHeight)) {
+		switch (p.x / (UI.MenuItemWidth + 10)) {
+		case FIG_TYPE:
+			pManager->ExecuteAction(PICK_FIG_TYPE);
+			break;
+		case FIG_FILL_COLOR:
+			pManager->ExecuteAction(PICK_FIG_FILL_COLOR);
+			break;
+		case FIG_TYPE_AND_FILL_COLOR:
+			pManager->ExecuteAction(PICK_FIG_TYPE_AND_FILL_COLOR);
+			break;
+		}
+		restart = true;
 	}
 }
 void PickByTypeAction::Execute() {

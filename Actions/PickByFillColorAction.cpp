@@ -13,9 +13,21 @@ void PickByFillColorAction::ReadActionParameters()
 {
 	Input* pIn = pManager->GetInput();
 	pIn->GetPointClicked(p.x, p.y);
-	if ((p.x / (UI.MenuItemWidth + 10)) == FIG_FILL_COLOR && p.y <= UI.ToolBarHeight) {
-		pManager->ExecuteAction(PICK_FIG_FILL_COLOR);
-		restart = 1;
+	if ((p.y <= UI.ToolBarHeight)) {
+		switch (p.x / (UI.MenuItemWidth + 10)) {
+		case FIG_TYPE:
+			pManager->ExecuteAction(PICK_FIG_TYPE);
+			restart = true;
+			break;
+		case FIG_FILL_COLOR:
+			pManager->ExecuteAction(PICK_FIG_FILL_COLOR);
+			restart = true;
+			break;
+		case FIG_TYPE_AND_FILL_COLOR:
+			pManager->ExecuteAction(PICK_FIG_TYPE_AND_FILL_COLOR);
+			restart = true;
+			break;
+		}
 	}
 }
 
