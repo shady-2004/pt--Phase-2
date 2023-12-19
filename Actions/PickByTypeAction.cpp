@@ -30,6 +30,10 @@ void PickByTypeAction::ReadActionParameters()
 		case FIG_TYPE_AND_FILL_COLOR:
 			pManager->ExecuteAction(PICK_FIG_TYPE_AND_FILL_COLOR);
 			break;
+		case SWITCH_DRAW:
+			pManager->ExecuteAction(TO_DRAW);
+			break;
+
 		}
 		restart = true;
 	}

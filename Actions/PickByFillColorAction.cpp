@@ -17,17 +17,18 @@ void PickByFillColorAction::ReadActionParameters()
 		switch (p.x / (UI.MenuItemWidth + 10)) {
 		case FIG_TYPE:
 			pManager->ExecuteAction(PICK_FIG_TYPE);
-			restart = true;
 			break;
 		case FIG_FILL_COLOR:
 			pManager->ExecuteAction(PICK_FIG_FILL_COLOR);
-			restart = true;
 			break;
 		case FIG_TYPE_AND_FILL_COLOR:
 			pManager->ExecuteAction(PICK_FIG_TYPE_AND_FILL_COLOR);
-			restart = true;
+			break;
+		case SWITCH_DRAW:
+			pManager->ExecuteAction(TO_DRAW);
 			break;
 		}
+		restart = true;
 	}
 }
 

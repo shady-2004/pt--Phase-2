@@ -127,8 +127,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	{
 		ActionList[ActionCount - 1] = pAct;
 		ActionList[ActionCount-1]->Execute();//Execute
-		//delete pAct;	//You may need to change this line depending to your implementation
-		//pAct = NULL;
+		delete pAct;	//You may need to change this line depending to your implementation
+		pAct = NULL;
 	}
 }
 
@@ -203,7 +203,7 @@ void ApplicationManager::resetHidden()
 }
 
 
-int ApplicationManager::getFigFillCount(int x)
+int ApplicationManager::getFigFillCount(int x) //return number of Shapes with that fill color
 {
 	int count=0;
 	for (int i = 0; i < FigCount; i++) {
@@ -213,12 +213,21 @@ int ApplicationManager::getFigFillCount(int x)
 	return count;
 }
 
-int ApplicationManager::getFigFillColor(int I)
+int ApplicationManager::GetTypeCount(DrawMenuItem P)// //return number of Shapes with that Type
+{
+	int count = 0;
+	for (int i = 0; i < FigCount; i++)
+		if (FigList[i]->getShapeType() == P)
+			count++;
+	return count;
+}
+
+int ApplicationManager::getFigFillColor(int I)//return randomed shape Fill color
 {
 	return FigList[I]->getShapeFillColor();
 }
 
-DrawMenuItem ApplicationManager::getFigType(int I)
+DrawMenuItem ApplicationManager::getFigType(int I)//return the randomed shape Type
 {
 	return FigList[I]->getShapeType();
 }
@@ -256,14 +265,6 @@ void ApplicationManager::SaveAll(ofstream &OutFile) {
 		FigList[i]->Save(OutFile);
 }
 
-int ApplicationManager::GetTypeCount(DrawMenuItem P)
-{
-	int count=0;
-	for (int i = 0; i < FigCount; i++)
-		if (FigList[i]->getShapeType() == P)
-			count++;
-	return count;
-}
 
 
 //Destructor
