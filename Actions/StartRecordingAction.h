@@ -3,7 +3,7 @@
 class StartRecordingAction : public Action
 {
 private:
-
+	static int RecordCount;
 public:
 	StartRecordingAction(ApplicationManager* pApp);
 

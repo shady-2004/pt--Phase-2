@@ -34,6 +34,7 @@ ApplicationManager::ApplicationManager()
 	ActionCount = 0;
 	RecordCount = 0;
 	SelectedFig = NULL;
+	isRecording = false;
 		
 	//Create an array of figure pointers and set them to NULL		
 	for(int i=0; i<MaxFigCount; i++)
@@ -134,20 +135,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		return;
 	}
 
-	if (isRecording && ActType != TO_START_RECORDING && ActType != TO_STOP_RECORDING) {
-		RecordCount++;
-		if (RecordCount > 20) {
-			for (int i = 1; i < 20; i++) {
-				image temp = RecordingList[i];
-				RecordingList[i] = RecordingList[i - 1];
-				RecordingList[i - 1] = temp;
-			}
-			RecordCount = 20;
-		}
-		image img;
-		GetOutput()->screenshotWindow(img);
-		RecordingList[RecordCount - 1] = img;
-	}
+	
 	
 	//Execute the created action
 	if (pAct != NULL)
@@ -161,6 +149,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct->Execute();//Execute
 	}
 
+	if (isRecording && ActType != TO_START_RECORDING && ActType != TO_STOP_RECORDING && ActType != TO_PLAY_RECORDING && ActType != TO_SAVE_GRAPH && ActType != TO_LOAD_GRAPH && ActType != TO_PLAY) {
+		Action* Record = new StartRecordingAction(this);
+		Record->Execute();
+		if (RecordCount <= 20) RecordCount++;
+		else RecordCount = 20;
+		delete Record;
+	}
 }
 
 Action** ApplicationManager::GetActionList()
