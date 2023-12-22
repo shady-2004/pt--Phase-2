@@ -184,6 +184,7 @@ const color DARKCYAN = color(0, 139, 139);
 const color DARKMAGENTA = color(139, 0, 139);
 const color DARKRED = color(139, 0, 0);
 const color LIGHTGREEN = color(144, 238, 144);
+const color NOFILL = color(-1, -1, -1);
 
 
 #endif //COLOR_H

@@ -48,7 +48,7 @@ istream& operator >> (istream& input, color* a) {
 		a->ucRed = 255; a->ucBlue = 0; a->ucGreen = 165;
 	}
 	else if (clr == "NOFILL") {
-		a->ucRed = 250; a->ucBlue = 210; a->ucGreen = 250;
+		a->ucRed = -1; a->ucBlue = -1; a->ucGreen = -1;
 	}
 	return input;
 }

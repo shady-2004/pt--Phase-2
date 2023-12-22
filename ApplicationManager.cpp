@@ -150,11 +150,16 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	}
 
 	if (isRecording && ActType != TO_START_RECORDING && ActType != TO_STOP_RECORDING && ActType != TO_PLAY_RECORDING && ActType != TO_SAVE_GRAPH && ActType != TO_LOAD_GRAPH && ActType != TO_PLAY) {
-		Action* Record = new StartRecordingAction(this);
-		Record->Execute();
-		if (RecordCount <= 20) RecordCount++;
-		else RecordCount = 20;
-		delete Record;
+		StartRecordingAction Record(this);
+		if (RecordCount < 20) {
+			Record.Record();
+			RecordCount++;
+		}
+		else {
+			StopRecordingAction StopRecord(this);
+			StopRecord.Execute();
+			RecordCount = 0;
+		}
 	}
 }
 

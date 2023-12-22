@@ -30,7 +30,7 @@ void CTriangle::Save(ofstream& OutFile) {
 
 void CTriangle::Load(ifstream& InFile) {
 	InFile >> id >> vertex1.x >> vertex1.y >> vertex2.x >> vertex2.y >> vertex3.x >> vertex3.y >> &FigGfxInfo.DrawClr >> &FigGfxInfo.FillClr;
-	if (FigGfxInfo.FillClr == LIGHTGOLDENRODYELLOW) FigGfxInfo.isFilled = false;
+	if (FigGfxInfo.FillClr == NOFILL) FigGfxInfo.isFilled = false;
 }
 
 bool CTriangle::IsFound(int x, int y)

@@ -1,5 +1,6 @@
 #include "StopRecordingAction.h"
 #include "../ApplicationManager.h"
+#include <iostream>
 
 StopRecordingAction::StopRecordingAction(ApplicationManager* pApp) : Action(pApp) {
 
@@ -16,7 +17,7 @@ void StopRecordingAction::Execute() {
 	Output* pOut = pManager->GetOutput();
 	int count = pManager->GetRecordCount();
 	image* recordList = pManager->GetRecordingList();
-	for (int i = 1; i <= count; i++) {
+	for (int i = 0; i <= count; i++) {
 		pOut->redrawWindow(recordList[i]);
 		Sleep(1000);
 	}
