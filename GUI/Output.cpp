@@ -236,14 +236,6 @@ bool Output::getCrntFillStatues() const
 
 void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const
 {
-
-	while (!(P1.y >= UI.ToolBarHeight && P1.y < UI.height - UI.StatusBarHeight && P2.y >= UI.ToolBarHeight && P2.y < UI.height - UI.StatusBarHeight))
-	{
-		PrintMessage("Can't draw here!! Enter two valid points:");
-		pWind->WaitMouseClick(P1.x, P1.y);
-		pWind->WaitMouseClick(P2.x, P2.y);
-
-	}
 	color DrawingClr;
 	if (selected)
 		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
