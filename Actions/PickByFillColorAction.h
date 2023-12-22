@@ -7,7 +7,7 @@ class PickByFillColorAction :
     Point p;
     int NoOfCorrectPicks;
     int NoOfWrongPicks;
-    int Fill;
+    string Fill;
     CFigure* choosedFig;
     int TypeCount;//No of this Type in Application manager array;
     bool restart;

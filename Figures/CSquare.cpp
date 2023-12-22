@@ -2,14 +2,14 @@
 #include <fstream>
 
 CSquare::CSquare() {
-	ShapeType = ITM_SQUARE;
+	ShapeType = "Square";
 }
 
 CSquare::CSquare(Point P, GfxInfo FigureGfxInfo, int ID):CFigure(FigureGfxInfo)
 {
 	id = ID;
 	Center = P;
-	ShapeType = ITM_SQUARE;
+	ShapeType = "Square";
 }
 
 void CSquare::Draw(Output* pOut) const

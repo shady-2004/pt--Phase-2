@@ -2,7 +2,7 @@
 #include <fstream>
 
 CRectangle::CRectangle() {
-	ShapeType = ITM_RECT;
+	ShapeType = "Rectangle";
 }
 
 CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo, int ID):CFigure(FigureGfxInfo)
@@ -10,7 +10,7 @@ CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo, int ID):CFigur
 	id = ID;
 	Corner1 = P1;
 	Corner2 = P2;
-	ShapeType = ITM_RECT;
+	ShapeType = "Rectangle";
 }
 	
 

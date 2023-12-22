@@ -11,7 +11,7 @@ protected:
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
 	bool Hidden;
-	DrawMenuItem ShapeType;
+	string ShapeType;
 
 public:
 	CFigure();
@@ -43,6 +43,5 @@ public:
 
 	void SetHidden(bool x);
 	bool IsHidden();
-	DrawMenuItem getShapeType();
-	int getShapeFillColor();
+	string getShapeType();
 };

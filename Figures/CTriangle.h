@@ -7,6 +7,7 @@ private:
     Point vertex1;
     Point vertex2;
     Point vertex3;
+
 public:
     CTriangle();
     CTriangle(Point, Point, Point, GfxInfo FigureGfxInfo,int ID);

@@ -5,7 +5,6 @@ class CSquare :
 {
 private:
 	Point Center;
-
 public:
 	CSquare();
 	CSquare(Point, GfxInfo FigureGfxInfo, int ID);

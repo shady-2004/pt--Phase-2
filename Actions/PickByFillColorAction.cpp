@@ -38,37 +38,16 @@ void PickByFillColorAction::Execute()
 	srand(time(0));//// This lines to random a shape
 	Fill = pManager->getFigFillColor((rand() % pManager->GetFigCount()));//Random a shape idx and get its Fill color to make sure it will no random a shape not drawn
 	TypeCount = pManager->getFigFillCount(Fill);
-	switch (Fill) {
-	case COLOR_RED:
-		pOut->PrintMessage("Pick By figure fill color : Red");
-		break;
-	case COLOR_BLUE:
-		pOut->PrintMessage("Pick By figure fill color : Blue");
-		break;
-	case COLOR_GREEN:
-		pOut->PrintMessage("Pick By figure fill color : Green");
-		break;
-	case COLOR_ORANGE:
-		pOut->PrintMessage("Pick By figure fill color : Orange");
-		break;
-	case COLOR_YELLOW:
-		pOut->PrintMessage("Pick By figure fill color : Yellow");
-		break;
-	case COLOR_BLACK:
-		pOut->PrintMessage("Pick By figure fill color : Black");
-		break;
-	case 10:
-		pOut->PrintMessage("Pick By figure fill color : Non FIlled");
-		break;
-	}
+	
+		pOut->PrintMessage("Pick By figure fill color : "+ Fill);
 	////////////////////////////////////
 
-	while (1) {
+	do {
 		ReadActionParameters();
 		if (restart)return;
 		choosedFig = pManager->GetFigure(p.x, p.y);
 		if (choosedFig != NULL) {
-			if (Fill == (choosedFig->getShapeFillColor())) {
+			if (Fill == (choosedFig->convertFillColorToString())) {
 				NoOfCorrectPicks++;
 			}
 			else
@@ -77,12 +56,9 @@ void PickByFillColorAction::Execute()
 			choosedFig->SetHidden(1);
 			pOut->ClearDrawArea();
 			pManager->UpdateInterface();
-			pOut->PrintMessage(" Correct Picks : " + to_string(NoOfCorrectPicks) + "   ""Wrong Picks : " + to_string(NoOfWrongPicks));
+			pOut->PrintMessage("Pick By figure fill color : " + Fill+ "  Correct Picks : " + to_string(NoOfCorrectPicks) + "   ""Wrong Picks : " + to_string(NoOfWrongPicks));
 		}
 
-
-		if (NoOfCorrectPicks == TypeCount)
-			break;
-	}
+	} while (NoOfCorrectPicks != TypeCount);
 	pOut->PrintMessage("Final Grade:  Correct Picks : " + to_string(NoOfCorrectPicks) + "   ""Wrong Picks : " + to_string(NoOfWrongPicks));
 }

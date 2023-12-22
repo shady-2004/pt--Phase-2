@@ -8,7 +8,7 @@ class PickByTypeAction :
     Point p;
     int NoOfCorrectPicks;
     int NoOfWrongPicks;
-    DrawMenuItem Figure;
+    string FigureType;
     CFigure* choosedFig;
     int TypeCount;//No of this Type in Application manager array;
     bool restart;

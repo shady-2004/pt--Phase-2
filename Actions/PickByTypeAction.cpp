@@ -41,36 +41,19 @@ void PickByTypeAction::ReadActionParameters()
 void PickByTypeAction::Execute() {
 	Output* pOut = pManager->GetOutput();
 		srand(time(0));//// This lines to random a shape
-	Figure = pManager->getFigType((rand() % pManager->GetFigCount()));//Random a shape idx and get its Type to make sure it will no random a shape not drawn
+		FigureType = pManager->getFigType((rand() % pManager->GetFigCount()));//Random a shape idx and get its Type to make sure it will no random a shape not drawn
 		
-	switch (Figure) {
-	case ITM_RECT:
-		pOut->PrintMessage("Pick By figure type : Rectangle");
-		break;
-	case ITM_SQUARE:
-		pOut->PrintMessage("Pick By figure type : Square");
-		break;
-	case ITM_TRIANGLE:
-		pOut->PrintMessage("Pick By figure type : Triangle");
-		break;
-	case ITM_HEXAGON:
-		pOut->PrintMessage("Pick By figure type : Hexagon");
-		break;
-	case ITM_CIRCLE:
-		pOut->PrintMessage("Pick By figure type : Circle");
-		break;
-	}
-
+	pOut->PrintMessage("Pick By figure type : "+ FigureType);
 	////////////////////////////////////
-	TypeCount = pManager->GetTypeCount(Figure);
+	TypeCount = pManager->GetTypeCount(FigureType);
 
-	while (1) {
+	do {
 		ReadActionParameters();
 		if (restart)return;
 		choosedFig = pManager->GetFigure(p.x, p.y);
 
 		if (choosedFig != NULL) {
-			if (Figure == (choosedFig->getShapeType())) {
+			if (FigureType == (choosedFig->getShapeType())) {
 				NoOfCorrectPicks++;
 			}
 			else
@@ -79,13 +62,10 @@ void PickByTypeAction::Execute() {
 			choosedFig->SetHidden(1);
 			pOut->ClearDrawArea();
 			pManager->UpdateInterface();
-			pOut->PrintMessage(" Correct Picks : " + to_string(NoOfCorrectPicks) + "   ""Wrong Picks : " + to_string(NoOfWrongPicks));
+			pOut->PrintMessage("Pick By figure type : " + FigureType+ "  Correct Picks : " + to_string(NoOfCorrectPicks) + "   ""Wrong Picks : " + to_string(NoOfWrongPicks));
 		}
 
-
-		if (NoOfCorrectPicks == TypeCount)
-			break;
-	}
+	} while (NoOfCorrectPicks != TypeCount);
 	pOut->PrintMessage( "Final Grade:  Correct Picks : " + to_string(NoOfCorrectPicks) + "   ""Wrong Picks : " + to_string(NoOfWrongPicks));
 }
 	

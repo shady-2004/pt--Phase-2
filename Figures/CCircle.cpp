@@ -5,7 +5,7 @@
 using namespace std;
 
 CCircle::CCircle() {
-	ShapeType=ITM_CIRCLE;
+	ShapeType = "Circle";
 }
 
 CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo, int ID):CFigure(FigureGfxInfo)
@@ -13,7 +13,7 @@ CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo, int ID):CFigure(Figu
 	id = ID;
 	Center =  P1;
 	Radius = P2;
-	ShapeType = ITM_CIRCLE;
+	ShapeType = "Circle";
 }
 
 void CCircle::Draw(Output* pOut) const

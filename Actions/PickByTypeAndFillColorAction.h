@@ -7,8 +7,8 @@ class PickByTypeAndFillColorAction :
     Point p;
     int NoOfCorrectPicks;
     int NoOfWrongPicks;
-    DrawMenuItem Figure;//Figure Type to pick
-    int Fill;//Fill color to Pick 
+    string FigureType;//Figure Type to pick
+    string Fill;//Fill color to Pick 
     CFigure* choosedFig;
     int TypeCount;//No of this Type in Application manager array;
     bool restart;

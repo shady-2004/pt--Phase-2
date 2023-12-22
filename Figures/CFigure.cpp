@@ -37,13 +37,14 @@ string CFigure::convertDrwColorToString() const {
 }
 
 string CFigure::convertFillColorToString() const {
+
+	if(!FigGfxInfo.isFilled) return"NO FILL";
 	if (FigGfxInfo.FillClr == BLUE) return "BLUE";
 	else if (FigGfxInfo.FillClr == GREEN) return "GREEN";
 	else if (FigGfxInfo.FillClr == RED) return "RED";
 	else if (FigGfxInfo.FillClr == YELLOW) return "YELLOW";
 	else if (FigGfxInfo.FillClr == ORANGE) return "ORANGE";
-	else if (FigGfxInfo.FillClr == BLACK) return "BLACK";
-	else return "NO FILL";
+    if (FigGfxInfo.FillClr == BLACK) return "BLACK";
 }
 
 color CFigure::convertColorToClr(string clr) const {
@@ -67,26 +68,7 @@ bool CFigure::IsHidden()
 	return Hidden;
 }
 
-DrawMenuItem CFigure::getShapeType()
+string CFigure::getShapeType()
 {
 	return ShapeType;
-}
-
-int CFigure::getShapeFillColor()
-{
-	if (!FigGfxInfo.isFilled)
-		return 10;//Refers to Unfilled
-	if (FigGfxInfo.FillClr == RED)
-		return COLOR_RED;
-	if (FigGfxInfo.FillClr == BLUE)
-		return COLOR_BLUE;
-	if (FigGfxInfo.FillClr == GREEN)
-		return COLOR_GREEN;
-	if (FigGfxInfo.FillClr == ORANGE)
-		return COLOR_ORANGE;
-	if (FigGfxInfo.FillClr == YELLOW)
-		return COLOR_YELLOW;
-	if (FigGfxInfo.FillClr == BLACK)
-		return COLOR_BLACK;
-
 }

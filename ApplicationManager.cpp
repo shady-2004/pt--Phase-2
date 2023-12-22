@@ -203,17 +203,17 @@ void ApplicationManager::resetHidden()
 }
 
 
-int ApplicationManager::getFigFillCount(int x) //return number of Shapes with that fill color
+int ApplicationManager::getFigFillCount(string x) //return number of Shapes with that fill color
 {
 	int count=0;
 	for (int i = 0; i < FigCount; i++) {
-		if ((FigList[i]->getShapeFillColor()) == x)
+		if ((FigList[i]->convertFillColorToString()) == x)
 			count++;
 	}
 	return count;
 }
 
-int ApplicationManager::GetTypeCount(DrawMenuItem P)// //return number of Shapes with that Type
+int ApplicationManager::GetTypeCount(string P)// //return number of Shapes with that Type
 {
 	int count = 0;
 	for (int i = 0; i < FigCount; i++)
@@ -222,21 +222,21 @@ int ApplicationManager::GetTypeCount(DrawMenuItem P)// //return number of Shapes
 	return count;
 }
 
-int ApplicationManager::getFigFillColor(int I)//return randomed shape Fill color
+string ApplicationManager::getFigFillColor(int I)//return randomed shape Fill color
 {
-	return FigList[I]->getShapeFillColor();
+	return FigList[I]->convertFillColorToString();
 }
 
-DrawMenuItem ApplicationManager::getFigType(int I)//return the randomed shape Type
+string ApplicationManager::getFigType(int I)//return the randomed shape Type
 {
 	return FigList[I]->getShapeType();
 }
 
-int ApplicationManager::getFigCountByFillAndType(DrawMenuItem Type, int fill)
+int ApplicationManager::getFigCountByFillAndType(string Type, string fill)
 {
 	int count=0;
 	for (int i = 0; i < FigCount; i++) {
-		if ((FigList[i]->getShapeType() == Type) && (FigList[i]->getShapeFillColor() == fill))
+		if ((FigList[i]->getShapeType() == Type) && (FigList[i]->convertFillColorToString() == fill))
 			count++;
 	}
 	return count;
