@@ -49,7 +49,7 @@ void PickByTypeAction::Execute() {
 
 	do {
 		ReadActionParameters();
-		if (restart)return;
+		if (restart)return;//Close Current game if i choose another
 		choosedFig = pManager->GetFigure(p.x, p.y);
 
 		if (choosedFig != NULL) {
@@ -59,7 +59,7 @@ void PickByTypeAction::Execute() {
 			else
 				NoOfWrongPicks++;
 
-			choosedFig->SetHidden(1);
+			choosedFig->SetHidden(1);//Hide the Shape Picked
 			pOut->ClearDrawArea();
 			pManager->UpdateInterface();
 			pOut->PrintMessage("Pick By figure type : " + FigureType+ "  Correct Picks : " + to_string(NoOfCorrectPicks) + "   ""Wrong Picks : " + to_string(NoOfWrongPicks));
