@@ -27,14 +27,6 @@ void CFigure::ChngFillClr(color Fclr)
 	FigGfxInfo.FillClr = Fclr; 
 }
 
-string CFigure::convertDrwColorToString() const {
-	if (FigGfxInfo.DrawClr == BLUE) return "BLUE";
-	else if (FigGfxInfo.DrawClr == GREEN) return "GREEN";
-	else if (FigGfxInfo.DrawClr == RED) return "RED";
-	else if (FigGfxInfo.DrawClr == YELLOW) return "YELLOW";
-	else if (FigGfxInfo.DrawClr == ORANGE) return "ORANGE";
-	else if (FigGfxInfo.DrawClr == BLACK) return "BLACK";
-}
 
 string CFigure::convertFillColorToString() const {
 
@@ -46,17 +38,6 @@ string CFigure::convertFillColorToString() const {
 	else if (FigGfxInfo.FillClr == ORANGE) return "ORANGE";
     if (FigGfxInfo.FillClr == BLACK) return "BLACK";
 }
-
-color CFigure::convertColorToClr(string clr) const {
-	if (clr == "BLUE") return BLUE;
-	else if (clr == "GREEN") return GREEN;
-	else if (clr == "RED") return RED;
-	else if (clr == "YELLOW") return YELLOW;
-	else if (clr == "ORANGE") return ORANGE;
-	else if (clr == "BLACK") return BLACK;
-	else return WHITE;
-}
-
 void CFigure::SetHidden(bool x)
 {
 	Hidden = x;

@@ -37,12 +37,10 @@ public:
 
 	virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
 	virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
-
+	string convertFillColorToString() const;
 	void SetHidden(bool x);
 	bool IsHidden();
 	string getShapeType();
-	DrawMenuItem getShapeType();
-	int getShapeFillColor();
 
 	virtual void MoveFigure(int, int) = 0;
 	virtual void ReturnFigure() {};

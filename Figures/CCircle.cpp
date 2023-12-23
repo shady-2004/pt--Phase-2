@@ -12,8 +12,8 @@ CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo, int ID):CFigure(Figu
 {
 	id = ID;
 	Center =  P1;
-	Radius = P2;
-	ShapeType = ITM_CIRCLE;
+	PointOnRadius = P2;
+	ShapeType = "Circle";
 }
 
 void CCircle::Draw(Output* pOut) const
