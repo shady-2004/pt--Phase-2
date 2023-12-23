@@ -52,3 +52,7 @@ string CFigure::getShapeType()
 {
 	return ShapeType;
 }
+
+CFigure::~CFigure()
+{
+}

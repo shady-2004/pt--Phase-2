@@ -46,4 +46,5 @@ public:
 	virtual void ReturnFigure() {};
 
 	virtual ~CFigure() = 0;
+
 };
