@@ -37,6 +37,7 @@ void AddSqrAction::Execute()
 
 	//Add the Square to the list of figures
 	pManager->AddFigure(F);
+	PlaySound(TEXT("square.wav"), NULL, SND_SYNC);
 }
 
 void AddSqrAction::UndoExecution()

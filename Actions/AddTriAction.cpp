@@ -47,6 +47,7 @@ void AddTriAction::Execute()
 
 	//Add the Triangle to the list of figures
 	pManager->AddFigure(F);
+	PlaySound(TEXT("triangle.wav"), NULL, SND_SYNC);
 }
 
 void AddTriAction::UndoExecution()

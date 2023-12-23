@@ -44,6 +44,8 @@ void AddRectAction::Execute()
 
 	//Add the rectangle to the list of figures
 	pManager->AddFigure(F);
+
+	PlaySound(TEXT("rectangle.wav"), NULL, SND_SYNC);
 }
 
 void AddRectAction::UndoExecution()

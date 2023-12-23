@@ -42,6 +42,7 @@ void AddCircAction::Execute()
 
 	//Add the cirlce to the list of figures
 	pManager->AddFigure(F);
+	PlaySound(TEXT("circle.wav"), NULL, SND_SYNC);
 }
 
 void AddCircAction::UndoExecution()

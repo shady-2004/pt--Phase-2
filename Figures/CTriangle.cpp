@@ -19,6 +19,7 @@ void CTriangle::Draw(Output* pOut) const
 	//Call Output::DrawTri to draw a triangle on the screen	
 	if (!Hidden)
 	pOut->DrawTri(vertex1, vertex2, vertex3, FigGfxInfo, Selected);
+	//PlaySound(TEXT("triangle.wav"), NULL, SND_SYNC);
 }
 
 

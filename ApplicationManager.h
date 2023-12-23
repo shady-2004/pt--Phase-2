@@ -13,6 +13,7 @@ class ApplicationManager
 	enum { MaxFigCount = 200, MaxActions = 100 };	//Max no of figures
 
 private:
+	bool EnableSound;
 	int FigCount;		//Actual number of figures
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 
@@ -70,7 +71,8 @@ public:
 	int getFigFillColor(int I);
 	DrawMenuItem getFigType(int I);
 	int getFigCountByFillAndType(DrawMenuItem Type, int fill);
-
+	bool getEnableSound();
+	void setEnableSound(bool s);
 
 };
 #endif

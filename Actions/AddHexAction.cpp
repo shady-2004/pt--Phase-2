@@ -39,6 +39,7 @@ void AddHexAction::Execute()
 
 	//Add the hexagon to the list of figures
 	pManager->AddFigure(F);
+	PlaySound(TEXT("hexagon.wav"), NULL, SND_SYNC);
 }
 
 void AddHexAction::UndoExecution()

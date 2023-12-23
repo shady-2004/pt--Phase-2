@@ -1,6 +1,6 @@
 #include "CSquare.h"
 #include <fstream>
-
+#include<conio.h>
 CSquare::CSquare() {
 	ShapeType = ITM_SQUARE;
 }
@@ -10,6 +10,7 @@ CSquare::CSquare(Point P, GfxInfo FigureGfxInfo, int ID):CFigure(FigureGfxInfo)
 	id = ID;
 	Center = P;
 	ShapeType = ITM_SQUARE;
+	//PlaySound(TEXT("square.wav"), NULL, SND_SYNC);
 }
 
 void CSquare::Draw(Output* pOut) const
@@ -17,6 +18,7 @@ void CSquare::Draw(Output* pOut) const
 	//Call Output::DrawSqr to draw a square on the screen
 	if (!Hidden)
 	pOut->DrawSqr(Center, FigGfxInfo, Selected);
+
 }
 
 void CSquare::Save(ofstream& OutFile) {
@@ -58,5 +60,6 @@ void CSquare::ReturnFigure()
 
 CSquare::~CSquare()
 {
+	PlaySound(0, 0, 0);
 }
 

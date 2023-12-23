@@ -19,6 +19,7 @@ void CRectangle::Draw(Output* pOut) const
 	//Call Output::DrawRect to draw a rectangle on the screen
  if(!Hidden)	
 	pOut->DrawRect(Corner1, Corner2, FigGfxInfo, Selected);
+ //PlaySound(TEXT("rectangle.wav"), NULL, SND_SYNC);
 }
 
 void CRectangle::Save(ofstream& OutFile) {

@@ -1,6 +1,7 @@
 #include "Output.h"
 #include "Input.h"
-
+//#include<Windows.h>
+//#include<MMSystem.h>
 
 Output::Output()
 {
@@ -104,8 +105,8 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[SAVE_GRAPH] = "images\\MenuItems\\save graph.jpg";
 	MenuItemImages[LOAD_GRAPH] = "images\\MenuItems\\load graph.jpg";
 	MenuItemImages[SWITCH_PLAY] = "images\\MenuItems\\switch to play mode.jpg";
+	MenuItemImages[SOUND] = "images\\MenuItems\\sound.jpg";
 	MenuItemImages[EXIT] = "images\\MenuItems\\exit.jpg";
-
 	//TODO: Prepare images for each menu item and add it to the list
 
 	//Draw menu item one image at a time
@@ -260,12 +261,12 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 
 	pWind->DrawRectangle(P1.x, P1.y, P2.x, P2.y, style);
 
+
 }
 
 void Output::DrawSqr(const Point& P1, GfxInfo SqrGfxInfo, bool selected) const
 {
 
-	
 	color DrawingClr;
 	if (selected)
 		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
@@ -286,7 +287,7 @@ void Output::DrawSqr(const Point& P1, GfxInfo SqrGfxInfo, bool selected) const
 
 	int a[4] = { P1.y + 100,P1.y + 100, P1.y - 100,P1.y - 100 };//y cord.
 	pWind->DrawPolygon(p, a, 4, style);
-
+	
 }
 
 void Output::DrawTri(const Point& P1, const Point& P2, const Point& P3, GfxInfo TriGfxInfo, bool selected) const
