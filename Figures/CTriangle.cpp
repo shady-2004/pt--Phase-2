@@ -30,7 +30,7 @@ void CTriangle::Save(ofstream& OutFile) {
 
 void CTriangle::Load(ifstream& InFile) {
 	InFile >> id >> vertex1.x >> vertex1.y >> vertex2.x >> vertex2.y >> vertex3.x >> vertex3.y >> &FigGfxInfo.DrawClr >> &FigGfxInfo.FillClr;
-	if (FigGfxInfo.FillClr == LIGHTGOLDENRODYELLOW) FigGfxInfo.isFilled = false;
+	if (FigGfxInfo.FillClr == NOFILL) FigGfxInfo.isFilled = false;
 }
 
 bool CTriangle::IsFound(int x, int y)
@@ -62,5 +62,40 @@ void CTriangle::PrintInfo(Output* pOut)
 {
 	pOut->PrintMessage("Figure Type : Triangle         Figure ID : " + to_string(id) + "         Vertex1 : " + to_string(vertex1.x) + "," + to_string(vertex1.y) + "   Vertex2: " + to_string(vertex2.x) + "," + to_string(vertex2.y) + "   Vertex3: " + to_string(vertex3.x) + "," + to_string(vertex3.y));
 
+}
+
+void CTriangle::MoveFigure(int a, int b)  // a function that modify the center of the selected figure to the new center 
+{
+	PreviousVertex1 = vertex1;
+	PreviousVertex2 = vertex2;
+	PreviousVertex3 = vertex3;
+	
+	// calculate old centroid coordinates
+	int c1x = (vertex1.x + vertex2.x + vertex3.x) / 3;
+	int c1y = (vertex1.y + vertex2.y + vertex3.y) / 3;
+	// new centroid coordinates
+	int c2x = a;
+	int c2y = b;
+	// set vertex1 coordinates
+	vertex1.x = vertex1.x + c2x - c1x;
+	vertex1.y = vertex1.y + c2y - c1y;
+	// set vertex2 coordinates
+	vertex2.x = vertex2.x + c2x - c1x;
+	vertex2.y = vertex2.y + c2y - c1y;
+	// set vertex3 coordinates
+	vertex3.x = vertex3.x + c2x - c1x;
+	vertex3.y = vertex3.y + c2y - c1y;
+
+}
+
+void CTriangle::ReturnFigure()
+{
+	vertex1 = PreviousVertex1;
+	vertex2 = PreviousVertex2;
+	vertex3 = PreviousVertex3;
+}
+
+CTriangle::~CTriangle()
+{
 }
 

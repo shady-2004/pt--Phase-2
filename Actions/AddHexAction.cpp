@@ -4,7 +4,7 @@
 #include"../GUI/Output.h"
 #include"../ApplicationManager.h"
 
-AddHexAction::AddHexAction(ApplicationManager* pApp):Action(pApp)
+AddHexAction::AddHexAction(ApplicationManager* pApp):AddFigureAction(pApp)
 {
 }
 
@@ -20,11 +20,10 @@ void AddHexAction::ReadActionParameters()
 	pIn->GetPointClicked(Center.x, Center.y);
 
 
-	HexGfxInfo.isFilled = false;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
 	HexGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	HexGfxInfo.FillClr = pOut->getCrntFillColor();
-	HexGfxInfo.isFilled = pOut->getCrntFillStatues();
+	HexGfxInfo.isFilled = pOut->getCrntFillStatus();
 
 	pOut->ClearStatusBar();
 }
@@ -34,13 +33,18 @@ void AddHexAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
-	id = pManager->GetActionCount();
 
 	//Create a hexagon with the parameters read from the user
-	CHexagon* H = new CHexagon(Center, HexGfxInfo, (pManager->GetFigCount()) + 1);
+	F = new CHexagon(Center, HexGfxInfo, (pManager->GetFigCount()) + 1);
 
 	//Add the hexagon to the list of figures
-	pManager->AddFigure(H);
+	pManager->AddFigure(F);
+}
+
+void AddHexAction::UndoExecution()
+{
+	pManager->DeleteFigure(F);
+	pManager->GetOutput()->PrintMessage("Draw Hexagon Action Undone");
 }
 
 

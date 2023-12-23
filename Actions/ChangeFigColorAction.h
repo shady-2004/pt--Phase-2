@@ -3,6 +3,8 @@
 class ChangeFigColorAction :
 	public Action
 {
+	color PreviousColor;
+	CFigure* SelectedFig;
 
 public:
 	ChangeFigColorAction(ApplicationManager* pApp);
@@ -10,5 +12,7 @@ public:
 	void ReadActionParameters();
 
 	virtual void Execute();
+
+	virtual void UndoExecution();
 };
 

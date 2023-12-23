@@ -6,8 +6,8 @@
 class CRectangle : public CFigure
 {
 private:
-	Point Corner1;	
-	Point Corner2;
+	Point Corner1, PreviousCorner1;
+	Point Corner2, PreviousCorner2;
 public:
 	CRectangle();
 	CRectangle(Point , Point, GfxInfo FigureGfxInfo, int ID);
@@ -17,6 +17,11 @@ public:
 	virtual void PrintInfo(Output*);	//Prints the figure's info
 
 	virtual bool IsFound(int x, int y);
+
+
+	virtual void MoveFigure(int, int);
+	virtual void ReturnFigure();
+	virtual ~CRectangle();
 };
 
 #endif

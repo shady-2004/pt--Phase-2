@@ -5,6 +5,7 @@
 #include "..\GUI\Output.h"
 ChangeFigColorAction::ChangeFigColorAction(ApplicationManager* pApp):Action(pApp)
 {
+	PreviousColor = UI.DrawColor;
 }
 
 void ChangeFigColorAction::ReadActionParameters()
@@ -12,7 +13,6 @@ void ChangeFigColorAction::ReadActionParameters()
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-
 
 	pOut->PrintMessage("Select Draw Color");
 
@@ -49,15 +49,21 @@ void ChangeFigColorAction::ReadActionParameters()
 
 void ChangeFigColorAction::Execute()
 {
-	Output* pOut = pManager->GetOutput();
+	SelectedFig = pManager->GetSelectedFig();
+	
+	if (SelectedFig == NULL)
+		return;
 
 	ReadActionParameters();//This action needs to read some parameters first
 
-	CFigure*F = pManager->GetSelectedFig();//
-	if (F != NULL)//Checks if there is selected figure or not
-	{
+	SelectedFig->ChngDrawClr(UI.DrawColor);
+	SelectedFig->SetSelected(0);
+}
 
-		F->ChngDrawClr(UI.DrawColor);
-		F->SetSelected(0);
-	}
+void ChangeFigColorAction::UndoExecution()
+{
+	if (SelectedFig == NULL)
+		return;
+	SelectedFig->ChngDrawClr(PreviousColor);
+	pManager->GetOutput()->PrintMessage("Change Draw Color Action Undone");
 }

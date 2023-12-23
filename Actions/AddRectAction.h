@@ -1,10 +1,8 @@
 #pragma once
-
-
-#include "Action.h"
+#include "AddFigureAction.h"
 
 //Add Rectangle Action class
-class AddRectAction: public Action
+class AddRectAction: public AddFigureAction
 {
 private:
 	Point P1, P2; //Rectangle Corners
@@ -18,4 +16,5 @@ public:
 	//Add rectangle to the ApplicationManager
 	virtual void Execute() ;
 	
+	virtual void UndoExecution();
 };

@@ -4,7 +4,7 @@ class CHexagon :
     public CFigure
 {
 private:
-    Point Center;
+    Point Center , PreviousCenter;
     Point Vertex1, Vertex2, Vertex3, Vertex4, Vertex5, Vertex6;
 public:
     CHexagon();
@@ -15,5 +15,10 @@ public:
     virtual bool IsFound(int x, int y);
 
     virtual void PrintInfo(Output* pOut);
+
+
+    virtual void MoveFigure(int, int);
+    virtual void ReturnFigure();
+    virtual ~CHexagon();
 };
 

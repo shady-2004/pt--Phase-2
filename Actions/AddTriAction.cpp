@@ -3,7 +3,7 @@
 #include"../GUI/Input.h"
 #include"../GUI/Output.h"
 #include"../ApplicationManager.h"
-AddTriAction::AddTriAction(ApplicationManager* pApp):Action(pApp)
+AddTriAction::AddTriAction(ApplicationManager* pApp):AddFigureAction(pApp)
 {
 }
 
@@ -28,11 +28,10 @@ void AddTriAction::ReadActionParameters()
 	//Read 3rd Vertex and store in point P3
 	pIn->GetPointClicked(P3.x, P3.y);
 
-	TriGfxInfo.isFilled = false;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
 	TriGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	TriGfxInfo.FillClr = pOut->getCrntFillColor();
-	TriGfxInfo.isFilled = pOut->getCrntFillStatues();
+	TriGfxInfo.isFilled = pOut->getCrntFillStatus();
 
 
 	pOut->ClearStatusBar();
@@ -42,11 +41,16 @@ void AddTriAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
-	id = pManager->GetActionCount();
 
 	//Create a Triangle with the parameters read from the user
-	CTriangle* R = new CTriangle(P1, P2,P3, TriGfxInfo, (pManager->GetFigCount()) + 1);
+	F = new CTriangle(P1, P2,P3, TriGfxInfo, (pManager->GetFigCount()) + 1);
 
 	//Add the Triangle to the list of figures
-	pManager->AddFigure(R);
+	pManager->AddFigure(F);
+}
+
+void AddTriAction::UndoExecution()
+{
+	pManager->DeleteFigure(F);
+	pManager->GetOutput()->PrintMessage("Draw Triangle Action Undone");
 }

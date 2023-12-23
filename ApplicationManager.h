@@ -10,7 +10,7 @@
 //Main class that manages everything in the application.
 class ApplicationManager
 {
-	enum { MaxFigCount = 200, MaxActions = 5 };	//Max no of figures
+	enum { MaxFigCount = 200, MaxActions = 100 };	//Max no of figures
 
 private:
 	int FigCount;		//Actual number of figures
@@ -20,7 +20,10 @@ private:
 
 	Action* ActionList[MaxActions];		//List of all actions (Array of pointers)
 	int ActionCount;					//Actual number of actions
-
+	
+	bool isRecording;
+	image RecordingList[20];
+	int RecordCount;
 	//Pointers to Input and Output classes
 	Input* pIn;
 	Output* pOut;
@@ -35,8 +38,10 @@ public:
 	void ExecuteAction(ActionType); //Creates an action and executes it
 	Action** GetActionList();		// Getter for Action list
 	int GetActionCount();			// Getter for Action count
-
-
+	
+	image* GetRecordingList();
+	int GetRecordCount();
+	
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
 	CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
@@ -44,6 +49,10 @@ public:
 
 	void SetSelectedFig(CFigure*);			// Setter for Selected Figure
 	CFigure* GetSelectedFig();				// Getter for Selected Figure
+
+	void setRecording(bool);
+	
+	void DeleteFigure(CFigure* pFig);
 
 
 	void SaveAll(ofstream& OutFile);

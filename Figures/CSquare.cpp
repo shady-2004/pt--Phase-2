@@ -27,7 +27,7 @@ void CSquare::Save(ofstream& OutFile) {
 
 void CSquare::Load(ifstream& InFile) {
 	InFile >> id >> Center.x >> Center.y >> &FigGfxInfo.DrawClr >> &FigGfxInfo.FillClr;
-	if (FigGfxInfo.FillClr == LIGHTGOLDENRODYELLOW) FigGfxInfo.isFilled = false;
+	if (FigGfxInfo.FillClr == NOFILL) FigGfxInfo.isFilled = false;
 }
 
 bool CSquare::IsFound(int x, int y)
@@ -40,5 +40,23 @@ bool CSquare::IsFound(int x, int y)
 void CSquare::PrintInfo(Output* pOut)
 {
 	pOut->PrintMessage("Figure Type : Square          Figure ID : " + to_string(id) + "         Center : " + to_string(Center.x) + "," + to_string(Center.y));
+}
+
+
+void CSquare::MoveFigure(int a, int b)  // a function that modify the center of the selected figure to the new center 
+{
+	PreviousCenter = Center;
+	Center.x = a;
+	Center.y = b;
+
+}
+
+void CSquare::ReturnFigure()
+{
+	Center = PreviousCenter;
+}
+
+CSquare::~CSquare()
+{
 }
 

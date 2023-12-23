@@ -24,9 +24,6 @@ public:
 	
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
-	string convertDrwColorToString() const;
-	string convertFillColorToString() const;
-	color convertColorToClr(string) const;
 
 	virtual void PrintInfo(Output* pOut) = 0 ;	//print all figure info on the status bar
 
@@ -44,4 +41,11 @@ public:
 	void SetHidden(bool x);
 	bool IsHidden();
 	string getShapeType();
+	DrawMenuItem getShapeType();
+	int getShapeFillColor();
+
+	virtual void MoveFigure(int, int) = 0;
+	virtual void ReturnFigure() {};
+
+	virtual ~CFigure() = 0;
 };

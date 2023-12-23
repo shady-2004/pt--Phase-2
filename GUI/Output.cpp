@@ -18,7 +18,7 @@ Output::Output()
 
 	UI.DrawColor = BLUE;	//Drawing color
 	UI.FillColor = GREEN;	//Filling color
-	UI.IsFilled = 0;
+	UI.IsFilled = false;
 	UI.MsgColor = RED;		//Messages color
 	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	//Background color
 	UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
@@ -152,6 +152,14 @@ void Output::closeColorMenu() {
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
+void Output::screenshotWindow(image& img) {
+	pWind->StoreImage(img, 0, 0, 1250, 600);
+}
+
+void Output::redrawWindow(image img) {
+	pWind->DrawImage(img, 0, 0, 1250, 600);
+}
+
 void Output::CreatePlayToolBar() const
 {
 	UI.InterfaceMode = MODE_PLAY;
@@ -207,17 +215,6 @@ color Output::getCrntFillColor() const	//get current filling color
 {
 	return UI.FillColor;
 }
-/////////////////////////////////////////////////////////////////////////////////////////
-
-string Output::getCrntColorAsString(color clr) const {
-	if (clr == BLUE) return "BLUE";
-	else if (clr == GREEN) return "GREEN";
-	else if (clr == RED) return "RED";
-	else if (clr == YELLOW) return "YELLOW";
-	else if (clr == ORANGE) return "ORANGE";
-	else if (clr == BLACK) return "BLACK";
-	else return "NO FILL";
-}
 //////////////////////////////////////////////////////////////////////////////////////////
 
 int Output::getCrntPenWidth() const		//get current pen width
@@ -225,7 +222,7 @@ int Output::getCrntPenWidth() const		//get current pen width
 	return UI.PenWidth;
 }
 
-bool Output::getCrntFillStatues() const
+bool Output::getCrntFillStatus() const
 {
 	return UI.IsFilled;
 }

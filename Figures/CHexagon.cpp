@@ -28,7 +28,7 @@ void CHexagon::Save(ofstream& OutFile) {
 
 void CHexagon::Load(ifstream& InFile) {
 	InFile >> id >> Center.x >> Center.y >> &FigGfxInfo.DrawClr >> &FigGfxInfo.FillClr;
-	if (FigGfxInfo.FillClr == LIGHTGOLDENRODYELLOW) FigGfxInfo.isFilled = false;
+	if (FigGfxInfo.FillClr == NOFILL) FigGfxInfo.isFilled = false;
 }
 
 bool CHexagon::IsFound(int x, int y)
@@ -71,4 +71,20 @@ void CHexagon::PrintInfo(Output* pOut)
 {
 	pOut->PrintMessage("Figure Type : Hexagon        Figure ID : " + to_string(id) + "        Center : " + to_string(Center.x) + "," + to_string(Center.y) );
 
+}
+
+
+void CHexagon::MoveFigure(int a, int b)  // a function that modify the center of the selected figure to the new center 
+{
+	PreviousCenter = Center;
+	Center.x = a;
+	Center.y = b;
+
+}
+void CHexagon::ReturnFigure()
+{
+	Center = PreviousCenter;
+}
+CHexagon::~CHexagon()
+{
 }

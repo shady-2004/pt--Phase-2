@@ -57,7 +57,6 @@ color CFigure::convertColorToClr(string clr) const {
 	else return WHITE;
 }
 
-
 void CFigure::SetHidden(bool x)
 {
 	Hidden = x;

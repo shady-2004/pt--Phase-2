@@ -1,14 +1,16 @@
 #pragma once
-#include "Action.h"
+#include "AddFigureAction.h"
+#include "../Figures/CCircle.h"
 
 //Add Circle Action class
 class AddCircAction :
-	public Action
+	public AddFigureAction
 
 {
 private:
-	Point Center, Radius; //Center and Radius of the circle
+	Point Center, PointOnRadius; //Center and Radius of the circle
 	GfxInfo CircGfxInfo;
+	
 public:
 	AddCircAction(ApplicationManager* pApp);
 
@@ -18,5 +20,6 @@ public:
 	//Add Circle to the ApplicationManager
 	virtual void Execute();
 
+	virtual void UndoExecution();
 };
 

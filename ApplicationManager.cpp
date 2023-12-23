@@ -15,7 +15,12 @@
 #include"Actions/PickByTypeAction.h"
 #include"Actions/PickByFillColorAction.h"
 #include"Actions/PickByTypeAndFillColorAction.h"
+#include "Actions/StartRecordingAction.h"
+#include "Actions/StopRecordingAction.h"
 #include <fstream>
+#include "Actions/UndoAction.h"
+#include "Actions/DeleteFigureAction.h"
+#include "Actions\MoveFigureAction.h"
 
 
 //Constructor
@@ -27,7 +32,9 @@ ApplicationManager::ApplicationManager()
 	
 	FigCount = 0;
 	ActionCount = 0;
+	RecordCount = 0;
 	SelectedFig = NULL;
+	isRecording = false;
 		
 	//Create an array of figure pointers and set them to NULL		
 	for(int i=0; i<MaxFigCount; i++)
@@ -46,89 +53,113 @@ ActionType ApplicationManager::GetUserAction() const
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Creates an action and executes it
-void ApplicationManager::ExecuteAction(ActionType ActType) 
+void ApplicationManager::ExecuteAction(ActionType ActType)
 {
 	Action* pAct = NULL;
 
-	ActionCount++;
-	if (ActionCount > MaxActions)						// Shifting The array of actions one to the left
-	{													// To make space for the new selected action
-		for (int i = 0; i < MaxActions-1; i++)
-			ActionList[i] = ActionList[i + 1];
-		
-		ActionCount = MaxActions;
-	}
-	
+
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
-		case DRAW_RECT:
+	case DRAW_RECT:
 
-			pAct = new AddRectAction(this);
-			break;
+		pAct = new AddRectAction(this);
+		break;
 
-		case DRAW_SQUARE:
-			pAct = new AddSqrAction(this);
-			break;
+	case DRAW_SQUARE:
+		pAct = new AddSqrAction(this);
+		break;
 
-		case DRAW_CIRCLE:
-			pAct = new AddCircAction(this);
-			break;
+	case DRAW_CIRCLE:
+		pAct = new AddCircAction(this);
+		break;
 
-		case DRAW_TRIANGLE:
-			pAct = new AddTriAction(this);
-			break;
+	case DRAW_TRIANGLE:
+		pAct = new AddTriAction(this);
+		break;
 
-		case DRAW_HEXAGON:
-			pAct = new AddHexAction(this);
-			break;
+	case DRAW_HEXAGON:
+		pAct = new AddHexAction(this);
+		break;
 
-		case TO_SAVE_GRAPH:
-			pAct = new SaveAction(this);
-			break;
-		case TO_LOAD_GRAPH:
-			pAct = new LoadAction(this);
-			break;
-		case TO_SELECT:
-			pAct = new SelectAction(this);
-			break;
-		case TO_CHANGE_DRAW_COLOR:
-			pAct = new ChangeFigColorAction(this);
-			break;
-		case TO_CHANGE_FILL_COLOR:
-			pAct = new ChangeFillColorAcion(this);
-			break;
-		case TO_PLAY:
-			pAct = new SwitchToPlayModeAction(this);
-			break;
-		case TO_DRAW:
-			pAct = new SwitchToDrawModeAction(this);
-			break;
-		case PICK_FIG_TYPE:
-			pAct = new PickByTypeAction(this);
-			break;
-
-		case PICK_FIG_FILL_COLOR:
-			pAct = new PickByFillColorAction(this);
-			break;
-		case PICK_FIG_TYPE_AND_FILL_COLOR:
-			pAct = new PickByTypeAndFillColorAction(this);
-			break;
-		case TO_EXIT:
-			///create ExitAction here
-			pAct = new ExitAction(this);
-			break;
-		case STATUS:	//a click on the status bar ==> no action
-			return;
+	case TO_SAVE_GRAPH:
+		pAct = new SaveAction(this);
+		break;
+	case TO_LOAD_GRAPH:
+		pAct = new LoadAction(this);
+		break;
+	case TO_START_RECORDING:
+		pAct = new StartRecordingAction(this);
+		break;
+	case TO_STOP_RECORDING:
+		pAct = new StopRecordingAction(this);
+		break;
+	case TO_SELECT:
+		pAct = new SelectAction(this);
+		break;
+	case TO_CHANGE_DRAW_COLOR:
+		pAct = new ChangeFigColorAction(this);
+		break;
+	case TO_CHANGE_FILL_COLOR:
+		pAct = new ChangeFillColorAcion(this);
+		break;
+	case TO_PLAY:
+		pAct = new SwitchToPlayModeAction(this);
+		break;
+	case TO_DRAW:
+		pAct = new SwitchToDrawModeAction(this);
+		break;
+	case PICK_FIG_TYPE:
+		pAct = new PickByTypeAction(this);
+		break;
+	case PICK_FIG_FILL_COLOR:
+		pAct = new PickByFillColorAction(this);
+		break;
+	case PICK_FIG_TYPE_AND_FILL_COLOR:
+		pAct = new PickByTypeAndFillColorAction(this);
+		break;
+	case TO_UNDO:
+		pAct = new UndoAction(this);
+		break;
+	case TO_MOVE:
+		pAct = new MoveFigureAction(this);
+		break;
+	case TO_DELETEE:
+		pAct = new DeleteFigureAction(this);
+		break;
+	case TO_EXIT:
+		///create ExitAction here
+		pAct = new ExitAction(this);
+		break;
+	case STATUS:	//a click on the status bar ==> no action
+		return;
 	}
+
+	
 	
 	//Execute the created action
-	if(pAct != NULL)
+	if (pAct != NULL)
 	{
-		ActionList[ActionCount - 1] = pAct;
-		ActionList[ActionCount-1]->Execute();//Execute
-		delete pAct;	//You may need to change this line depending to your implementation
-		pAct = NULL;
+		ActionList[ActionCount] = pAct;
+		ActionCount++;
+		if (ActType != TO_UNDO)
+		{
+			UndoAction::UndoCount = 0;
+		}
+		pAct->Execute();//Execute
+	}
+
+	if (isRecording && ActType != TO_START_RECORDING && ActType != TO_STOP_RECORDING && ActType != TO_PLAY_RECORDING && ActType != TO_SAVE_GRAPH && ActType != TO_LOAD_GRAPH && ActType != TO_PLAY) {
+		StartRecordingAction Record(this);
+		if (RecordCount < 20) {
+			Record.Record();
+			RecordCount++;
+		}
+		else {
+			StopRecordingAction StopRecord(this);
+			StopRecord.Execute();
+			RecordCount = 0;
+		}
 	}
 }
 
@@ -142,6 +173,17 @@ int ApplicationManager::GetActionCount()
 	return ActionCount;
 }
 
+image* ApplicationManager::GetRecordingList() {
+	return RecordingList;
+}
+
+int ApplicationManager::GetRecordCount() {
+	return RecordCount;
+}
+
+void ApplicationManager::setRecording(bool s) {
+	isRecording = s;
+}
 //==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//
@@ -183,6 +225,17 @@ CFigure* ApplicationManager::GetSelectedFig()
 {
 	return SelectedFig;
 }
+void ApplicationManager::DeleteFigure(CFigure* pFig)
+{
+	for (int i = 0; i < FigCount; i++)
+		if (FigList[i] == pFig)
+		{
+			FigList[i] = FigList[FigCount - 1];
+			FigList[FigCount - 1] = NULL;
+			FigCount--;
+		}
+
+}
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
@@ -190,6 +243,7 @@ CFigure* ApplicationManager::GetSelectedFig()
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {	
+	pOut->ClearDrawArea();
 	for (int i = 0; i < FigCount; i++) {
 		FigList[i]->Draw(pOut);
 	}
@@ -260,7 +314,7 @@ Output* ApplicationManager::GetOutput() const
 //==================================================================================//
 
 void ApplicationManager::SaveAll(ofstream &OutFile) {
-	/*OutFile << FigCount << endl;*/
+	OutFile << FigCount << endl;
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Save(OutFile);
 }
@@ -271,7 +325,12 @@ void ApplicationManager::SaveAll(ofstream &OutFile) {
 ApplicationManager::~ApplicationManager()
 {
 	for(int i=0; i<FigCount; i++)
-		delete FigList[i];
+		if (FigList[i])
+			delete FigList[i];
+
+	for (int i = 0; i < ActionCount; i++)
+		if (ActionList[i])
+			delete ActionList[i];
 	delete pIn;
 	delete pOut;
 	

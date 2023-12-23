@@ -1,9 +1,9 @@
 #pragma once
-#include "Action.h"
+#include "AddFigureAction.h"
 
 //Add Circle Action class
 class AddHexAction :
-    public Action
+    public AddFigureAction
 {
 	
 	private:
@@ -13,10 +13,11 @@ class AddHexAction :
 		AddHexAction(ApplicationManager* pApp);
 
 		//Reads Hexagon parameters
-		virtual void ReadActionParameters();
+		void ReadActionParameters();
 
 		//Add Hexagon to the ApplicationManager
 		virtual void Execute();
 
+		virtual void UndoExecution();
 };
 

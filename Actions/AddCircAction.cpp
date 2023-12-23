@@ -1,10 +1,9 @@
 #include "AddCircAction.h"
-#include"../Figures/CCircle.h"
 #include"../GUI/Input.h"
 #include"../GUI/Output.h"
 #include"../ApplicationManager.h"
 
-AddCircAction::AddCircAction(ApplicationManager* pApp) :Action(pApp)
+AddCircAction::AddCircAction(ApplicationManager* pApp) :AddFigureAction(pApp)
 {
 }
 
@@ -22,13 +21,12 @@ void AddCircAction::ReadActionParameters()
 	pOut->PrintMessage("New Circle: Click at Radius");
 
 	//Read Radius and store in Radius
-	pIn->GetPointClicked(Radius.x, Radius.y);
+	pIn->GetPointClicked(PointOnRadius.x, PointOnRadius.y);
 
-	CircGfxInfo.isFilled = false;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
 	CircGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	CircGfxInfo.FillClr = pOut->getCrntFillColor();
-	CircGfxInfo.isFilled= pOut->getCrntFillStatues();
+	CircGfxInfo.isFilled= pOut->getCrntFillStatus();
 
 	pOut->ClearStatusBar();
 }
@@ -38,11 +36,17 @@ void AddCircAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
-	id = pManager->GetActionCount();
 
 	//Create a circle with the parameters read from the user
-	CCircle* C = new CCircle(Center, Radius, CircGfxInfo, (pManager->GetFigCount()) + 1);
+	 F = new CCircle(Center, PointOnRadius, CircGfxInfo, (pManager->GetFigCount()) + 1);
 
 	//Add the cirlce to the list of figures
-	pManager->AddFigure(C);
+	pManager->AddFigure(F);
 }
+
+void AddCircAction::UndoExecution()
+{
+	pManager->DeleteFigure(F);
+	pManager->GetOutput()->PrintMessage("Draw Circle Action Undone");
+}
+

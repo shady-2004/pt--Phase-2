@@ -5,6 +5,8 @@ class CSquare :
 {
 private:
 	Point Center;
+	Point PreviousCenter;
+
 public:
 	CSquare();
 	CSquare(Point, GfxInfo FigureGfxInfo, int ID);
@@ -14,5 +16,10 @@ public:
 	virtual bool IsFound(int x, int y);
 
 	virtual void PrintInfo(Output* pOut);
+
+
+	virtual void MoveFigure(int, int);
+	virtual void ReturnFigure();
+	virtual ~CSquare();
 };
 

@@ -3,7 +3,7 @@
 #include"../GUI/Input.h"
 #include"../GUI/Output.h"
 #include"../ApplicationManager.h"
-AddSqrAction::AddSqrAction(ApplicationManager* pApp):Action(pApp)
+AddSqrAction::AddSqrAction(ApplicationManager* pApp):AddFigureAction(pApp)
 {
 }
 
@@ -18,11 +18,11 @@ void AddSqrAction::ReadActionParameters()
 	//Read center of square
 	pIn->GetPointClicked(P1.x, P1.y);
 
-	SqrGfxInfo.isFilled = false;	//default is not filled
+
 	//get drawing, filling colors and pen width from the interface
 	SqrGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	SqrGfxInfo.FillClr = pOut->getCrntFillColor();
-	SqrGfxInfo.isFilled = pOut->getCrntFillStatues();
+	SqrGfxInfo.isFilled = pOut->getCrntFillStatus();
 
 	pOut->ClearStatusBar();
 }
@@ -31,11 +31,16 @@ void AddSqrAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
-	id = pManager->GetActionCount();
 
 	//Create a Square with the parameters read from the user
-	CSquare* S = new CSquare(P1,  SqrGfxInfo, (pManager->GetFigCount()) + 1);
+	F = new CSquare(P1,  SqrGfxInfo, (pManager->GetFigCount()) + 1);
 
 	//Add the Square to the list of figures
-	pManager->AddFigure(S);
+	pManager->AddFigure(F);
+}
+
+void AddSqrAction::UndoExecution()
+{
+	pManager->DeleteFigure(F);
+	pManager->GetOutput()->PrintMessage("Draw Square Action Undone");
 }

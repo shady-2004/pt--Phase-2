@@ -1,12 +1,11 @@
 #include "AddRectAction.h"
-#include "..\Figures\CRectangle.h"
-
+#include"../Figures/CRectangle.h"
 #include "..\ApplicationManager.h"
 
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddRectAction::AddRectAction(ApplicationManager * pApp):Action(pApp)
+AddRectAction::AddRectAction(ApplicationManager * pApp):AddFigureAction(pApp)
 {}
 
 void AddRectAction::ReadActionParameters() 
@@ -25,11 +24,10 @@ void AddRectAction::ReadActionParameters()
 	//Read 2nd corner and store in point P2
 	pIn->GetPointClicked(P2.x, P2.y);
 
-	RectGfxInfo.isFilled = false;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
 	RectGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	RectGfxInfo.FillClr = pOut->getCrntFillColor();
-	RectGfxInfo.isFilled = pOut->getCrntFillStatues();
+	RectGfxInfo.isFilled = pOut->getCrntFillStatus();
 
 	pOut->ClearStatusBar();
 
@@ -40,11 +38,16 @@ void AddRectAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
-	id = pManager->GetActionCount();
 	
 	//Create a rectangle with the parameters read from the user
-	CRectangle *R=new CRectangle(P1, P2, RectGfxInfo, (pManager->GetFigCount())+1);
+	F=new CRectangle(P1, P2, RectGfxInfo, (pManager->GetFigCount())+1);
 
 	//Add the rectangle to the list of figures
-	pManager->AddFigure(R);
+	pManager->AddFigure(F);
+}
+
+void AddRectAction::UndoExecution()
+{
+	pManager->DeleteFigure(F);
+	pManager->GetOutput()->PrintMessage("Draw Rectangle Action Undone");
 }
