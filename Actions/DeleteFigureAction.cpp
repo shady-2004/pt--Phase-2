@@ -38,5 +38,5 @@ void DeleteFigureAction::RedoExecution()
 	if (temp == NULL)
 		return;
 	pManager->DeleteFigure(temp);
-	pManager->GetOutput()->PrintMessage("Delete Figure Action Undone");
+	pManager->GetOutput()->PrintMessage("Delete Figure Action Redone");
 }
