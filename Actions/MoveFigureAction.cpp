@@ -35,3 +35,12 @@ void MoveFigureAction::UndoExecution()
 
 	pManager->GetOutput()->PrintMessage("Move Figure Action Undone");
 }
+
+void MoveFigureAction::RedoExecution()
+{
+	if (SelectedFig == NULL)
+		return;
+	SelectedFig->MoveFigure(x, y);
+
+	pManager->GetOutput()->PrintMessage("Move Figure Action Redone");
+}

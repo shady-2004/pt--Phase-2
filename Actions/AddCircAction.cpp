@@ -46,7 +46,12 @@ void AddCircAction::Execute()
 
 void AddCircAction::UndoExecution()
 {
-	pManager->DeleteFigure(F);
+	AddFigureAction::UndoExecution();
 	pManager->GetOutput()->PrintMessage("Draw Circle Action Undone");
 }
 
+void AddCircAction::RedoExecution()
+{
+	AddFigureAction::RedoExecution();
+	pManager->GetOutput()->PrintMessage("Draw Circle Action Redone");
+}

@@ -196,6 +196,7 @@
     <ClCompile Include="Actions\StopRecordingAction.cpp" />
     <ClCompile Include="Actions\UndoAction.cpp" />
     <ClCompile Include="Actions\MoveFigureAction.cpp" />
+    <ClCompile Include="Actions\RedoAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\AddCircAction.h" />
@@ -211,6 +212,7 @@
     <ClInclude Include="Actions\PickByFillColorAction.h" />
     <ClInclude Include="Actions\PickByTypeAction.h" />
     <ClInclude Include="Actions\PickByTypeAndFillColorAction.h" />
+    <ClInclude Include="Actions\RedoAction.h" />
     <ClInclude Include="Actions\SelectAction.h" />
     <ClInclude Include="Actions\SwitchToDrawModeAction.h" />
     <ClInclude Include="Actions\SwitchToPlayModeAction.h" />

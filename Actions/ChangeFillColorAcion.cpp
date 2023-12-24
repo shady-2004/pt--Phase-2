@@ -75,3 +75,13 @@ void ChangeFillColorAcion::UndoExecution()
 	pManager->GetOutput()->PrintMessage("Change Fill Color Action Undone");
 	
 }
+
+
+void ChangeFillColorAcion::RedoExecution()
+{
+	if (SelectedFig == NULL)
+		return;
+	UI.IsFilled = true;
+	SelectedFig->ChngFillClr(UI.FillColor);
+	pManager->GetOutput()->PrintMessage("Change Fill Color Action Redone");
+}

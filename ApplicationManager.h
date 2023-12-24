@@ -10,7 +10,7 @@
 //Main class that manages everything in the application.
 class ApplicationManager
 {
-	enum { MaxFigCount = 200, MaxActions = 100 };	//Max no of figures
+	enum { MaxFigCount = 200, MaxActions = 100 };	//Max no of figures , Max no of Actions
 
 private:
 	int FigCount;		//Actual number of figures
@@ -36,8 +36,6 @@ public:
 	//Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;
 	void ExecuteAction(ActionType); //Creates an action and executes it
-	Action** GetActionList();		// Getter for Action list
-	int GetActionCount();			// Getter for Action count
 	
 	image* GetRecordingList();
 	int GetRecordCount();
@@ -46,9 +44,6 @@ public:
 	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
 	CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
 	int GetFigCount();						// Getter for figure count
-
-	void SetSelectedFig(CFigure*);			// Setter for Selected Figure
-	CFigure* GetSelectedFig();				// Getter for Selected Figure
 
 	void setRecording(bool);
 	
@@ -70,6 +65,16 @@ public:
 	string getFigFillColor(int I);
 	string getFigType(int I);
 	int getFigCountByFillAndType(string Type, string fill);
-	//////////////////////////////////////////////////
+
+	// -- Undo & Redo Functions
+	Action** GetActionList();		// Getter for Action list
+	int GetActionCount();			// Getter for Action count
+	void SetActionCount(int c);
+	bool CheckUndoCondition(ActionType action); // checks whether the action is an undo/redo action
+
+	// -- Select Functions
+	void SetSelectedFig(CFigure*);			// Setter for Selected Figure
+	CFigure* GetSelectedFig();				// Getter for Selected Figure
+
 };
 #endif

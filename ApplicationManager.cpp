@@ -21,6 +21,7 @@
 #include "Actions/UndoAction.h"
 #include "Actions/DeleteFigureAction.h"
 #include "Actions\MoveFigureAction.h"
+#include "Actions/RedoAction.h"
 
 
 //Constructor
@@ -121,6 +122,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case TO_UNDO:
 		pAct = new UndoAction(this);
 		break;
+	case TO_REDO:
+		pAct = new RedoAction(this);
+		break;
 	case TO_MOVE:
 		pAct = new MoveFigureAction(this);
 		break;
@@ -140,22 +144,32 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	//Execute the created action
 	if (pAct != NULL)
 	{
-		ActionList[ActionCount] = pAct;
-		ActionCount++;
-		if (ActType != TO_UNDO)
+		pAct->Execute();//Execute
+
+		if (CheckUndoCondition(ActType))
 		{
 			UndoAction::UndoCount = 0;
+			RedoAction::RedoCount = 0;
+			ActionList[ActionCount] = pAct;
+			ActionCount++;
 		}
-		pAct->Execute();//Execute
+		else
+		{
+			delete pAct;
+			pAct = NULL;
+		}
 	}
 
-	if (isRecording && ActType != TO_START_RECORDING && ActType != TO_STOP_RECORDING && ActType != TO_PLAY_RECORDING && ActType != TO_SAVE_GRAPH && ActType != TO_LOAD_GRAPH && ActType != TO_PLAY) {
+	if (isRecording && ActType != TO_START_RECORDING && ActType != TO_STOP_RECORDING && ActType != TO_PLAY_RECORDING && ActType != TO_SAVE_GRAPH && ActType != TO_LOAD_GRAPH && ActType != TO_PLAY)
+	{
 		StartRecordingAction Record(this);
-		if (RecordCount < 20) {
+		if (RecordCount < 20) 
+		{
 			Record.Record();
 			RecordCount++;
 		}
-		else {
+		else 
+		{
 			StopRecordingAction StopRecord(this);
 			StopRecord.Execute();
 			RecordCount = 0;
@@ -163,6 +177,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	}
 }
 
+//===============================================================//
+//						Undo & Redo Functions					//
+//=============================================================//
 Action** ApplicationManager::GetActionList()
 {
 	return ActionList;
@@ -171,6 +188,17 @@ Action** ApplicationManager::GetActionList()
 int ApplicationManager::GetActionCount()
 {
 	return ActionCount;
+}
+
+void ApplicationManager::SetActionCount(int c)
+{
+	ActionCount = c;
+}
+
+bool ApplicationManager::CheckUndoCondition(ActionType action)
+{
+	return (action == DRAW_RECT || action == DRAW_SQUARE || action == DRAW_TRIANGLE || action == DRAW_CIRCLE || action == DRAW_HEXAGON || action == TO_CHANGE_DRAW_COLOR || action == TO_CHANGE_FILL_COLOR || action == TO_DELETEE || action == TO_MOVE);
+
 }
 
 image* ApplicationManager::GetRecordingList() {

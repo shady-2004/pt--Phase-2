@@ -43,8 +43,13 @@ void AddHexAction::Execute()
 
 void AddHexAction::UndoExecution()
 {
-	pManager->DeleteFigure(F);
+	AddFigureAction::UndoExecution();
 	pManager->GetOutput()->PrintMessage("Draw Hexagon Action Undone");
 }
 
+void AddHexAction::RedoExecution()
+{
+	AddFigureAction::RedoExecution();
+	pManager->GetOutput()->PrintMessage("Draw Hexagon Action Redone");
+}
 

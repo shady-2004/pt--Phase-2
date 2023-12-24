@@ -48,6 +48,12 @@ void AddRectAction::Execute()
 
 void AddRectAction::UndoExecution()
 {
-	pManager->DeleteFigure(F);
+	AddFigureAction::UndoExecution();
 	pManager->GetOutput()->PrintMessage("Draw Rectangle Action Undone");
+}
+
+void AddRectAction::RedoExecution()
+{
+	AddFigureAction::RedoExecution();
+	pManager->GetOutput()->PrintMessage("Draw Rectangle Action Redone");
 }

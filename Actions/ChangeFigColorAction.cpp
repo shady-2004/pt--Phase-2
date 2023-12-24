@@ -67,3 +67,14 @@ void ChangeFigColorAction::UndoExecution()
 	SelectedFig->ChngDrawClr(PreviousColor);
 	pManager->GetOutput()->PrintMessage("Change Draw Color Action Undone");
 }
+
+
+void ChangeFigColorAction::RedoExecution()
+{
+	if (SelectedFig == NULL)
+		return;
+	SelectedFig->ChngDrawClr(UI.DrawColor);
+	SelectedFig->SetSelected(0);
+
+	pManager->GetOutput()->PrintMessage("Change Draw Color Action Redone");
+}
