@@ -3,6 +3,8 @@
 #include"../GUI/Input.h"
 #include"../GUI/Output.h"
 #include"../ApplicationManager.h"
+#include<Windows.h>
+#include<MMSystem.h>
 AddSqrAction::AddSqrAction(ApplicationManager* pApp):AddFigureAction(pApp)
 {
 }
@@ -37,11 +39,13 @@ void AddSqrAction::Execute()
 
 	//Add the Square to the list of figures
 	pManager->AddFigure(F);
-	PlaySound(TEXT("square.wav"), NULL, SND_SYNC);
+	//display figure`s sound if the sound is enabled
+	if (pManager->getEnableSound())           // check if the sound is enabled 
+	PlaySound(TEXT("square.wav"), NULL, SND_ASYNC);
 }
 
 void AddSqrAction::UndoExecution()
 {
-	pManager->DeleteFigure(F);
+	pManager->DeleteFigure(F) ;
 	pManager->GetOutput()->PrintMessage("Draw Square Action Undone");
 }

@@ -18,5 +18,6 @@ SwitchToPlayModeAction::SwitchToPlayModeAction(ApplicationManager* pApp):Action(
 void SwitchToPlayModeAction::Execute()
 {
 	ReadActionParameters();
-	(pManager->GetOutput())->CreatePlayToolBar();  //create the play mode tool bar
+	Output* pOut = pManager->GetOutput();
+	pOut->CreatePlayToolBar();  //create the play mode tool bar
 }

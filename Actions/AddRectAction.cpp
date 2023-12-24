@@ -4,7 +4,8 @@
 
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
-
+#include<Windows.h>       // for the sound//
+#include<MMSystem.h>      // for the sound//
 AddRectAction::AddRectAction(ApplicationManager * pApp):AddFigureAction(pApp)
 {}
 
@@ -44,8 +45,9 @@ void AddRectAction::Execute()
 
 	//Add the rectangle to the list of figures
 	pManager->AddFigure(F);
-
-	PlaySound(TEXT("rectangle.wav"), NULL, SND_SYNC);
+	//display figure`s sound if the sound is enabled
+	if (pManager->getEnableSound())    // check if the sound is enabled 
+	PlaySound(TEXT("rectangle.wav"), NULL, SND_ASYNC);
 }
 
 void AddRectAction::UndoExecution()

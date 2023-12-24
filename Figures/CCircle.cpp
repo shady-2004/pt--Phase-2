@@ -21,6 +21,7 @@ void CCircle::Draw(Output* pOut) const
 	//Call Output::DrawCirc to draw a circle on the screen	
 	if(!Hidden)
 	pOut->DrawCirc(Center, PointOnRadius, FigGfxInfo, Selected);
+
 }
 
 void CCircle::Save(ofstream& OutFile) {

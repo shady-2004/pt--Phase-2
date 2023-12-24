@@ -1,7 +1,6 @@
 #include "Output.h"
 #include "Input.h"
-//#include<Windows.h>
-//#include<MMSystem.h>
+
 
 Output::Output()
 {

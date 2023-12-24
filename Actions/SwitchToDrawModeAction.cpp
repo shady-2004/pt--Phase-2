@@ -19,5 +19,6 @@ void SwitchToDrawModeAction::ReadActionParameters()
 void SwitchToDrawModeAction::Execute()      // function to execute the action
 {
 	ReadActionParameters();
-	(pManager->GetOutput())->CreateDrawToolBar();    //create the draw mode tool bar
+	Output* pOut = pManager->GetOutput();
+	pOut->CreateDrawToolBar();   //create the draw mode tool bar
 }
