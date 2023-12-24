@@ -23,9 +23,27 @@ void CFigure::ChngDrawClr(color Dclr)
 
 void CFigure::ChngFillClr(color Fclr)
 {	
-	FigGfxInfo.isFilled = UI.IsFilled;
-	if (UI.IsFilled == true)
 		FigGfxInfo.FillClr = Fclr;
+}
+
+void CFigure::ChngFillState(bool state)
+{
+	FigGfxInfo.isFilled = state;
+}
+
+color CFigure::GetDrawClr()
+{
+	return FigGfxInfo.DrawClr;
+}
+
+color CFigure::GetFillClr()
+{
+	return FigGfxInfo.FillClr;
+}
+
+bool CFigure::GetFillState()
+{
+	return FigGfxInfo.isFilled;
 }
 
 

@@ -5,7 +5,8 @@
 #include "..\GUI\Output.h"
 ChangeFigColorAction::ChangeFigColorAction(ApplicationManager* pApp):Action(pApp)
 {
-	PreviousColor = UI.DrawColor;
+	UndoColor = pManager->GetSelectedFig()->GetDrawClr();
+	Previous_UI_Draw_Color = UI.DrawColor;
 }
 
 void ChangeFigColorAction::ReadActionParameters()
@@ -43,6 +44,8 @@ void ChangeFigColorAction::ReadActionParameters()
 		pOut->PrintMessage("Selected Color : BLACK ");
 		break;
 	}
+
+	RedoColor = UI.DrawColor;
 	pOut->closeColorMenu();
 
 }
@@ -64,7 +67,11 @@ void ChangeFigColorAction::UndoExecution()
 {
 	if (SelectedFig == NULL)
 		return;
-	SelectedFig->ChngDrawClr(PreviousColor);
+
+	SelectedFig->ChngDrawClr(UndoColor);
+
+	UI.DrawColor = Previous_UI_Draw_Color;
+
 	pManager->GetOutput()->PrintMessage("Change Draw Color Action Undone");
 }
 
@@ -73,8 +80,11 @@ void ChangeFigColorAction::RedoExecution()
 {
 	if (SelectedFig == NULL)
 		return;
-	SelectedFig->ChngDrawClr(UI.DrawColor);
+
+	SelectedFig->ChngDrawClr(RedoColor);
 	SelectedFig->SetSelected(0);
+
+	UI.DrawColor = RedoColor;
 
 	pManager->GetOutput()->PrintMessage("Change Draw Color Action Redone");
 }

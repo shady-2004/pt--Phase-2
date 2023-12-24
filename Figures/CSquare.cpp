@@ -32,7 +32,7 @@ void CSquare::Load(ifstream& InFile) {
 
 bool CSquare::IsFound(int x, int y)
 {
-	if (abs(x-Center.x) <=100 && abs(y-Center.y) <=100)
+	if (abs(x-Center.x) <=75 && abs(y-Center.y) <=75)
 		return 1;
 	return 0;
 }

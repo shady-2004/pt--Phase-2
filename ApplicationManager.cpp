@@ -229,15 +229,15 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 	//if this point (x,y) does not belong to any figure return NULL
 	//Add your code here to search for a figure given a point x,y	
 	//Remember that ApplicationManager only calls functions do NOT implement it.
-
+	CFigure* foundFig = NULL;
 	for (int i = 0; i < FigCount; i++) {
 		if (FigList[i]->IsFound(x, y)) {
 			if (FigList[i]->IsHidden())
 			continue;
-			return FigList[i];
+			foundFig = FigList[i];
 		}
 	}
-	return NULL;
+	return foundFig;
 }
 
 int ApplicationManager::GetFigCount()
