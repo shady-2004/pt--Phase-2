@@ -12,6 +12,8 @@ UndoAction::UndoAction(ApplicationManager* pApp) : Action(pApp)
 }
 void UndoAction::ReadActionParameters()
 {
+	Output* pOut = pManager->GetOutput();
+	pOut->PrintMessage("Clear All");
 }
 
 void UndoAction::Execute()
@@ -22,6 +24,9 @@ void UndoAction::Execute()
 
 	if (ActionCount > MaxActionsToUndo)
 	{
+		for (int i = 0; i < ActionCount - MaxActionsToUndo; i++)
+			delete ActionList[i];
+
 		for (int i = 0; i < MaxActionsToUndo; i++)
 		{
 			ActionList[i] = ActionList[ActionCount - MaxActionsToUndo + i];

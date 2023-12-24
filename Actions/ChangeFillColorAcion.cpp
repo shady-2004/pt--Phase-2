@@ -6,11 +6,6 @@
 
 ChangeFillColorAcion::ChangeFillColorAcion(ApplicationManager* pApp):Action(pApp)
 {
-	UndoColor = pManager->GetSelectedFig()->GetFillClr();
-	UndoState = pManager->GetSelectedFig()->GetFillState();
-
-	Previous_UI_Fill_Color = UI.FillColor;
-	Previous_UI_Fill_State = UI.IsFilled;
 }
 
 
@@ -65,6 +60,11 @@ void ChangeFillColorAcion::Execute()
 	if (SelectedFig == NULL)
 		return;
 
+	UndoColor = SelectedFig->GetFillClr();
+	UndoState = SelectedFig->GetFillState();
+
+	Previous_UI_Fill_Color = UI.FillColor;
+	Previous_UI_Fill_State = UI.IsFilled;
 	ReadActionParameters();//This action needs to read some parameters first
 
 	SelectedFig->ChngFillState(true);

@@ -48,6 +48,7 @@ public:
 	void setRecording(bool);
 	
 	void DeleteFigure(CFigure* pFig);
+	void DeleteAllFigures();
 
 
 	void SaveAll(ofstream& OutFile);

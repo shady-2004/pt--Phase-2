@@ -64,7 +64,7 @@ ActionType Input::GetUserAction() const
 			case SELECT:return TO_SELECT;
 			case CHANGE_DRAW_COLOR: return TO_CHANGE_DRAW_COLOR;
 			case CHANGE_FILL_COLOR: return TO_CHANGE_FILL_COLOR;
-			case DELETE_FIGURE: return TO_DELETEE;
+			case DELETE_FIGURE: return TO_DELETE;
 			case MOVE: return TO_MOVE;
 			case UNDO: return TO_UNDO;
 			case REDO: return TO_REDO;

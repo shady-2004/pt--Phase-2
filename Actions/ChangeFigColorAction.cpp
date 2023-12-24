@@ -5,8 +5,6 @@
 #include "..\GUI\Output.h"
 ChangeFigColorAction::ChangeFigColorAction(ApplicationManager* pApp):Action(pApp)
 {
-	UndoColor = pManager->GetSelectedFig()->GetDrawClr();
-	Previous_UI_Draw_Color = UI.DrawColor;
 }
 
 void ChangeFigColorAction::ReadActionParameters()
@@ -57,6 +55,8 @@ void ChangeFigColorAction::Execute()
 	if (SelectedFig == NULL)
 		return;
 
+	UndoColor = SelectedFig->GetDrawClr();
+	Previous_UI_Draw_Color = UI.DrawColor;
 	ReadActionParameters();//This action needs to read some parameters first
 
 	SelectedFig->ChngDrawClr(UI.DrawColor);

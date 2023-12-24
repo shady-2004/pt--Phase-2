@@ -22,6 +22,7 @@
 #include "Actions/DeleteFigureAction.h"
 #include "Actions\MoveFigureAction.h"
 #include "Actions/RedoAction.h"
+#include "Actions/ClearAllAction.h"
 
 
 //Constructor
@@ -125,10 +126,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case TO_REDO:
 		pAct = new RedoAction(this);
 		break;
+	case TO_CLEAR_ALL:
+		pAct = new ClearAllAction(this);
+		break;
 	case TO_MOVE:
 		pAct = new MoveFigureAction(this);
 		break;
-	case TO_DELETEE:
+	case TO_DELETE:
 		pAct = new DeleteFigureAction(this);
 		break;
 	case TO_EXIT:
@@ -197,7 +201,7 @@ void ApplicationManager::SetActionCount(int c)
 
 bool ApplicationManager::CheckUndoCondition(ActionType action)
 {
-	return (action == DRAW_RECT || action == DRAW_SQUARE || action == DRAW_TRIANGLE || action == DRAW_CIRCLE || action == DRAW_HEXAGON || action == TO_CHANGE_DRAW_COLOR || action == TO_CHANGE_FILL_COLOR || action == TO_DELETEE || action == TO_MOVE);
+	return (action == DRAW_RECT || action == DRAW_SQUARE || action == DRAW_TRIANGLE || action == DRAW_CIRCLE || action == DRAW_HEXAGON || action == TO_CHANGE_DRAW_COLOR || action == TO_CHANGE_FILL_COLOR || action == TO_DELETE || action == TO_MOVE);
 
 }
 
@@ -263,6 +267,12 @@ void ApplicationManager::DeleteFigure(CFigure* pFig)
 			FigCount--;
 		}
 
+}
+void ApplicationManager::DeleteAllFigures()
+{
+	for (int i = 0; i < FigCount; i++)
+		FigList[i] = NULL;
+	FigCount = 0;
 }
 //==================================================================================//
 //							Interface Management Functions							//
