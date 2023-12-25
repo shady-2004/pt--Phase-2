@@ -22,21 +22,22 @@ void SelectAction::Execute()
 {
 	ReadActionParameters();
 
-	if (pManager->GetSelectedFig() != NULL)			//This means that there is a figure previously selected
-
+	if (SelectedFig == NULL)					//User clicks on an empty area
 	{
-		if (pManager->GetSelectedFig() == SelectedFig)	//Case 1: User clicks on the same selected figure
+		pManager->GetOutput()->PrintMessage("A click on an empty area");
+		return;
+	}
+
+
+	if (pManager->GetSelectedFig() != NULL)			//This means that there is a figure previously selected
+	{
+		if (SelectedFig == pManager->GetSelectedFig())	//Case 1: User clicks on the same selected figure
 		{
 			SelectedFig->SetSelected(0);
 			pManager->SetSelectedFig(NULL);
+			pManager->GetOutput()->PrintMessage("Figure unselected");
 		}
-
-			
-		else if (SelectedFig == NULL)					//Case 2: User clicks on an empty area
-			return;	
-
-
-		else											//Case 3: User clicks on a different figure
+		else											//Case 2: User clicks on a different figure
 		{
 			pManager->GetSelectedFig()->SetSelected(0);
 			SelectedFig->SetSelected(1);
@@ -46,12 +47,9 @@ void SelectAction::Execute()
 	}
 	else												// This means that this is the first time the user selects a figure
 		{
-		if (SelectedFig != NULL)
-		{
 			SelectedFig->SetSelected(1);
 			pManager->SetSelectedFig(SelectedFig);
 			SelectedFig->PrintInfo(pManager->GetOutput());
-		}
 		}
 
 }

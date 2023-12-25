@@ -69,8 +69,7 @@ public:
 
 	// -- Undo & Redo Functions
 	Action** GetActionList();		// Getter for Action list
-	int GetActionCount();			// Getter for Action count
-	void SetActionCount(int c);
+	int& GetActionCount();			// Getter for Action count
 	bool CheckUndoCondition(ActionType action); // checks whether the action is an undo/redo action
 
 	// -- Select Functions

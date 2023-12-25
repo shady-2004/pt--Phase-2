@@ -189,15 +189,11 @@ Action** ApplicationManager::GetActionList()
 	return ActionList;
 }
 
-int ApplicationManager::GetActionCount()
+int& ApplicationManager::GetActionCount()
 {
 	return ActionCount;
 }
 
-void ApplicationManager::SetActionCount(int c)
-{
-	ActionCount = c;
-}
 
 bool ApplicationManager::CheckUndoCondition(ActionType action)
 {

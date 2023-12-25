@@ -24,14 +24,14 @@ void ClearAllAction::Execute()
 
 	// Deleting undo & redo history
 	Action** ActionList = pManager->GetActionList();
-	int ActionCount = pManager->GetActionCount();
+	int &ActionCount = pManager->GetActionCount();
 
 	for (int i = 0; i < ActionCount; i++)
 	{
 		delete ActionList[i];
 		ActionList[i] = NULL;
 	}
-	pManager->SetActionCount(0);
+	ActionCount = 0;
 	UndoAction::UndoCount = 0;
 	RedoAction::RedoCount = 0;
 

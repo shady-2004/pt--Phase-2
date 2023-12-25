@@ -20,7 +20,7 @@ void UndoAction::Execute()
 {
 
 	Action** ActionList = pManager->GetActionList();
-	int ActionCount = pManager->GetActionCount();
+	int &ActionCount = pManager->GetActionCount();
 
 	if (ActionCount > MaxActionsToUndo)
 	{
@@ -32,7 +32,6 @@ void UndoAction::Execute()
 			ActionList[i] = ActionList[ActionCount - MaxActionsToUndo + i];
 		}
 		ActionCount = MaxActionsToUndo;
-		pManager->SetActionCount(ActionCount);
 	}
 
 	if (ActionCount == 0)
@@ -41,8 +40,6 @@ void UndoAction::Execute()
 		return;
 	}
 	ActionList[ActionCount - 1]->UndoExecution();
-	//ActionsToUndo[ActionsToUndoCount - 1] = NULL;
 	ActionCount--;
-	pManager->SetActionCount(ActionCount);
 	UndoCount++;
 }

@@ -29,10 +29,9 @@ void RedoAction::Execute()
 
 
 	Action** ActionList = pManager->GetActionList();
-	int ActionCount = pManager->GetActionCount();
+	int &ActionCount = pManager->GetActionCount();
 
 	ActionList[ActionCount]->RedoExecution();
 	ActionCount++;
-	pManager->SetActionCount(ActionCount);
 
 }
