@@ -12,8 +12,6 @@ UndoAction::UndoAction(ApplicationManager* pApp) : Action(pApp)
 }
 void UndoAction::ReadActionParameters()
 {
-	Output* pOut = pManager->GetOutput();
-	pOut->PrintMessage("Clear All");
 }
 
 void UndoAction::Execute()
