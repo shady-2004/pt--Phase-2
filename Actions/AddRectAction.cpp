@@ -38,6 +38,12 @@ void AddRectAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
+
+	if (P1.y <= UI.ToolBarHeight || P1.y > UI.height - UI.StatusBarHeight|| P2.y <= UI.ToolBarHeight || P2.y > UI.height - UI.StatusBarHeight)//Draw Validation
+	{
+		pManager->GetOutput()->PrintMessage("Error :Can't draw here ");
+		return;
+	}
 	
 	//Create a rectangle with the parameters read from the user
 	F=new CRectangle(P1, P2, RectGfxInfo, (pManager->GetFigCount())+1);

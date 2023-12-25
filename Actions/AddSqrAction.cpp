@@ -16,7 +16,7 @@ void AddSqrAction::ReadActionParameters()
 	pOut->PrintMessage("New Square: Click at Square center");
 
 	//Read center of square
-	pIn->GetPointClicked(P1.x, P1.y);
+	pIn->GetPointClicked(Center.x, Center.y);
 
 
 	//get drawing, filling colors and pen width from the interface
@@ -32,8 +32,14 @@ void AddSqrAction::Execute()
 	//This action needs to read some parameters first
 	ReadActionParameters();
 
+	if (Center.y - 75 < UI.ToolBarHeight || Center.y + 75 > UI.height - UI.StatusBarHeight) //Draw Validation
+	{
+		pManager->GetOutput()->PrintMessage("Error :Can't draw here ");
+			return;
+	}
+
 	//Create a Square with the parameters read from the user
-	F = new CSquare(P1,  SqrGfxInfo, (pManager->GetFigCount()) + 1);
+	F = new CSquare(Center,  SqrGfxInfo, (pManager->GetFigCount()) + 1);
 
 	//Add the Square to the list of figures
 	pManager->AddFigure(F);

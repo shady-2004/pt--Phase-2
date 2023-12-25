@@ -4,7 +4,7 @@
 class AddSqrAction:public AddFigureAction
 {
 	private:
-		Point P1; //Square Center
+		Point Center; //Square Center
 		GfxInfo SqrGfxInfo;
 	public:
 		AddSqrAction(ApplicationManager* pApp);
