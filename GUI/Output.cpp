@@ -273,9 +273,6 @@ void Output::DrawSqr(const Point& P1, GfxInfo SqrGfxInfo, bool selected) const
 		style = FRAME;
 
 
-	if (P1.y - Dim < UI.ToolBarHeight)//Validation 
-		Dim -= (UI.ToolBarHeight - (P1.y - Dim));
-
 		int x[4] = { P1.x - Dim,P1.x + Dim, P1.x + Dim,P1.x - Dim };//x cord.
 
 		int y[4] = { P1.y + Dim,P1.y + Dim, P1.y - Dim,P1.y - Dim };//y cord.
