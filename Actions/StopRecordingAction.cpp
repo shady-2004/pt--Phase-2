@@ -7,18 +7,25 @@ StopRecordingAction::StopRecordingAction(ApplicationManager* pApp) : Action(pApp
 }
 
 void StopRecordingAction::ReadActionParameters() {
-	Output* pOut = pManager->GetOutput();
-	pManager->setRecording(false);
-	pOut->PrintMessage("Recording stopped now playing!");
 }
 
 void StopRecordingAction::Execute() {
-	ReadActionParameters();
 	Output* pOut = pManager->GetOutput();
 	int count = pManager->GetRecordCount();
-	image* recordList = pManager->GetRecordingList();
-	for (int i = 0; i <= count; i++) {
-		pOut->redrawWindow(recordList[i]);
+	Action** recordList = pManager->GetRecordingList();
+
+	if (!count) {
+		pOut->PrintMessage("You need to start recording first!");
+		return;
+	}
+
+	pManager->setRecording(false);
+	pOut->PrintMessage("Stopped Recording");
+
+	for (int i = 0; i < count; i++) {
+		pOut->ClearDrawArea();
+		recordList[i]->RedoExecution();
+		pManager->UpdateInterface();
 		Sleep(1000);
 	}
 	pOut->PrintMessage("Done");

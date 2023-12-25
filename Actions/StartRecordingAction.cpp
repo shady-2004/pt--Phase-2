@@ -23,10 +23,8 @@ void StartRecordingAction::Execute() {
 }
 
 void StartRecordingAction::Record() {
-	image* recordList = pManager->GetRecordingList();
-	image img;
+	/*Action** recordList = pManager->GetRecordingList();
 	Output* pOut = pManager->GetOutput();
 	RecordCount = pManager->GetRecordCount();
-	pOut->screenshotWindow(img);
-	recordList[RecordCount++] = img;
+	recordList[RecordCount++] = act;*/
 }

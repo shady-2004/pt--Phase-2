@@ -149,11 +149,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct->Execute();//Execute
 	}
 
-	if (isRecording && ActType != TO_START_RECORDING && ActType != TO_STOP_RECORDING && ActType != TO_PLAY_RECORDING && ActType != TO_SAVE_GRAPH && ActType != TO_LOAD_GRAPH && ActType != TO_PLAY) {
-		StartRecordingAction Record(this);
-		if (RecordCount < 20) {
-			Record.Record();
-			RecordCount++;
+	if (isRecording && ActType != TO_START_RECORDING && ActType != TO_STOP_RECORDING && ActType != TO_PLAY_RECORDING && ActType != TO_SAVE_GRAPH && ActType != TO_LOAD_GRAPH && ActType != TO_PLAY)
+	{
+		if (RecordCount < 20) 
+		{
+			RecordingList[RecordCount++] = pAct;
 		}
 		else {
 			StopRecordingAction StopRecord(this);
@@ -173,7 +173,13 @@ int ApplicationManager::GetActionCount()
 	return ActionCount;
 }
 
-image* ApplicationManager::GetRecordingList() {
+bool ApplicationManager::CheckUndoCondition(ActionType action)
+{
+	return (action == DRAW_RECT || action == DRAW_SQUARE || action == DRAW_TRIANGLE || action == DRAW_CIRCLE || action == DRAW_HEXAGON || action == TO_CHANGE_DRAW_COLOR || action == TO_CHANGE_FILL_COLOR || action == TO_DELETEE || action == TO_MOVE);
+
+}
+
+Action** ApplicationManager::GetRecordingList() {
 	return RecordingList;
 }
 
@@ -332,5 +338,4 @@ ApplicationManager::~ApplicationManager()
 			delete ActionList[i];
 	delete pIn;
 	delete pOut;
-	
 }

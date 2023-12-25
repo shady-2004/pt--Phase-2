@@ -21,9 +21,9 @@ private:
 	Action* ActionList[MaxActions];		//List of all actions (Array of pointers)
 	int ActionCount;					//Actual number of actions
 	
-	bool isRecording;
-	image RecordingList[20];
+	Action* RecordingList[20];
 	int RecordCount;
+	bool isRecording;
 	//Pointers to Input and Output classes
 	Input* pIn;
 	Output* pOut;
@@ -39,8 +39,9 @@ public:
 	Action** GetActionList();		// Getter for Action list
 	int GetActionCount();			// Getter for Action count
 	
-	image* GetRecordingList();
+	Action** GetRecordingList();
 	int GetRecordCount();
+	void setRecording(bool);
 	
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList

@@ -26,7 +26,10 @@ void LoadAction::Execute() {
 	int num;
 	ifstream InFile;
 	InFile.open("Saved Data/" + filename + ".txt");
-	if (InFile.fail()) { pManager->GetOutput()->PrintMessage("No such file to load. Enter a valid file!"); return; }
+	if (InFile.fail()){
+		pManager->GetOutput()->PrintMessage("No such file to load. Enter a valid file!"); 
+		return;
+	}
 	InFile >> &UI.DrawColor >> &UI.FillColor >> num;
 	while (num--) {
 		string shape;
