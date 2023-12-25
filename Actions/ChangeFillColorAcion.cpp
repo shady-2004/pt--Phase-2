@@ -6,8 +6,6 @@
 
 ChangeFillColorAcion::ChangeFillColorAcion(ApplicationManager* pApp):Action(pApp)
 {
-	PreviousColor = UI.FillColor;
-	PreviousState = UI.IsFilled;
 }
 
 
@@ -48,6 +46,8 @@ void ChangeFillColorAcion::ReadActionParameters()
 		pOut->PrintMessage("Selected Color : BLACK ");
 		break;
 	}
+
+	RedoColor = UI.FillColor;
 	pOut->closeColorMenu();
 
 }
@@ -60,8 +60,14 @@ void ChangeFillColorAcion::Execute()
 	if (SelectedFig == NULL)
 		return;
 
+	UndoColor = SelectedFig->GetFillClr();
+	UndoState = SelectedFig->GetFillState();
+
+	Previous_UI_Fill_Color = UI.FillColor;
+	Previous_UI_Fill_State = UI.IsFilled;
 	ReadActionParameters();//This action needs to read some parameters first
 
+	SelectedFig->ChngFillState(true);
 	SelectedFig->ChngFillClr(UI.FillColor);
 
 }
@@ -70,8 +76,28 @@ void ChangeFillColorAcion::UndoExecution()
 {
 	if (SelectedFig == NULL)
 		return;
-	UI.IsFilled = PreviousState;
-	SelectedFig->ChngFillClr(PreviousColor);
+
+
+	SelectedFig->ChngFillState(UndoState);
+	SelectedFig->ChngFillClr(UndoColor);
+
+	UI.IsFilled = Previous_UI_Fill_State;
+	UI.FillColor = Previous_UI_Fill_Color;
+	
 	pManager->GetOutput()->PrintMessage("Change Fill Color Action Undone");
 	
+}
+
+
+void ChangeFillColorAcion::RedoExecution()
+{
+	if (SelectedFig == NULL)
+		return;
+
+	SelectedFig->ChngFillState(true);
+	SelectedFig->ChngFillClr(RedoColor);
+
+	UI.IsFilled = true;
+	UI.FillColor = RedoColor;
+	pManager->GetOutput()->PrintMessage("Change Fill Color Action Redone");
 }

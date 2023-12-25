@@ -17,5 +17,7 @@ class AddSqrAction:public AddFigureAction
 
 		virtual void UndoExecution();
 
+		virtual void RedoExecution();
+
 };
 

@@ -19,5 +19,7 @@ class AddHexAction :
 		virtual void Execute();
 
 		virtual void UndoExecution();
+
+		virtual void RedoExecution();
 };
 

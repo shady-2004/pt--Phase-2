@@ -2,12 +2,8 @@
 #include "Action.h"
 class UndoAction : public Action
 {
-	enum {MaxActionsToUndo = 5};
+	enum { MaxActionsToUndo = 5 };
 
-private:
-	
-	Action* ActionsToUndo[MaxActionsToUndo];
-	int ActionsToUndoCount;
 
 public:
 	static int UndoCount;
@@ -17,6 +13,3 @@ public:
 
 	virtual void Execute();
 };
-
-
-

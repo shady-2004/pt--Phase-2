@@ -51,6 +51,12 @@ void AddTriAction::Execute()
 
 void AddTriAction::UndoExecution()
 {
-	pManager->DeleteFigure(F);
+	AddFigureAction::UndoExecution();
 	pManager->GetOutput()->PrintMessage("Draw Triangle Action Undone");
+}
+
+void AddTriAction::RedoExecution()
+{
+	AddFigureAction::RedoExecution();
+	pManager->GetOutput()->PrintMessage("Draw Triangle Action Redone");
 }

@@ -9,44 +9,40 @@
 int UndoAction::UndoCount = 0;
 UndoAction::UndoAction(ApplicationManager* pApp) : Action(pApp)
 {
-	UndoCount++;
-	ActionsToUndoCount = 0;
-
-
-	for (int i = 0; i < MaxActionsToUndo; i++)
-		ActionsToUndo[i] = NULL;
+}
+void UndoAction::ReadActionParameters()
+{
+	Output* pOut = pManager->GetOutput();
+	pOut->PrintMessage("Clear All");
 }
 
 void UndoAction::Execute()
 {
+
 	Action** ActionList = pManager->GetActionList();
 	int ActionCount = pManager->GetActionCount();
 
-	for (int i = 0; i < ActionCount; i++)
+	if (ActionCount > MaxActionsToUndo)
 	{
-		if (dynamic_cast<AddFigureAction*>(ActionList[i]) || dynamic_cast<DeleteFigureAction*>(ActionList[i]) || dynamic_cast<ChangeFigColorAction*>(ActionList[i]) || dynamic_cast<ChangeFillColorAcion*>(ActionList[i]) || dynamic_cast<MoveFigureAction*>(ActionList[i]))
+		for (int i = 0; i < ActionCount - MaxActionsToUndo; i++)
+			delete ActionList[i];
+
+		for (int i = 0; i < MaxActionsToUndo; i++)
 		{
-			ActionsToUndoCount++;
-
-			if (ActionsToUndoCount > MaxActionsToUndo)
-			{
-				for (int i = 0; i < MaxActionsToUndo - 1; i++)			// Shifting The array of actions one to the left to make space for the new selected action
-				{
-					ActionsToUndo[i] = ActionsToUndo[i + 1];
-				}
-
-				ActionsToUndoCount = MaxActionsToUndo;
-			}
-			ActionsToUndo[ActionsToUndoCount - 1] = ActionList[i];
+			ActionList[i] = ActionList[ActionCount - MaxActionsToUndo + i];
 		}
+		ActionCount = MaxActionsToUndo;
+		pManager->SetActionCount(ActionCount);
 	}
-	if (ActionsToUndoCount == 0)
-		return;
-	if (UndoCount > ActionsToUndoCount)
-		return;
-	ActionsToUndo[ActionsToUndoCount - UndoCount]->UndoExecution();
 
-}
-void UndoAction::ReadActionParameters()
-{
+	if (ActionCount == 0)
+	{
+		pManager->GetOutput()->PrintMessage("No more Actions to Undo!");
+		return;
+	}
+	ActionList[ActionCount - 1]->UndoExecution();
+	//ActionsToUndo[ActionsToUndoCount - 1] = NULL;
+	ActionCount--;
+	pManager->SetActionCount(ActionCount);
+	UndoCount++;
 }

@@ -23,12 +23,40 @@ void CFigure::ChngDrawClr(color Dclr)
 
 void CFigure::ChngFillClr(color Fclr)
 {	
-	FigGfxInfo.isFilled = UI.IsFilled;
-	if (UI.IsFilled == true)
-		FigGfxInfo.FillClr = Fclr; 
-	
+		FigGfxInfo.FillClr = Fclr;
 }
 
+void CFigure::ChngFillState(bool state)
+{
+	FigGfxInfo.isFilled = state;
+}
+
+color CFigure::GetDrawClr()
+{
+	return FigGfxInfo.DrawClr;
+}
+
+color CFigure::GetFillClr()
+{
+	return FigGfxInfo.FillClr;
+}
+
+bool CFigure::GetFillState()
+{
+	return FigGfxInfo.isFilled;
+}
+
+
+string CFigure::convertFillColorToString() const {
+
+	if(!FigGfxInfo.isFilled) return"NO FILL";
+	if (FigGfxInfo.FillClr == BLUE) return "BLUE";
+	else if (FigGfxInfo.FillClr == GREEN) return "GREEN";
+	else if (FigGfxInfo.FillClr == RED) return "RED";
+	else if (FigGfxInfo.FillClr == YELLOW) return "YELLOW";
+	else if (FigGfxInfo.FillClr == ORANGE) return "ORANGE";
+    if (FigGfxInfo.FillClr == BLACK) return "BLACK";
+}
 void CFigure::SetHidden(bool x)
 {
 	Hidden = x;
@@ -39,28 +67,9 @@ bool CFigure::IsHidden()
 	return Hidden;
 }
 
-DrawMenuItem CFigure::getShapeType()
+string CFigure::getShapeType()
 {
 	return ShapeType;
-}
-
-int CFigure::getShapeFillColor()
-{
-	if (FigGfxInfo.FillClr == RED)
-		return COLOR_RED;
-	if (FigGfxInfo.FillClr == BLUE)
-		return COLOR_BLUE;
-	if (FigGfxInfo.FillClr == GREEN)
-		return COLOR_GREEN;
-	if (FigGfxInfo.FillClr == ORANGE)
-		return COLOR_ORANGE;
-	if (FigGfxInfo.FillClr == YELLOW)
-		return COLOR_YELLOW;
-	if (FigGfxInfo.FillClr == BLACK)
-		return COLOR_BLACK;
-	else
-		return 10;//Refers to Unfilled
-
 }
 
 CFigure::~CFigure()

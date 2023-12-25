@@ -11,7 +11,7 @@ protected:
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
 	bool Hidden;
-	DrawMenuItem ShapeType;
+	string ShapeType;
 
 public:
 	CFigure();
@@ -24,6 +24,10 @@ public:
 	
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
+	void ChngFillState(bool state);
+	color GetDrawClr();
+	color GetFillClr();
+	bool GetFillState();
 
 	virtual void PrintInfo(Output* pOut) = 0 ;	//print all figure info on the status bar
 
@@ -37,14 +41,14 @@ public:
 
 	virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
 	virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
-
+	string convertFillColorToString() const;
 	void SetHidden(bool x);
 	bool IsHidden();
-	DrawMenuItem getShapeType();
-	int getShapeFillColor();
+	string getShapeType();
 
 	virtual void MoveFigure(int, int) = 0;
 	virtual void ReturnFigure() {};
 
 	virtual ~CFigure() = 0;
+
 };

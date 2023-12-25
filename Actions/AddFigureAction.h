@@ -9,6 +9,8 @@ protected:
 public:
 	AddFigureAction(ApplicationManager* pApp);
 
-	
+	virtual void UndoExecution();
+
+	virtual void RedoExecution();
 };
 

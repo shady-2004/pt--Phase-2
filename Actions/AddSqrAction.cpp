@@ -41,6 +41,12 @@ void AddSqrAction::Execute()
 
 void AddSqrAction::UndoExecution()
 {
-	pManager->DeleteFigure(F);
+	AddFigureAction::UndoExecution();
 	pManager->GetOutput()->PrintMessage("Draw Square Action Undone");
+}
+
+void AddSqrAction::RedoExecution()
+{
+	AddFigureAction::RedoExecution();
+	pManager->GetOutput()->PrintMessage("Draw Square Action Redone");
 }

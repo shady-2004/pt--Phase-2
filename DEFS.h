@@ -25,7 +25,7 @@ enum ActionType //The actions supported (you can add more if needed)
 	CHOOSE_COLOR_YELLOW,	// choose yellow color
 	CHOOSE_COLOR_BLACK,		// choose black color
 
-	TO_DELETEE,				// delete selected figure
+	TO_DELETE,				// delete selected figure
 	TO_MOVE,				// move selected figure
 	TO_UNDO,				// undo the last performed operation
 	TO_REDO,				// redo the undone operation

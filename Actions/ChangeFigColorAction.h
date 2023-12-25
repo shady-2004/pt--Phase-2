@@ -3,7 +3,9 @@
 class ChangeFigColorAction :
 	public Action
 {
-	color PreviousColor;
+	color UndoColor;
+	color RedoColor;
+	color Previous_UI_Draw_Color;
 	CFigure* SelectedFig;
 
 public:
@@ -14,5 +16,7 @@ public:
 	virtual void Execute();
 
 	virtual void UndoExecution();
+
+	virtual void RedoExecution();
 };
 

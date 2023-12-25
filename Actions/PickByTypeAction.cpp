@@ -12,61 +12,60 @@ PickByTypeAction::PickByTypeAction(ApplicationManager* pApp) :Action(pApp)
 	NoOfWrongPicks = 0;
 	pManager->resetHidden();
 	pManager->UpdateInterface();
+	restart = false;
 }
 
 void PickByTypeAction::ReadActionParameters()
 {
 	Input* pIn = pManager->GetInput();
 	pIn->GetPointClicked(p.x, p.y);
+	if ((p.y<=UI.ToolBarHeight)) {
+		switch (p.x / (UI.MenuItemWidth + 10)) {
+		case FIG_TYPE:
+			pManager->ExecuteAction(PICK_FIG_TYPE);
+			break;
+		case FIG_FILL_COLOR:
+			pManager->ExecuteAction(PICK_FIG_FILL_COLOR);
+			break;
+		case FIG_TYPE_AND_FILL_COLOR:
+			pManager->ExecuteAction(PICK_FIG_TYPE_AND_FILL_COLOR);
+			break;
+		case SWITCH_DRAW:
+			pManager->ExecuteAction(TO_DRAW);
+			break;
+
+		}
+		restart = true;
+	}
 }
 void PickByTypeAction::Execute() {
 	Output* pOut = pManager->GetOutput();
-	/*Input* pIn = pManager->GetInput();*/
 		srand(time(0));//// This lines to random a shape
-	Figure = pManager->getFigType((rand() % pManager->GetFigCount()));//Random a shape idx and get its Type to make sure it will no random a shape not drawn
+		FigureType = pManager->getFigType((rand() % pManager->GetFigCount()));//Random a shape idx and get its Type to make sure it will no random a shape not drawn
 		
-	switch (Figure) {
-	case ITM_RECT:
-		pOut->PrintMessage("Pick By figure type : Rectangle");
-		break;
-	case ITM_SQUARE:
-		pOut->PrintMessage("Pick By figure type : Square");
-		break;
-	case ITM_TRIANGLE:
-		pOut->PrintMessage("Pick By figure type : Triangle");
-		break;
-	case ITM_HEXAGON:
-		pOut->PrintMessage("Pick By figure type : Hexagon");
-		break;
-	case ITM_CIRCLE:
-		pOut->PrintMessage("Pick By figure type : Circle");
-		break;
-	}
-
+	pOut->PrintMessage("Pick By figure type : "+ FigureType);
 	////////////////////////////////////
-	TypeCount = pManager->GetTypeCount(Figure);
+	TypeCount = pManager->GetTypeCount(FigureType);
 
-	while (1) {
+	do {
 		ReadActionParameters();
+		if (restart)return;//Close Current game if i choose another
 		choosedFig = pManager->GetFigure(p.x, p.y);
 
 		if (choosedFig != NULL) {
-			if (Figure == (choosedFig->getShapeType())) {
+			if (FigureType == (choosedFig->getShapeType())) {
 				NoOfCorrectPicks++;
 			}
 			else
 				NoOfWrongPicks++;
 
-			choosedFig->SetHidden(1);
+			choosedFig->SetHidden(1);//Hide the Shape Picked
 			pOut->ClearDrawArea();
 			pManager->UpdateInterface();
-			pOut->PrintMessage(" Correct Picks : " + to_string(NoOfCorrectPicks) + "   ""Wrong Picks : " + to_string(NoOfWrongPicks));
+			pOut->PrintMessage("Pick By figure type : " + FigureType+ "  Correct Picks : " + to_string(NoOfCorrectPicks) + "   ""Wrong Picks : " + to_string(NoOfWrongPicks));
 		}
 
-
-		if (NoOfCorrectPicks == TypeCount)
-			break;
-	}
+	} while (NoOfCorrectPicks != TypeCount);
 	pOut->PrintMessage( "Final Grade:  Correct Picks : " + to_string(NoOfCorrectPicks) + "   ""Wrong Picks : " + to_string(NoOfWrongPicks));
 }
 	

@@ -1,15 +1,16 @@
 #include "CHexagon.h"
 #include <fstream>
 
+
 CHexagon::CHexagon() {
-	ShapeType = ITM_HEXAGON;
+	ShapeType = "Hexagon";
 }
 
 CHexagon::CHexagon(Point P, GfxInfo FigureGfxInfo, int ID):CFigure(FigureGfxInfo)
 {
 	id = ID;
 	Center = P;
-	ShapeType = ITM_HEXAGON;
+	ShapeType = "Hexagon";
 }
 
 void CHexagon::Draw(Output* pOut) const

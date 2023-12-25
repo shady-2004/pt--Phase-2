@@ -21,6 +21,8 @@
 #include "Actions/UndoAction.h"
 #include "Actions/DeleteFigureAction.h"
 #include "Actions\MoveFigureAction.h"
+#include "Actions/RedoAction.h"
+#include "Actions/ClearAllAction.h"
 
 
 //Constructor
@@ -121,10 +123,16 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case TO_UNDO:
 		pAct = new UndoAction(this);
 		break;
+	case TO_REDO:
+		pAct = new RedoAction(this);
+		break;
+	case TO_CLEAR_ALL:
+		pAct = new ClearAllAction(this);
+		break;
 	case TO_MOVE:
 		pAct = new MoveFigureAction(this);
 		break;
-	case TO_DELETEE:
+	case TO_DELETE:
 		pAct = new DeleteFigureAction(this);
 		break;
 	case TO_EXIT:
@@ -140,13 +148,20 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	//Execute the created action
 	if (pAct != NULL)
 	{
-		ActionList[ActionCount] = pAct;
-		ActionCount++;
-		if (ActType != TO_UNDO)
+		pAct->Execute();//Execute
+
+		if (CheckUndoCondition(ActType))
 		{
 			UndoAction::UndoCount = 0;
+			RedoAction::RedoCount = 0;
+			ActionList[ActionCount] = pAct;
+			ActionCount++;
 		}
-		pAct->Execute();//Execute
+		else
+		{
+			delete pAct;
+			pAct = NULL;
+		}
 	}
 
 	if (isRecording && ActType != TO_START_RECORDING && ActType != TO_STOP_RECORDING && ActType != TO_PLAY_RECORDING && ActType != TO_SAVE_GRAPH && ActType != TO_LOAD_GRAPH && ActType != TO_PLAY)
@@ -155,7 +170,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		{
 			RecordingList[RecordCount++] = pAct;
 		}
-		else {
+		else 
+		{
 			StopRecordingAction StopRecord(this);
 			StopRecord.Execute();
 			RecordCount = 0;
@@ -163,6 +179,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	}
 }
 
+//===============================================================//
+//						Undo & Redo Functions					//
+//=============================================================//
 Action** ApplicationManager::GetActionList()
 {
 	return ActionList;
@@ -171,6 +190,11 @@ Action** ApplicationManager::GetActionList()
 int ApplicationManager::GetActionCount()
 {
 	return ActionCount;
+}
+
+void ApplicationManager::SetActionCount(int c)
+{
+	ActionCount = c;
 }
 
 bool ApplicationManager::CheckUndoCondition(ActionType action)
@@ -207,15 +231,15 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 	//if this point (x,y) does not belong to any figure return NULL
 	//Add your code here to search for a figure given a point x,y	
 	//Remember that ApplicationManager only calls functions do NOT implement it.
-
+	CFigure* foundFig = NULL;
 	for (int i = 0; i < FigCount; i++) {
 		if (FigList[i]->IsFound(x, y)) {
 			if (FigList[i]->IsHidden())
 			continue;
-			return FigList[i];
+			foundFig = FigList[i];
 		}
 	}
-	return NULL;
+	return foundFig;
 }
 
 int ApplicationManager::GetFigCount()
@@ -242,6 +266,12 @@ void ApplicationManager::DeleteFigure(CFigure* pFig)
 		}
 
 }
+void ApplicationManager::DeleteAllFigures()
+{
+	for (int i = 0; i < FigCount; i++)
+		FigList[i] = NULL;
+	FigCount = 0;
+}
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
@@ -263,31 +293,40 @@ void ApplicationManager::resetHidden()
 }
 
 
-int ApplicationManager::getFigFillCount(int x)
+int ApplicationManager::getFigFillCount(string x) //return number of Shapes with that fill color
 {
 	int count=0;
 	for (int i = 0; i < FigCount; i++) {
-		if ((FigList[i]->getShapeFillColor()) == x)
+		if ((FigList[i]->convertFillColorToString()) == x)
 			count++;
 	}
 	return count;
 }
 
-int ApplicationManager::getFigFillColor(int I)
+int ApplicationManager::GetTypeCount(string P)// //return number of Shapes with that Type
 {
-	return FigList[I]->getShapeFillColor();
+	int count = 0;
+	for (int i = 0; i < FigCount; i++)
+		if (FigList[i]->getShapeType() == P)
+			count++;
+	return count;
 }
 
-DrawMenuItem ApplicationManager::getFigType(int I)
+string ApplicationManager::getFigFillColor(int I)//return randomed shape Fill color
+{
+	return FigList[I]->convertFillColorToString();
+}
+
+string ApplicationManager::getFigType(int I)//return the randomed shape Type
 {
 	return FigList[I]->getShapeType();
 }
 
-int ApplicationManager::getFigCountByFillAndType(DrawMenuItem Type, int fill)
+int ApplicationManager::getFigCountByFillAndType(string Type, string fill)
 {
 	int count=0;
 	for (int i = 0; i < FigCount; i++) {
-		if ((FigList[i]->getShapeType() == Type) && (FigList[i]->getShapeFillColor() == fill))
+		if ((FigList[i]->getShapeType() == Type) && (FigList[i]->convertFillColorToString() == fill))
 			count++;
 	}
 	return count;
@@ -316,14 +355,6 @@ void ApplicationManager::SaveAll(ofstream &OutFile) {
 		FigList[i]->Save(OutFile);
 }
 
-int ApplicationManager::GetTypeCount(DrawMenuItem P)
-{
-	int count=0;
-	for (int i = 0; i < FigCount; i++)
-		if (FigList[i]->getShapeType() == P)
-			count++;
-	return count;
-}
 
 
 //Destructor

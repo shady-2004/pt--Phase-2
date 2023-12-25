@@ -10,7 +10,7 @@
 //Main class that manages everything in the application.
 class ApplicationManager
 {
-	enum { MaxFigCount = 200, MaxActions = 100 };	//Max no of figures
+	enum { MaxFigCount = 200, MaxActions = 100 };	//Max no of figures , Max no of Actions
 
 private:
 	int FigCount;		//Actual number of figures
@@ -36,8 +36,6 @@ public:
 	//Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;
 	void ExecuteAction(ActionType); //Creates an action and executes it
-	Action** GetActionList();		// Getter for Action list
-	int GetActionCount();			// Getter for Action count
 	
 	Action** GetRecordingList();
 	int GetRecordCount();
@@ -48,30 +46,37 @@ public:
 	CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
 	int GetFigCount();						// Getter for figure count
 
-	void SetSelectedFig(CFigure*);			// Setter for Selected Figure
-	CFigure* GetSelectedFig();				// Getter for Selected Figure
-
 	void setRecording(bool);
 	
 	void DeleteFigure(CFigure* pFig);
+	void DeleteAllFigures();
 
 
 	void SaveAll(ofstream& OutFile);
 
-	int GetTypeCount(DrawMenuItem P);
+	int GetTypeCount(string P);
 
 	// -- Interface Management Functions
 	Input* GetInput() const; //Return pointer to the input
 	Output* GetOutput() const; //Return pointer to the output
 	void UpdateInterface() const;	//Redraws all the drawing window
 
-
+	//Play mode Functions///
 	void resetHidden();
-	int getFigFillCount(int x);
-	int getFigFillColor(int I);
-	DrawMenuItem getFigType(int I);
-	int getFigCountByFillAndType(DrawMenuItem Type, int fill);
+	int getFigFillCount(string x);
+	string getFigFillColor(int I);
+	string getFigType(int I);
+	int getFigCountByFillAndType(string Type, string fill);
 
+	// -- Undo & Redo Functions
+	Action** GetActionList();		// Getter for Action list
+	int GetActionCount();			// Getter for Action count
+	void SetActionCount(int c);
+	bool CheckUndoCondition(ActionType action); // checks whether the action is an undo/redo action
+
+	// -- Select Functions
+	void SetSelectedFig(CFigure*);			// Setter for Selected Figure
+	CFigure* GetSelectedFig();				// Getter for Selected Figure
 
 };
 #endif

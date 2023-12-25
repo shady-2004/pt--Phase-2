@@ -231,16 +231,11 @@ bool Output::getCrntFillStatus() const
 //								Figures Drawing Functions								//
 //======================================================================================//
 
-void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const
+void Output::DrawRect(const Point P1,const Point P2, GfxInfo RectGfxInfo, bool selected) const
 {
+	int shiftingC1 = 0;//Shift corners for validation
+	int shiftingC2 = 0;
 
-	while (!(P1.y >= UI.ToolBarHeight && P1.y < UI.height - UI.StatusBarHeight && P2.y >= UI.ToolBarHeight && P2.y < UI.height - UI.StatusBarHeight))
-	{
-		PrintMessage("Can't draw here!! Enter two valid points:");
-		pWind->WaitMouseClick(P1.x, P1.y);
-		pWind->WaitMouseClick(P2.x, P2.y);
-
-	}
 	color DrawingClr;
 	if (selected)
 		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
@@ -256,15 +251,20 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 	}
 	else
 		style = FRAME;
+	{//Draw Validation
+		if (P1.y < UI.ToolBarHeight)
+			shiftingC1 = (UI.ToolBarHeight - P1.y);
 
-
-	pWind->DrawRectangle(P1.x, P1.y, P2.x, P2.y, style);
+		if (P2.y < UI.ToolBarHeight)
+			shiftingC2 = (UI.ToolBarHeight - P2.y);
+	}
+	pWind->DrawRectangle(P1.x, P1.y+ shiftingC1, P2.x, P2.y+ shiftingC2, style);
 
 }
 
 void Output::DrawSqr(const Point& P1, GfxInfo SqrGfxInfo, bool selected) const
 {
-
+	int Dim = 75;
 	
 	color DrawingClr;
 	if (selected)
@@ -282,15 +282,23 @@ void Output::DrawSqr(const Point& P1, GfxInfo SqrGfxInfo, bool selected) const
 	else
 		style = FRAME;
 
-	int p[4] = { P1.x - 100,P1.x + 100, P1.x + 100,P1.x - 100 };//x cord.
 
-	int a[4] = { P1.y + 100,P1.y + 100, P1.y - 100,P1.y - 100 };//y cord.
-	pWind->DrawPolygon(p, a, 4, style);
+	if (P1.y - Dim < UI.ToolBarHeight)//Validation 
+		Dim -= (UI.ToolBarHeight - (P1.y - Dim));
+
+		int x[4] = { P1.x - Dim,P1.x + Dim, P1.x + Dim,P1.x - Dim };//x cord.
+
+		int y[4] = { P1.y + Dim,P1.y + Dim, P1.y - Dim,P1.y - Dim };//y cord.
+
+	pWind->DrawPolygon(x, y, 4, style);
 
 }
 
 void Output::DrawTri(const Point& P1, const Point& P2, const Point& P3, GfxInfo TriGfxInfo, bool selected) const
 {
+	int shiftingV1 = 0;//for shifting vertex if it is out the draw area
+	int shiftingV2 = 0;
+	int shiftingV3 = 0;
 
 	color DrawingClr;
 	if (selected)
@@ -307,14 +315,30 @@ void Output::DrawTri(const Point& P1, const Point& P2, const Point& P3, GfxInfo 
 	}
 	else
 		style = FRAME;
+	//Validation
+	{
+		if (P1.y < UI.ToolBarHeight) {
+			shiftingV1 = (UI.ToolBarHeight - P1.y);
+		}
+		if (P2.y < UI.ToolBarHeight) {
+			shiftingV2 = (UI.ToolBarHeight - P2.y);
+		}
+		if (P3.y < UI.ToolBarHeight) {
+			shiftingV3 = (UI.ToolBarHeight - P3.y);
+		}
+	}
 
-	pWind->DrawTriangle(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y, style);
+	pWind->DrawTriangle(P1.x, P1.y+ shiftingV1, P2.x, P2.y+ shiftingV2, P3.x, P3.y+ shiftingV3, style);
 }
 
 
 
 void Output::DrawHex(const Point& P1, GfxInfo HexGfxInfo, bool selected) const
 {
+	
+	int dim3 = 100;//length hexagon side
+	int dim1 = (dim3/2)*sqrt(3);//distance from center to any vertex
+	int dim2 = dim3/2;//perp. distance from center to sides
 	
 	color DrawingClr;
 	if (selected)
@@ -332,10 +356,17 @@ void Output::DrawHex(const Point& P1, GfxInfo HexGfxInfo, bool selected) const
 	else
 		style = FRAME;
 
-	int p[6] = { P1.x,       P1.x + 87,   P1.x + 87,    P1.x ,      P1.x - 87 ,  P1.x - 87 };//x cord.
+		if (P1.y - dim3 < UI.ToolBarHeight) {//Validation
+			dim3 -= (UI.ToolBarHeight - (P1.y - dim3));
+			dim1 = (dim3 / 2.0) * sqrt(3);
+			dim2 = dim3 / 2;
+		}
 
-	int a[6] = { P1.y + 100, P1.y + 50,   P1.y - 50 ,   P1.y - 100 ,P1.y - 50 ,  P1.y + 50 };//y cord.
-	pWind->DrawPolygon(p, a, 6, style);
+	int x[6] = { P1.x,       P1.x + dim1,   P1.x + dim1,    P1.x ,      P1.x - dim1 ,  P1.x - dim1 };//x cord.
+
+	int y[6] = { P1.y + dim3, P1.y + dim2,   P1.y - dim2 ,   P1.y - dim3 ,P1.y - dim2 ,  P1.y + dim2 };//y cord.
+
+	pWind->DrawPolygon(x, y ,6, style);
 }
 
 void Output::DrawCirc(const Point& P1, const Point& P2, GfxInfo CircGfxInfo, bool selected) const
@@ -358,8 +389,9 @@ void Output::DrawCirc(const Point& P1, const Point& P2, GfxInfo CircGfxInfo, boo
 	else
 		style = FRAME;
 
-
-
+	if (P1.y - Radius < UI.ToolBarHeight)//Validation
+		Radius -= (UI.ToolBarHeight - (P1.y - Radius));
+		
 	pWind->DrawCircle(P1.x, P1.y, Radius, style);
 }
 

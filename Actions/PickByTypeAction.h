@@ -5,12 +5,13 @@
 class PickByTypeAction :
     public Action
 {
-    Point p;
+    Point p;//
     int NoOfCorrectPicks;
     int NoOfWrongPicks;
-    DrawMenuItem Figure;
+    string FigureType;//Fgure Type To Pick
     CFigure* choosedFig;
-    int TypeCount;//No of this Type in Application manager array;
+    int TypeCount;//No of this Type in Application manager Figlist;
+    bool restart;//Condition for Is the game closed while playing or not
 
 
 public:

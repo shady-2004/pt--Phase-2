@@ -3,9 +3,13 @@
 class ChangeFillColorAcion :
     public Action
 {
-	color PreviousColor;
+	color UndoColor;
+	color Previous_UI_Fill_Color;
+	bool UndoState;
+	bool Previous_UI_Fill_State;
+	color RedoColor;
 	CFigure* SelectedFig;
-	bool PreviousState;
+	
 public:
 	ChangeFillColorAcion(ApplicationManager* pApp);
 
@@ -14,5 +18,7 @@ public:
 	virtual void Execute();
 
 	virtual void UndoExecution();
+
+	virtual void RedoExecution();
 };
 
