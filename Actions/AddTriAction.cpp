@@ -42,6 +42,13 @@ void AddTriAction::Execute()
 	//This action needs to read some parameters first
 	ReadActionParameters();
 
+	if (P1.y <= UI.ToolBarHeight || P1.y > UI.height - UI.StatusBarHeight || P2.y <= UI.ToolBarHeight || P2.y > UI.height - UI.StatusBarHeight || P3.y <= UI.ToolBarHeight || P3.y > UI.height - UI.StatusBarHeight) //Draw validation
+	{
+		pManager->GetOutput()->PrintMessage("Error :Can't draw here ");
+		return;
+	}
+	
+
 	//Create a Triangle with the parameters read from the user
 	F = new CTriangle(P1, P2,P3, TriGfxInfo, (pManager->GetFigCount()) + 1);
 

@@ -34,6 +34,12 @@ void AddHexAction::Execute()
 	//This action needs to read some parameters first
 	ReadActionParameters();
 
+	if (Center.y - 86 < UI.ToolBarHeight || Center.y + 86 > UI.height - UI.StatusBarHeight) //Draw Validation
+	{
+		pManager->GetOutput()->PrintMessage("Error :Can't draw here ");
+		return;
+	}
+
 	//Create a hexagon with the parameters read from the user
 	F = new CHexagon(Center, HexGfxInfo, (pManager->GetFigCount()) + 1);
 
