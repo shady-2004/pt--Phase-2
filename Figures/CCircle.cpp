@@ -59,7 +59,7 @@ int CCircle::CalcRadius()
 }
 
 
-void CCircle::MoveFigure(int a, int b)  // a function that modify the center of the selected figure to the new center 
+void CCircle::Move(int a, int b,Output* pOut, Input* pIn)  // a function that modify the center of the selected figure to the new center 
 {
 	PreviousCenter = Center;
 	PreviousPointOnRadius = PointOnRadius;
@@ -73,6 +73,15 @@ void CCircle::MoveFigure(int a, int b)  // a function that modify the center of 
 	// set the old radius to the new radius
 	PointOnRadius.x = Center.x;
 	PointOnRadius.y = Center.y + Radius;
+	////////Move validation to check the circle will move to right position//////
+	if (Center.y - Radius <= UI.ToolBarHeight || Center.y + Radius >= UI.height - UI.StatusBarHeight || Center.x - Radius < 0 || Center.x + Radius > UI.width)
+	{
+		pOut->PrintMessage("Error! Can't move the circle here!! ");
+		Center = PreviousCenter;
+	    PointOnRadius = PreviousPointOnRadius;
+	}
+	else
+		pOut->ClearStatusBar();
 }
 
 void CCircle::ReturnFigure()

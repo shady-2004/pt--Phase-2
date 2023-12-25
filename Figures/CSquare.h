@@ -18,7 +18,7 @@ public:
 	virtual void PrintInfo(Output* pOut);
 
 
-	virtual void MoveFigure(int, int);
+	virtual void Move(int, int, Output*, Input*);
 	virtual void ReturnFigure();
 	virtual ~CSquare();
 };

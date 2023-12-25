@@ -43,7 +43,7 @@ public:
 	DrawMenuItem getShapeType();
 	int getShapeFillColor();
 
-	virtual void MoveFigure(int, int) = 0;
+	virtual void Move(int, int ,Output*,Input*) = 0;
 	virtual void ReturnFigure() {};
 
 	virtual ~CFigure() = 0;

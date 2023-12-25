@@ -19,7 +19,7 @@ public:
 	virtual bool IsFound(int x, int y);
 
 
-	virtual void MoveFigure(int, int);
+	virtual void Move(int, int, Output*, Input*);
 	virtual void ReturnFigure();
 	virtual ~CRectangle();
 };
