@@ -20,7 +20,7 @@ bool DeleteFigureAction::Execute()
 
 	ReadActionParameters();
 	
-	pManager->GetSelectedFig()->SetSelected(0);
+	temp->SetSelected(0);
 	pManager->SetSelectedFig(NULL);
 	pManager->DeleteFigure(temp);
 

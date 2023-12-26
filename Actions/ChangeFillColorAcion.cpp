@@ -70,6 +70,9 @@ bool ChangeFillColorAcion::Execute()
 	SelectedFig->ChngFillState(true);
 	SelectedFig->ChngFillClr(UI.FillColor);
 
+	SelectedFig->SetSelected(0);
+	pManager->SetSelectedFig(NULL);
+
 	return 1;
 
 }

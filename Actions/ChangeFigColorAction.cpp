@@ -61,6 +61,7 @@ bool ChangeFigColorAction::Execute()
 
 	SelectedFig->ChngDrawClr(UI.DrawColor);
 	SelectedFig->SetSelected(0);
+	pManager->SetSelectedFig(NULL);
 
 	return 1;
 }

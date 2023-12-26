@@ -25,6 +25,10 @@ bool MoveFigureAction::Execute()
 	ReadActionParameters();
 	
 	SelectedFig->MoveFigure(x, y);
+	pManager->GetOutput()->PrintMessage("Figure Moved");
+
+	SelectedFig->SetSelected(0);
+	pManager->SetSelectedFig(NULL);
 
 	return 1;
 }
