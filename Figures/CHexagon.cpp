@@ -74,11 +74,20 @@ void CHexagon::PrintInfo(Output* pOut)
 }
 
 
-void CHexagon::MoveFigure(int a, int b)  // a function that modify the center of the selected figure to the new center 
+bool CHexagon::MoveFigure(int a, int b , Output* pOut)  // a function that modify the center of the selected figure to the new center 
 {
 	PreviousCenter = Center;
 	Center.x = a;
 	Center.y = b;
+
+	////////Move validation to check the hexagon will move to right position//////
+	if (Center.y - 100 <= UI.ToolBarHeight || Center.y + 100 >= UI.height - UI.StatusBarHeight || Center.x - 87 < 0 || Center.x + 87 > UI.width)
+	{
+		pOut->PrintMessage("Error! Can't move the hexagon here!! ");
+		Center = PreviousCenter;
+		return 0;
+	}
+	return 1;
 
 }
 void CHexagon::ReturnFigure()

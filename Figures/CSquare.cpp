@@ -45,11 +45,20 @@ void CSquare::PrintInfo(Output* pOut)
 }
 
 
-void CSquare::MoveFigure(int a, int b)  // a function that modify the center of the selected figure to the new center 
+bool CSquare::MoveFigure(int a, int b , Output* pOut)  // a function that modify the center of the selected figure to the new center 
 {
 	PreviousCenter = Center;
 	Center.x = a;
 	Center.y = b;
+
+	////////Move validation to check the square will move to right position//////
+	if (Center.y - 100 <= UI.ToolBarHeight || Center.y + 100 >= UI.height - UI.StatusBarHeight || Center.x - 100 < 0 || Center.x + 100 > UI.width)
+	{
+		pOut->PrintMessage("Error! Can't move the square here!! ");
+		Center = PreviousCenter;
+		return 0;
+	}
+	return 1;
 }
 
 void CSquare::ReturnFigure()

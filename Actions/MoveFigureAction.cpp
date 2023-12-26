@@ -27,7 +27,9 @@ bool MoveFigureAction::Execute()
 	}
 	ReadActionParameters();
 	
-	SelectedFig->MoveFigure(x, y);
+	if (!SelectedFig->MoveFigure(x, y, pOut))
+		return 0;
+
 	pManager->GetOutput()->PrintMessage("Figure Moved");
 
 	SelectedFig->SetSelected(0);
@@ -45,7 +47,7 @@ void MoveFigureAction::UndoExecution()
 
 void MoveFigureAction::RedoExecution()
 {
-	SelectedFig->MoveFigure(x, y);
+	SelectedFig->MoveFigure(x, y , pManager->GetOutput());
 
 	pManager->GetOutput()->PrintMessage("Move Figure Action Redone");
 }

@@ -65,7 +65,7 @@ void CTriangle::PrintInfo(Output* pOut)
 
 }
 
-void CTriangle::MoveFigure(int a, int b)  // a function that modify the center of the selected figure to the new center 
+bool CTriangle::MoveFigure(int a, int b , Output* pOut)  // a function that modify the center of the selected figure to the new center 
 {
 	PreviousVertex1 = vertex1;
 	PreviousVertex2 = vertex2;
@@ -107,6 +107,17 @@ void CTriangle::MoveFigure(int a, int b)  // a function that modify the center o
 		MaxY = vertex3.y;
 	else if (vertex3.y < MinY)
 		MinY = vertex3.y;
+
+	////////Move validation to check the triangle will move to right position//////
+	if (MinY <= UI.ToolBarHeight || MaxY >= UI.height - UI.StatusBarHeight || MinX < 0 || MaxX > UI.width)
+	{
+		pOut->PrintMessage("Error! Can't move the triangle here!! ");
+		vertex1 = PreviousVertex1;
+		vertex2 = PreviousVertex2;
+		vertex3 = PreviousVertex3;
+		return 0;
+	}
+	return 1;
 }
 
 void CTriangle::ReturnFigure()

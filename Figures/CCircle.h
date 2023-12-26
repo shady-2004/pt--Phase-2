@@ -21,7 +21,7 @@ public:
     int CalcRadius();
 
 
-    virtual void MoveFigure(int, int);
+    virtual bool MoveFigure(int, int , Output*);
     virtual void ReturnFigure();
 
     virtual ~CCircle();

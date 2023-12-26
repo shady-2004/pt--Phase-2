@@ -20,7 +20,7 @@ public:
     virtual void PrintInfo(Output* pOut);
 
 
-    virtual void MoveFigure(int, int);
+    virtual bool MoveFigure(int, int, Output*);
 
     virtual void ReturnFigure();
 

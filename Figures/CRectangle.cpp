@@ -46,7 +46,7 @@ bool CRectangle::IsFound(int x, int y)
 	return 0;
 }
 
-void CRectangle::MoveFigure(int a, int b)  // a function that modify the center of the selected figure to the new center 
+bool CRectangle::MoveFigure(int a, int b , Output* pOut)  // a function that modify the center of the selected figure to the new center 
 {
 	PreviousCorner1 = Corner1;
 	PreviousCorner2 = Corner2;
@@ -63,6 +63,16 @@ void CRectangle::MoveFigure(int a, int b)  // a function that modify the center 
 	Corner2.x = a + length / 2.0;
 	Corner2.y = b + width / 2.0;
 
+	////////Move validation to check the rectangle will move to right position/////
+	if (!(Corner1.y >= UI.ToolBarHeight && Corner1.y < UI.height - UI.StatusBarHeight && Corner2.y >= UI.ToolBarHeight && Corner2.y < UI.height - UI.StatusBarHeight && Corner1.x >= 0 && Corner2.x >= 0 && Corner1.x <= UI.width && Corner2.x <= UI.width))
+	{
+		pOut->PrintMessage("Error! Can't move the rectangle here!!");
+		Corner1 = PreviousCorner1;
+		Corner2 = PreviousCorner2;
+		return 0;
+	}
+
+	return 1;
 }
 
 void CRectangle::ReturnFigure()

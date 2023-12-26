@@ -40,7 +40,7 @@ public:
 	bool IsHidden();
 	string getShapeType();
 
-	virtual void MoveFigure(int, int) = 0;
+	virtual bool MoveFigure(int, int , Output*) = 0;
 	virtual void ReturnFigure() {};			//needed for undo operation
 
 	virtual ~CFigure() = 0;
