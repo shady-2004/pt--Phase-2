@@ -67,8 +67,6 @@ bool ChangeFigColorAction::Execute()
 
 void ChangeFigColorAction::UndoExecution()
 {
-	if (SelectedFig == NULL)
-		return;
 
 	SelectedFig->ChngDrawClr(UndoColor);
 
@@ -80,8 +78,6 @@ void ChangeFigColorAction::UndoExecution()
 
 void ChangeFigColorAction::RedoExecution()
 {
-	if (SelectedFig == NULL)
-		return;
 
 	SelectedFig->ChngDrawClr(RedoColor);
 	SelectedFig->SetSelected(0);

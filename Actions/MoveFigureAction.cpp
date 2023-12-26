@@ -31,8 +31,6 @@ bool MoveFigureAction::Execute()
 
 void MoveFigureAction::UndoExecution()
 {
-	if (SelectedFig == NULL)
-		return;
 	SelectedFig->ReturnFigure();
 
 	pManager->GetOutput()->PrintMessage("Move Figure Action Undone");
@@ -40,8 +38,6 @@ void MoveFigureAction::UndoExecution()
 
 void MoveFigureAction::RedoExecution()
 {
-	if (SelectedFig == NULL)
-		return;
 	SelectedFig->MoveFigure(x, y);
 
 	pManager->GetOutput()->PrintMessage("Move Figure Action Redone");

@@ -76,9 +76,6 @@ bool ChangeFillColorAcion::Execute()
 
 void ChangeFillColorAcion::UndoExecution()
 {
-	if (SelectedFig == NULL)
-		return;
-
 
 	SelectedFig->ChngFillState(UndoState);
 	SelectedFig->ChngFillClr(UndoColor);
@@ -93,8 +90,6 @@ void ChangeFillColorAcion::UndoExecution()
 
 void ChangeFillColorAcion::RedoExecution()
 {
-	if (SelectedFig == NULL)
-		return;
 
 	SelectedFig->ChngFillState(true);
 	SelectedFig->ChngFillClr(RedoColor);
