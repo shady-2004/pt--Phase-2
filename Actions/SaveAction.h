@@ -3,7 +3,7 @@
 class SaveAction : public Action
 {
 private:
-	string filename; //file name of the save file
+	string filename; //file name of the saved file
 public:
 	SaveAction(ApplicationManager* pApp);
 

@@ -48,7 +48,7 @@ bool CCircle::IsFound(int x, int y)
 
 void CCircle::PrintInfo(Output* pOut)
 {
-	pOut->PrintMessage("Figure Type : Circle        Figure ID : " + to_string(id) + "      Center : " + to_string(Center.x) + "," + to_string(Center.y) + "   Radius =  " + to_string(CalcRadius()));
+	pOut->PrintMessage("Figure Type : Circle     Figure ID : " + to_string(id) + "     Center : " + to_string(Center.x) + "," + to_string(Center.y) + "     Radius = " + to_string(CalcRadius()));
 
 }
 

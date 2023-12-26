@@ -15,8 +15,6 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 void CFigure::SetSelected(bool s)
 {	Selected = s; }
 
-//bool CFigure::IsSelected() const
-//{	return Selected; }
 
 void CFigure::ChngDrawClr(color Dclr)
 {	FigGfxInfo.DrawClr = Dclr; }

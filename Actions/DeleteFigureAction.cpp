@@ -19,8 +19,6 @@ bool DeleteFigureAction::Execute()
 	if (temp == NULL)
 	{
 		pOut->PrintMessage(" Error : Please select a figure first ");
-		Sleep(1000);
-		pOut->ClearStatusBar();
 		return 0;
 	}
 	ReadActionParameters();

@@ -30,21 +30,21 @@ bool ClearAllAction::Execute()
 
 
 	// Deleting undo & redo history
-	Action** ActionList = pManager->GetActionList();
-	int &ActionCount = pManager->GetActionCount();
+	Action** UndoList = pManager->GetUndoList();
+	int &ActionsToUndoCount = pManager->GetActionsToUndoCount();
 
-	for (int i = 0; i < ActionCount; i++)
+	for (int i = 0; i < ActionsToUndoCount; i++)
 	{
-		delete ActionList[i];
-		ActionList[i] = NULL;
+		delete UndoList[i];
+		UndoList[i] = NULL;
 	}
-	ActionCount = 0;
+	ActionsToUndoCount = 0;
 	UndoAction::UndoCount = 0;
 	RedoAction::RedoCount = 0;
 
 	// Deleting Record history
-	image* recordList = pManager->GetRecordingList();
-	int RecordCount = pManager->GetRecordCount();
+	int &RecordCount = pManager->GetRecordCount();
+	RecordCount = 0;
 
 
 	return 1;

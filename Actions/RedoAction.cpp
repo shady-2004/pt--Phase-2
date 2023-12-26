@@ -7,7 +7,7 @@
 #include "MoveFigureAction.h"
 #include "AddCircAction.h"
 
-int RedoAction::RedoCount = 0;
+int RedoAction::RedoCount = 0;	// Initialized to zero
 RedoAction::RedoAction(ApplicationManager* pApp) : Action(pApp)
 {
 }
@@ -15,7 +15,7 @@ RedoAction::RedoAction(ApplicationManager* pApp) : Action(pApp)
 bool RedoAction::Execute()
 {
 	RedoCount++;
-	if (RedoCount > UndoAction::UndoCount)
+	if (RedoCount > UndoAction::UndoCount)	// Checks if there are any more actions to redo
 	{
 		pManager->GetOutput()->PrintMessage("No more Actions to redo!");
 		RedoCount--;
@@ -23,10 +23,12 @@ bool RedoAction::Execute()
 	}
 
 
-	Action** ActionList = pManager->GetActionList();
-	int &ActionCount = pManager->GetActionCount();
+	Action** UndoList = pManager->GetUndoList();
+	int &ActionsToUndoCount = pManager->GetActionsToUndoCount();
 
-	ActionList[ActionCount]->RedoExecution();
-	ActionCount++;
+	UndoList[ActionsToUndoCount]->RedoExecution();
+	ActionsToUndoCount++;
 
+
+	return 1;
 }

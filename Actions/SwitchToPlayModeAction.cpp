@@ -10,14 +10,13 @@ SwitchToPlayModeAction::SwitchToPlayModeAction(ApplicationManager* pApp):Action(
  void SwitchToPlayModeAction::ReadActionParameters() 
  {
 	 Output* pOut = pManager->GetOutput();
-	 Input* pIn = pManager->GetInput();
-	   //print a message of the selected action
 	 pOut->PrintMessage("Switch to play mode: Click anywhere");
 
  }
  bool SwitchToPlayModeAction::Execute()
 {
-	if (pManager->GetFigCount() == 0) {
+	if (pManager->GetFigCount() == 0)
+	{
 		(pManager->GetOutput())->PrintMessage("Draw Figures before switching to play mode: Click anywhere");
 		return 0;
 	}

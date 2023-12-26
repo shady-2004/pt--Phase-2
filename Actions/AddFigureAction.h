@@ -4,7 +4,7 @@
 class AddFigureAction : public Action
 {
 protected:
-	CFigure* F;
+	CFigure* F;	// Figure to be drawn
 
 public:
 	AddFigureAction(ApplicationManager* pApp);

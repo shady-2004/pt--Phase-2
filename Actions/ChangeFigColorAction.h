@@ -3,10 +3,10 @@
 class ChangeFigColorAction :
 	public Action
 {
-	color UndoColor;
-	color RedoColor;
-	color Previous_UI_Draw_Color;
-	CFigure* SelectedFig;
+	color UndoColor;	// Fig Color before changes
+	color RedoColor;	// Fig Color after changes
+	color Previous_UI_Draw_Color;	//Previous UI.Draw Color
+	CFigure* SelectedFig;	
 
 public:
 	ChangeFigColorAction(ApplicationManager* pApp);

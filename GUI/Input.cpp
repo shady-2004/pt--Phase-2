@@ -96,7 +96,8 @@ ActionType Input::GetUserAction() const
 		///TODO:
 		//perform checks similar to Draw mode checks above
 		//and return the correspoding action
-		if (y >= 0 && y < UI.ToolBarHeight) {
+		if (y >= 0 && y < UI.ToolBarHeight) 
+		{
 
 			int ClickedItemOrder = (x / (UI.MenuItemWidth + 10));
 			switch (ClickedItemOrder) {

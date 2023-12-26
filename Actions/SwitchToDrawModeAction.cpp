@@ -10,13 +10,11 @@ SwitchToDrawModeAction::SwitchToDrawModeAction(ApplicationManager* pApp):Action(
 void SwitchToDrawModeAction::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
-	Input* pIn = pManager->GetInput();
 	pManager->resetHidden();
-	//print a massage on the status bar
 	pOut->PrintMessage("Switch to draw mode: Click anywhere");
 }
 
-bool SwitchToDrawModeAction::Execute()      // function to execute the action
+bool SwitchToDrawModeAction::Execute() 
 {
 	ReadActionParameters();
 	(pManager->GetOutput())->CreateDrawToolBar();    //create the draw mode tool bar

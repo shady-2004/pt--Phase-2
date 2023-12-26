@@ -4,7 +4,7 @@
 class DeleteFigureAction : public Action
 {
 
-	CFigure* temp;
+	CFigure* temp;	//A pointer to store the figure temporarily for the undo action
 public:
 	DeleteFigureAction(ApplicationManager* pApp);
 

@@ -11,6 +11,6 @@ public:
 
 	virtual bool Execute();
 
-	void Record();
+	void Record();	//Records each action
 };
 

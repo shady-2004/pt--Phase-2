@@ -14,27 +14,29 @@ UndoAction::UndoAction(ApplicationManager* pApp) : Action(pApp)
 bool UndoAction::Execute()
 {
 
-	Action** ActionList = pManager->GetActionList();
-	int &ActionCount = pManager->GetActionCount();
+	Action** UndoList = pManager->GetUndoList();
+	int &ActionsToUndoCount = pManager->GetActionsToUndoCount();
 
-	if (ActionCount > MaxActionsToUndo)
+	if (ActionsToUndoCount > MaxActionsToUndo)
 	{
-		for (int i = 0; i < ActionCount - MaxActionsToUndo; i++)
-			delete ActionList[i];
+		for (int i = 0; i < ActionsToUndoCount - MaxActionsToUndo; i++)
+			delete UndoList[i];
 
 		for (int i = 0; i < MaxActionsToUndo; i++)
 		{
-			ActionList[i] = ActionList[ActionCount - MaxActionsToUndo + i];
+			UndoList[i] = UndoList[ActionsToUndoCount - MaxActionsToUndo + i];
 		}
-		ActionCount = MaxActionsToUndo;
+		ActionsToUndoCount = MaxActionsToUndo;
 	}
 
-	if (ActionCount == 0)
+	if (ActionsToUndoCount == 0)
 	{
 		pManager->GetOutput()->PrintMessage("No more Actions to Undo!");
 		return 0;
 	}
-	ActionList[ActionCount - 1]->UndoExecution();
-	ActionCount--;
+	UndoList[ActionsToUndoCount - 1]->UndoExecution();
+	ActionsToUndoCount--;
 	UndoCount++;
+
+	return 1;
 }

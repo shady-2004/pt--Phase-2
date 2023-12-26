@@ -69,9 +69,9 @@ bool ChangeFigColorAction::Execute()
 void ChangeFigColorAction::UndoExecution()
 {
 
-	SelectedFig->ChngDrawClr(UndoColor);
+	SelectedFig->ChngDrawClr(UndoColor);	// Changes the fig draw color to the previous color
 
-	UI.DrawColor = Previous_UI_Draw_Color;
+	UI.DrawColor = Previous_UI_Draw_Color;	// Changes the UI.draw color to the previous one
 
 	pManager->GetOutput()->PrintMessage("Change Draw Color Action Undone");
 }
@@ -80,10 +80,10 @@ void ChangeFigColorAction::UndoExecution()
 void ChangeFigColorAction::RedoExecution()
 {
 
-	SelectedFig->ChngDrawClr(RedoColor);
+	SelectedFig->ChngDrawClr(RedoColor);	// Reverts the fig draw color
 	SelectedFig->SetSelected(0);
 
-	UI.DrawColor = RedoColor;
+	UI.DrawColor = RedoColor;				// Reverts the UI.draw color
 
 	pManager->GetOutput()->PrintMessage("Change Draw Color Action Redone");
 }

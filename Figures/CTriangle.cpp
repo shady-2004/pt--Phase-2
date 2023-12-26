@@ -61,7 +61,7 @@ bool CTriangle::IsFound(int x, int y)
 
 void CTriangle::PrintInfo(Output* pOut)
 {
-	pOut->PrintMessage("Figure Type : Triangle         Figure ID : " + to_string(id) + "         Vertex1 : " + to_string(vertex1.x) + "," + to_string(vertex1.y) + "   Vertex2: " + to_string(vertex2.x) + "," + to_string(vertex2.y) + "   Vertex3: " + to_string(vertex3.x) + "," + to_string(vertex3.y));
+	pOut->PrintMessage("Figure Type : Triangle     Figure ID : " + to_string(id) + "     Vertex1 : " + to_string(vertex1.x) + "," + to_string(vertex1.y) + "     Vertex2: " + to_string(vertex2.x) + "," + to_string(vertex2.y) + "     Vertex3: " + to_string(vertex3.x) + "," + to_string(vertex3.y));
 
 }
 

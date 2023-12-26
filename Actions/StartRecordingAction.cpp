@@ -7,12 +7,13 @@ StartRecordingAction::StartRecordingAction(ApplicationManager* pApp) : Action(pA
 
 void StartRecordingAction::ReadActionParameters() {
 	Output* pOut = pManager->GetOutput();
-	pManager->setRecording(true);
 	pOut->PrintMessage("Started Recording!");
 }
 
-bool StartRecordingAction::Execute() {
+bool StartRecordingAction::Execute() 
+{
 	ReadActionParameters();
+	pManager->setRecording(true);
 	Output* pOut = pManager->GetOutput();
 	int FigCount = pManager->GetFigCount();
 	if (!RecordCount || FigCount) {
@@ -22,11 +23,12 @@ bool StartRecordingAction::Execute() {
 	}
 }
 
-void StartRecordingAction::Record() {
+void StartRecordingAction::Record() 
+{
 	image* recordList = pManager->GetRecordingList();
 	image img;
 	Output* pOut = pManager->GetOutput();
 	RecordCount = pManager->GetRecordCount();
-	pOut->screenshotWindow(img);
-	recordList[RecordCount++] = img;
+	pOut->screenshotWindow(img);	
+	recordList[RecordCount++] = img;	// Adds the screenshotted image to the record list
 }

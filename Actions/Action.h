@@ -22,7 +22,11 @@ public:
 	
 	//Execute action (code depends on action type)
 	virtual bool Execute() =0;
+
+	//Undo previous action
 	virtual void UndoExecution() {};
+
+	//Redo the undone action
 	virtual void RedoExecution() {};
 
 };

@@ -6,7 +6,7 @@ class UndoAction : public Action
 
 
 public:
-	static int UndoCount;
+	static int UndoCount;	//Number of undo clicks in a row
 	UndoAction(ApplicationManager* pApp);
 
 	void ReadActionParameters() {};

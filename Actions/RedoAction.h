@@ -4,7 +4,7 @@
 class RedoAction : public Action
 {
 public:
-	static int RedoCount;
+	static int RedoCount;	// Number of redo clicks in a row
 	RedoAction(ApplicationManager* pApp);
 
 	void ReadActionParameters() {};

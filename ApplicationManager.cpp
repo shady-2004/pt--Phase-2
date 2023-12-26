@@ -34,17 +34,18 @@ ApplicationManager::ApplicationManager()
 	pIn = pOut->CreateInput();
 	
 	FigCount = 0;
-	ActionCount = 0;
+	ActionsToUndoCount = 0;
 	RecordCount = 0;
 	SelectedFig = NULL;
 	isRecording = false;
+	EnableSound = true;
 		
 	//Create an array of figure pointers and set them to NULL		
 	for(int i=0; i<MaxFigCount; i++)
 		FigList[i] = NULL;	
 	for (int i = 0; i < MaxActions; i++)
-		ActionList[i] = NULL;
-	EnableSound = true;
+		UndoList[i] = NULL;
+	
 }
 
 //==================================================================================//
@@ -144,7 +145,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new PlayRecordingAction(this);
 		break;
 	case TO_EXIT:
-		///create ExitAction here
 		pAct = new ExitAction(this);
 		break;
 	case STATUS:	//a click on the status bar ==> no action
@@ -158,48 +158,49 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	{
 		bool result = pAct->Execute();//Execute
 
-		if (CheckUndoCondition(ActType) && result)
+		if (CheckUndoCondition(ActType) && result)	// Checks if the action can be undone and if it was executed
 		{
-			UndoAction::UndoCount = 0;
-			RedoAction::RedoCount = 0;
-			ActionList[ActionCount] = pAct;
-			ActionCount++;
+			UndoAction::UndoCount = 0;			// resets the undocount
+			RedoAction::RedoCount = 0;			// resets the redocount
+			UndoList[ActionsToUndoCount] = pAct; // adds the action to the undolist
+			ActionsToUndoCount++;
 		}
 		else
 		{
-			delete pAct;
+			delete pAct;				// deleting the actions that are not included in the undo list
 			pAct = NULL;
+		}
+
+		if (CheckRecordCondition(ActType) && result)
+		{
+			if (RecordCount < 20)	//Checks if there are less than 20 actions in the record list
+			{
+				StartRecordingAction Record(this);
+				Record.Record();		// records the action in the recording list
+				RecordCount++;
+			}
+			else						// stops the recoring when it exceeds 20 actions
+			{
+				StopRecordingAction StopRecord(this);
+				StopRecord.Execute();
+			}
 		}
 	}
 
-	if (isRecording && ActType != TO_START_RECORDING && ActType != TO_STOP_RECORDING && ActType != TO_PLAY_RECORDING && ActType != TO_SAVE_GRAPH && ActType != TO_LOAD_GRAPH && ActType != TO_PLAY)
-	{
-		StartRecordingAction Record(this);
-		if (RecordCount < 20) 
-		{
-			Record.Record();
-			RecordCount++;
-		}
-		else 
-		{
-			StopRecordingAction StopRecord(this);
-			StopRecord.Execute();
-			RecordCount = 0;
-		}
-	}
+	
 }
 
 //===============================================================//
 //						Undo & Redo Functions					//
 //=============================================================//
-Action** ApplicationManager::GetActionList()
+Action** ApplicationManager::GetUndoList()
 {
-	return ActionList;
+	return UndoList;
 }
 
-int& ApplicationManager::GetActionCount()
+int& ApplicationManager::GetActionsToUndoCount()
 {
-	return ActionCount;
+	return ActionsToUndoCount;
 }
 
 
@@ -209,20 +210,28 @@ bool ApplicationManager::CheckUndoCondition(ActionType action)
 
 }
 
+
+//===============================================================//
+//						Recording  Functions					//
+//=============================================================//
 image* ApplicationManager::GetRecordingList() {
 	return RecordingList;
 }
 
-int ApplicationManager::GetRecordCount() {
+int& ApplicationManager::GetRecordCount() {
 	return RecordCount;
 }
 
 void ApplicationManager::setRecording(bool s) {
 	isRecording = s;
 }
-bool ApplicationManager::getRecording()
+bool ApplicationManager::IsRecording()
 {
 	return isRecording;
+}
+bool ApplicationManager::CheckRecordCondition(ActionType ActType)
+{
+	return (isRecording && ActType != TO_START_RECORDING && ActType != TO_STOP_RECORDING && ActType != TO_PLAY_RECORDING && ActType != TO_SAVE_GRAPH && ActType != TO_LOAD_GRAPH && ActType != TO_PLAY && ActType != TO_CLEAR_ALL);
 }
 //==================================================================================//
 //						Figures Management Functions								//
@@ -257,6 +266,10 @@ int ApplicationManager::GetFigCount()
 	return FigCount;
 }
 
+
+//==================================================================//
+//						 Select Functions						   //
+//================================================================//
 void ApplicationManager::SetSelectedFig(CFigure* pFig)
 {
 	SelectedFig = pFig;
@@ -265,6 +278,10 @@ CFigure* ApplicationManager::GetSelectedFig()
 {
 	return SelectedFig;
 }
+
+//==================================================================//
+//						 Deleting Figures Functions				   //
+//================================================================//
 void ApplicationManager::DeleteFigure(CFigure* pFig)
 {
 	for (int i = 0; i < FigCount; i++)
@@ -295,6 +312,10 @@ void ApplicationManager::UpdateInterface() const
 	}
 	//Call Draw function (virtual member fn)
 }
+
+//==================================================================//
+//						 Play Mode Functions				       //
+//================================================================//
 void ApplicationManager::resetHidden()
 {
 	for (int i = 0; i < FigCount; i++) {
@@ -342,6 +363,10 @@ int ApplicationManager::getFigCountByFillAndType(string Type, string fill)
 	return count;
 }
 
+
+//==================================================================//
+//						 Sound  Functions (Bonus)				   //
+//================================================================//
 bool ApplicationManager::getEnableSound()
 {
 	return EnableSound;
@@ -384,9 +409,9 @@ ApplicationManager::~ApplicationManager()
 		if (FigList[i])
 			delete FigList[i];
 
-	for (int i = 0; i < ActionCount; i++)
-		if (ActionList[i])
-			delete ActionList[i];
+	for (int i = 0; i < ActionsToUndoCount; i++)
+		if (UndoList[i])
+			delete UndoList[i];
 	delete pIn;
 	delete pOut;
 	

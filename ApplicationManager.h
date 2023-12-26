@@ -13,21 +13,26 @@ class ApplicationManager
 	enum { MaxFigCount = 200, MaxActions = 100 };	//Max no of figures , Max no of Actions
 
 private:
-	bool EnableSound;
 	int FigCount;		//Actual number of figures
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
-
 	CFigure* SelectedFig; //Pointer to the selected figure
 
-	Action* ActionList[MaxActions];		//List of all actions (Array of pointers)
-	int ActionCount;					//Actual number of actions
+
+	Action* UndoList[MaxActions];		//List of all actions (Array of pointers)
+	int ActionsToUndoCount;					//Actual number of actions
 	
 	bool isRecording;
 	image RecordingList[20];
 	int RecordCount;
+
+	bool EnableSound;
+
+
 	//Pointers to Input and Output classes
 	Input* pIn;
 	Output* pOut;
+
+	
 
 public:
 	ApplicationManager();
@@ -38,45 +43,56 @@ public:
 	ActionType GetUserAction() const;
 	void ExecuteAction(ActionType); //Creates an action and executes it
 	
-	image* GetRecordingList();
-	int GetRecordCount();
 	
+
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
 	CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
 	int GetFigCount();						// Getter for figure count
 
-	void setRecording(bool);
-	bool getRecording();
+
+	// -- Deleting Figures
 	void DeleteFigure(CFigure* pFig);
 	void DeleteAllFigures();
 
 
-	void SaveAll(ofstream& OutFile);
-
-	int GetTypeCount(string P);
 
 	// -- Interface Management Functions
 	Input* GetInput() const; //Return pointer to the input
 	Output* GetOutput() const; //Return pointer to the output
 	void UpdateInterface() const;	//Redraws all the drawing window
 
-	//Play mode Functions///
+
+
+	// -- Play mode Functions
 	void resetHidden();
 	int getFigFillCount(string x);
 	string getFigFillColor(int I);
 	string getFigType(int I);
 	int getFigCountByFillAndType(string Type, string fill);
+	int GetTypeCount(string P);
 
 	// -- Undo & Redo Functions
-	Action** GetActionList();		// Getter for Action list
-	int& GetActionCount();			// Getter for Action count
+	Action** GetUndoList();		// Getter for undo list
+	int& GetActionsToUndoCount();			// Getter for number of actions that can be undone 
 	bool CheckUndoCondition(ActionType action); // checks whether the action is an undo/redo action
 
 	// -- Select Functions
 	void SetSelectedFig(CFigure*);			// Setter for Selected Figure
 	CFigure* GetSelectedFig();				// Getter for Selected Figure
 	
+
+	// -- Recording Functions
+	image* GetRecordingList();
+	int& GetRecordCount();
+	void setRecording(bool);
+	bool IsRecording();
+	bool CheckRecordCondition(ActionType);
+
+	// -- Save Function
+	void SaveAll(ofstream& OutFile); // saves all figures in the figlist
+
+	// -- Sound Functions (Bonus)
 	bool getEnableSound();
 	void setEnableSound(bool s);
 

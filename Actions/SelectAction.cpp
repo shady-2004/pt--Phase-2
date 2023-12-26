@@ -14,7 +14,7 @@ void SelectAction::ReadActionParameters()
 
 	pOut->PrintMessage("Click on a figure:");
 	pIn->GetPointClicked(point.x, point.y);
-	SelectedFig = pManager->GetFigure(point.x, point.y);
+	SelectedFig = pManager->GetFigure(point.x, point.y);		// Get the selected figure by the user
 	
 }
 
@@ -52,5 +52,7 @@ bool SelectAction::Execute()
 			SelectedFig->PrintInfo(pManager->GetOutput());
 		}
 
+
+	return 1;
 }
 

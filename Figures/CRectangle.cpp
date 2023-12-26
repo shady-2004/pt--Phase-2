@@ -35,7 +35,7 @@ void CRectangle::Load(ifstream& InFile) {
 
 void CRectangle::PrintInfo(Output* pOut)
 {
-	pOut->PrintMessage("Figure Type : Rectangle          Figure ID : " + to_string(id) + "       Corner1 : " + to_string(Corner1.x) + "," + to_string(Corner1.y) + "   Corner2: " + to_string(Corner2.x) + "," + to_string(Corner1.y));
+	pOut->PrintMessage("Figure Type : Rectangle     Figure ID : " + to_string(id) + "     Corner1 : " + to_string(Corner1.x) + "," + to_string(Corner1.y) + "     Corner2: " + to_string(Corner2.x) + "," + to_string(Corner1.y));
 
 }
 

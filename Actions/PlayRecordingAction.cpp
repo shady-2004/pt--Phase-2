@@ -18,15 +18,11 @@ bool PlayRecordingAction::Execute()
 	if (count == 0)
 	{
 		pOut->PrintMessage("there is no recording to display ");
-		Sleep(1500);
-		pOut->ClearStatusBar();
 		return 0;
 	}
-	if (pManager->getRecording())
+	if (pManager->IsRecording())
 	{
 		pOut->PrintMessage("Error!! Please stop recording first ");
-		Sleep(1500);
-		pOut->ClearStatusBar();
 		return 0;
 	}
 	image* recordList = pManager->GetRecordingList();
