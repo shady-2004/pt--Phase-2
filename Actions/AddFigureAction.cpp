@@ -7,6 +7,12 @@ AddFigureAction::AddFigureAction(ApplicationManager* pApp) : Action(pApp)
 
 void AddFigureAction::UndoExecution()
 {
+	if (F == pManager->GetSelectedFig())
+	{
+		F->SetSelected(0);
+		pManager->SetSelectedFig(NULL);
+	}
+
 	pManager->DeleteFigure(F);
 }
 

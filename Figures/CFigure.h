@@ -18,7 +18,7 @@ public:
 	CFigure(GfxInfo FigureGfxInfo);
 
 	void SetSelected(bool s);	//select/unselect the figure
-	bool IsSelected() const;	//check whether fig is selected
+	//bool IsSelected() const;	//check whether fig is selected
 
 	virtual void Draw(Output* pOut) const  = 0 ;		//Draw the figure
 	
