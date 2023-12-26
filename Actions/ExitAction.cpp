@@ -17,8 +17,9 @@ void ExitAction::ReadActionParameters()
 	
 }
 
-void ExitAction::Execute()
+bool ExitAction::Execute()
 {
 	ReadActionParameters();
+	return 1;
 }
 

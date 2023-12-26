@@ -29,7 +29,7 @@ void AddHexAction::ReadActionParameters()
 }
 
 //Execute the action
-void AddHexAction::Execute()
+bool AddHexAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
@@ -37,7 +37,7 @@ void AddHexAction::Execute()
 	if (Center.y - 86 < UI.ToolBarHeight || Center.y + 86 > UI.height - UI.StatusBarHeight) //Draw Validation
 	{
 		pManager->GetOutput()->PrintMessage("Error :Can't draw here ");
-		return;
+		return 0;
 	}
 
 	//Create a hexagon with the parameters read from the user
@@ -45,6 +45,7 @@ void AddHexAction::Execute()
 
 	//Add the hexagon to the list of figures
 	pManager->AddFigure(F);
+	return 1;
 }
 
 void AddHexAction::UndoExecution()

@@ -6,6 +6,6 @@ class SwitchToDrawModeAction :public Action
 public:
 	SwitchToDrawModeAction(ApplicationManager* pApp);
 	virtual void ReadActionParameters();
-	virtual void Execute();
+	virtual bool Execute();
 };
 

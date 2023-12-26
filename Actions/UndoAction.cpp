@@ -11,7 +11,7 @@ UndoAction::UndoAction(ApplicationManager* pApp) : Action(pApp)
 {
 }
 
-void UndoAction::Execute()
+bool UndoAction::Execute()
 {
 
 	Action** ActionList = pManager->GetActionList();
@@ -32,7 +32,7 @@ void UndoAction::Execute()
 	if (ActionCount == 0)
 	{
 		pManager->GetOutput()->PrintMessage("No more Actions to Undo!");
-		return;
+		return 0;
 	}
 	ActionList[ActionCount - 1]->UndoExecution();
 	ActionCount--;

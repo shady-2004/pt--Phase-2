@@ -48,12 +48,12 @@ void ChangeFigColorAction::ReadActionParameters()
 
 }
 
-void ChangeFigColorAction::Execute()
+bool ChangeFigColorAction::Execute()
 {
 	SelectedFig = pManager->GetSelectedFig();
 	
 	if (SelectedFig == NULL)
-		return;
+		return 0;
 
 	UndoColor = SelectedFig->GetDrawClr();
 	Previous_UI_Draw_Color = UI.DrawColor;
@@ -61,6 +61,8 @@ void ChangeFigColorAction::Execute()
 
 	SelectedFig->ChngDrawClr(UI.DrawColor);
 	SelectedFig->SetSelected(0);
+
+	return 1;
 }
 
 void ChangeFigColorAction::UndoExecution()

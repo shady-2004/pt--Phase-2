@@ -9,6 +9,6 @@ public:
 
 	virtual void ReadActionParameters(); //Read Parameters
 
-	virtual void Execute(); //Saves the figures
+	virtual bool Execute(); //Saves the figures
 };
 

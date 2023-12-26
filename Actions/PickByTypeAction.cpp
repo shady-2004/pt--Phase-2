@@ -38,7 +38,7 @@ void PickByTypeAction::ReadActionParameters()
 		restart = true;
 	}
 }
-void PickByTypeAction::Execute() {
+bool PickByTypeAction::Execute() {
 	Output* pOut = pManager->GetOutput();
 		srand(time(0));//// This lines to random a shape
 		FigureType = pManager->getFigType((rand() % pManager->GetFigCount()));//Random a shape idx and get its Type to make sure it will no random a shape not drawn
@@ -49,7 +49,7 @@ void PickByTypeAction::Execute() {
 
 	do {
 		ReadActionParameters();
-		if (restart)return;//Close Current game if i choose another
+		if (restart)return 0;//Close Current game if i choose another
 		choosedFig = pManager->GetFigure(p.x, p.y);
 
 		if (choosedFig != NULL) {

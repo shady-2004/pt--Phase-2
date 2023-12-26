@@ -52,13 +52,13 @@ void ChangeFillColorAcion::ReadActionParameters()
 
 }
 
-void ChangeFillColorAcion::Execute()
+bool ChangeFillColorAcion::Execute()
 {
 
 	SelectedFig = pManager->GetSelectedFig();
 
 	if (SelectedFig == NULL)
-		return;
+		return 0;
 
 	UndoColor = SelectedFig->GetFillClr();
 	UndoState = SelectedFig->GetFillState();
@@ -69,6 +69,8 @@ void ChangeFillColorAcion::Execute()
 
 	SelectedFig->ChngFillState(true);
 	SelectedFig->ChngFillClr(UI.FillColor);
+
+	return 1;
 
 }
 

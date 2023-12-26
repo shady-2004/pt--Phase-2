@@ -15,13 +15,13 @@ void SaveAction::ReadActionParameters() {
 	pOut->ClearStatusBar();
 }
 
-void SaveAction::Execute() {
+bool SaveAction::Execute() {
 	ReadActionParameters();
 
 
 	ofstream OutFile;
 	OutFile.open("Saved Data/"+filename+".txt");
-	if(OutFile.fail()) { pManager->GetOutput()->PrintMessage("An error has occured! Please try again!"); return; }
+	if(OutFile.fail()) { pManager->GetOutput()->PrintMessage("An error has occured! Please try again!"); return 0; }
 	OutFile << UI.DrawColor << "\t" << UI.FillColor << endl;
 	pManager->SaveAll(OutFile);
 	pManager->GetOutput()->PrintMessage("Your file has been saved successfully!");

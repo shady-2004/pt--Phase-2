@@ -9,7 +9,7 @@ public:
 
 	virtual void ReadActionParameters(); //Read Parameters
 
-	virtual void Execute();
+	virtual bool Execute();
 
 	void Record();
 };

@@ -15,7 +15,7 @@ class PickByTypeAndFillColorAction :
 public:
     PickByTypeAndFillColorAction(ApplicationManager* pApp);
     virtual void ReadActionParameters();
-    virtual void Execute();
+    virtual bool Execute();
 
 };
 

@@ -34,7 +34,7 @@ void AddRectAction::ReadActionParameters()
 }
 
 //Execute the action
-void AddRectAction::Execute() 
+bool AddRectAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
@@ -42,7 +42,7 @@ void AddRectAction::Execute()
 	if (P1.y <= UI.ToolBarHeight || P1.y > UI.height - UI.StatusBarHeight|| P2.y <= UI.ToolBarHeight || P2.y > UI.height - UI.StatusBarHeight)//Draw Validation
 	{
 		pManager->GetOutput()->PrintMessage("Error :Can't draw here ");
-		return;
+		return 0;
 	}
 	
 	//Create a rectangle with the parameters read from the user
@@ -50,6 +50,7 @@ void AddRectAction::Execute()
 
 	//Add the rectangle to the list of figures
 	pManager->AddFigure(F);
+	return 1;
 }
 
 void AddRectAction::UndoExecution()

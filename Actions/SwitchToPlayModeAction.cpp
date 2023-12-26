@@ -15,11 +15,11 @@ SwitchToPlayModeAction::SwitchToPlayModeAction(ApplicationManager* pApp):Action(
 	 pOut->PrintMessage("Switch to play mode: Click anywhere");
 
  }
-void SwitchToPlayModeAction::Execute()
+ bool SwitchToPlayModeAction::Execute()
 {
 	if (pManager->GetFigCount() == 0) {
 		(pManager->GetOutput())->PrintMessage("Draw Figures before switching to play mode: Click anywhere");
-		return;
+		return 0;
 	}
 	ReadActionParameters();
 	(pManager->GetOutput())->CreatePlayToolBar();  //create the play mode tool bar

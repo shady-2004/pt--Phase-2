@@ -16,7 +16,7 @@ class AddTriAction :
 		virtual void ReadActionParameters();
 
 		//Add triangle to the ApplicationManager
-		virtual void Execute();
+		virtual bool Execute();
 
 		virtual void UndoExecution();
 

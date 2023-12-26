@@ -32,7 +32,7 @@ void AddCircAction::ReadActionParameters()
 }
 
 //Execute the action
-void AddCircAction::Execute()
+bool AddCircAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
@@ -40,7 +40,7 @@ void AddCircAction::Execute()
 	if(Center.y-(sqrt(pow(Center.x - PointOnRadius.x, 2) + pow(Center.y - PointOnRadius.y, 2)))<UI.ToolBarHeight|| Center.y + (sqrt(pow(Center.x - PointOnRadius.x, 2) + pow(Center.y - PointOnRadius.y, 2))) > UI.height - UI.StatusBarHeight)//Draw Validation
 	{
 		pManager->GetOutput()->PrintMessage("Error :Can't draw here ");
-		return;
+		return 0;
 	}
 
 	//Create a circle with the parameters read from the user
@@ -48,6 +48,7 @@ void AddCircAction::Execute()
 
 	//Add the cirlce to the list of figures
 	pManager->AddFigure(F);
+	return 1;
 }
 
 void AddCircAction::UndoExecution()

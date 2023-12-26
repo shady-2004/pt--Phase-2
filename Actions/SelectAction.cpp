@@ -18,14 +18,14 @@ void SelectAction::ReadActionParameters()
 	
 }
 
-void SelectAction::Execute()
+bool SelectAction::Execute()
 {
 	ReadActionParameters();
 
 	if (SelectedFig == NULL)					//User clicks on an empty area
 	{
 		pManager->GetOutput()->PrintMessage("A click on an empty area");
-		return;
+		return 0;
 	}
 
 

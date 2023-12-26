@@ -12,17 +12,19 @@ void DeleteFigureAction::ReadActionParameters()
 	pOut->PrintMessage("Selected Figure is deleted");
 }
 
-void DeleteFigureAction::Execute()
+bool DeleteFigureAction::Execute()
 {
 	temp = pManager->GetSelectedFig();
 	if (temp == NULL)
-		return;
+		return 0;
 
 	ReadActionParameters();
 	
 	pManager->GetSelectedFig()->SetSelected(0);
 	pManager->SetSelectedFig(NULL);
 	pManager->DeleteFigure(temp);
+
+	return 1;
 }
 
 void DeleteFigureAction::UndoExecution()

@@ -27,7 +27,7 @@ void AddSqrAction::ReadActionParameters()
 	pOut->ClearStatusBar();
 }
 //Execute the action
-void AddSqrAction::Execute()
+bool AddSqrAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
@@ -35,7 +35,7 @@ void AddSqrAction::Execute()
 	if (Center.y - 75 < UI.ToolBarHeight || Center.y + 75 > UI.height - UI.StatusBarHeight) //Draw Validation
 	{
 		pManager->GetOutput()->PrintMessage("Error :Can't draw here ");
-			return;
+			return 0;
 	}
 
 	//Create a Square with the parameters read from the user
@@ -43,6 +43,7 @@ void AddSqrAction::Execute()
 
 	//Add the Square to the list of figures
 	pManager->AddFigure(F);
+	return 1;
 }
 
 void AddSqrAction::UndoExecution()

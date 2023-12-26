@@ -33,7 +33,7 @@ void PickByTypeAndFillColorAction::ReadActionParameters()
 	}
 }
 
-void PickByTypeAndFillColorAction::Execute()
+bool PickByTypeAndFillColorAction::Execute()
 {
 	Output* pOut = pManager->GetOutput();
 	srand(time(0));//// This lines to random a shape
@@ -46,7 +46,7 @@ void PickByTypeAndFillColorAction::Execute()
 
 	do {
 		ReadActionParameters();
-		if (restart)return;
+		if (restart)return 0;
 		choosedFig = pManager->GetFigure(p.x, p.y);
 		if (choosedFig != NULL) {
 			if (Fill == (choosedFig->convertFillColorToString())&& FigureType == (choosedFig->getShapeType())) {

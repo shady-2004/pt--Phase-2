@@ -12,14 +12,14 @@ RedoAction::RedoAction(ApplicationManager* pApp) : Action(pApp)
 {
 }
 
-void RedoAction::Execute()
+bool RedoAction::Execute()
 {
 	RedoCount++;
 	if (RedoCount > UndoAction::UndoCount)
 	{
 		pManager->GetOutput()->PrintMessage("No more Actions to redo!");
 		RedoCount--;
-		return;
+		return 0;
 	}
 
 

@@ -21,12 +21,12 @@ void LoadAction::ReadActionParameters() {
 	pOut->ClearDrawArea();
 }
 
-void LoadAction::Execute() {
+bool LoadAction::Execute() {
 	ReadActionParameters();
 	int num;
 	ifstream InFile;
 	InFile.open("Saved Data/" + filename + ".txt");
-	if (InFile.fail()) { pManager->GetOutput()->PrintMessage("No such file to load. Enter a valid file!"); return; }
+	if (InFile.fail()) { pManager->GetOutput()->PrintMessage("No such file to load. Enter a valid file!"); return 0; }
 	InFile >> &UI.DrawColor >> &UI.FillColor >> num;
 	while (num--) {
 		string shape;

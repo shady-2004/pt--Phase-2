@@ -12,7 +12,9 @@ void StopRecordingAction::ReadActionParameters() {
 	pOut->PrintMessage("Recording stopped!");
 }
 
-void StopRecordingAction::Execute() {
+bool StopRecordingAction::Execute() {
 	ReadActionParameters();
 	Output* pOut = pManager->GetOutput();
+
+	return 1;
 }

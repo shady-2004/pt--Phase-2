@@ -16,7 +16,7 @@ class AddHexAction :
 		void ReadActionParameters();
 
 		//Add Hexagon to the ApplicationManager
-		virtual void Execute();
+		virtual bool Execute();
 
 		virtual void UndoExecution();
 

@@ -148,9 +148,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	//Execute the created action
 	if (pAct != NULL)
 	{
-		pAct->Execute();//Execute
+		bool result = pAct->Execute();//Execute
 
-		if (CheckUndoCondition(ActType))
+		if (CheckUndoCondition(ActType) && result)
 		{
 			UndoAction::UndoCount = 0;
 			RedoAction::RedoCount = 0;

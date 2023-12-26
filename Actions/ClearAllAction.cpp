@@ -14,7 +14,7 @@ void ClearAllAction::ReadActionParameters()
 	pOut->CreateDrawToolBar();
 }
 
-void ClearAllAction::Execute()
+bool ClearAllAction::Execute()
 {
 	ReadActionParameters();
 
@@ -47,5 +47,6 @@ void ClearAllAction::Execute()
 	int RecordCount = pManager->GetRecordCount();
 
 
+	return 1;
 
 }

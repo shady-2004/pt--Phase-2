@@ -13,7 +13,7 @@ class AddSqrAction:public AddFigureAction
 		virtual void ReadActionParameters();
 
 		//Add Square to the ApplicationManager
-		virtual void Execute();
+		virtual bool Execute();
 
 		virtual void UndoExecution();
 

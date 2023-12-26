@@ -10,7 +10,7 @@ public:
 
 	void ReadActionParameters();
 
-	virtual void Execute();
+	virtual bool Execute();
 
 	virtual void UndoExecution();
 

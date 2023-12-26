@@ -11,14 +11,14 @@ void StartRecordingAction::ReadActionParameters() {
 	pOut->PrintMessage("Started Recording!");
 }
 
-void StartRecordingAction::Execute() {
+bool StartRecordingAction::Execute() {
 	ReadActionParameters();
 	Output* pOut = pManager->GetOutput();
 	int FigCount = pManager->GetFigCount();
 	if (!RecordCount || FigCount) {
 		pOut->PrintMessage("Error! Can only record after a clear all or at the start of the program.");
 		pManager->setRecording(false);
-		return;
+		return 0;
 	}
 }
 

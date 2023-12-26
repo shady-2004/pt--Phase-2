@@ -37,7 +37,7 @@ void AddTriAction::ReadActionParameters()
 	pOut->ClearStatusBar();
 
 }
-void AddTriAction::Execute()
+bool AddTriAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
@@ -45,7 +45,7 @@ void AddTriAction::Execute()
 	if (P1.y <= UI.ToolBarHeight || P1.y > UI.height - UI.StatusBarHeight || P2.y <= UI.ToolBarHeight || P2.y > UI.height - UI.StatusBarHeight || P3.y <= UI.ToolBarHeight || P3.y > UI.height - UI.StatusBarHeight) //Draw validation
 	{
 		pManager->GetOutput()->PrintMessage("Error :Can't draw here ");
-		return;
+		return 0;
 	}
 	
 
@@ -54,6 +54,7 @@ void AddTriAction::Execute()
 
 	//Add the Triangle to the list of figures
 	pManager->AddFigure(F);
+	return 1;
 }
 
 void AddTriAction::UndoExecution()

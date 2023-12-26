@@ -16,15 +16,17 @@ void MoveFigureAction::ReadActionParameters()
 
 }
 
-void MoveFigureAction::Execute()
+bool MoveFigureAction::Execute()
 {
 	SelectedFig = pManager->GetSelectedFig();
 	if (SelectedFig == NULL)
-		return;
+		return 0;
 
 	ReadActionParameters();
 	
 	SelectedFig->MoveFigure(x, y);
+
+	return 1;
 }
 
 void MoveFigureAction::UndoExecution()
