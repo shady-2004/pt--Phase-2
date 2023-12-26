@@ -34,7 +34,6 @@ bool LoadAction::Execute()
 	ClearAction->Execute();									// everything
 	delete ClearAction;										// before
 	ClearAction = NULL;										// loading
-	pManager->GetOutput()->ClearStatusBar();
 
 	int num;	// number of figures
 	ifstream InFile;
