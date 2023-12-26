@@ -12,11 +12,6 @@ RedoAction::RedoAction(ApplicationManager* pApp) : Action(pApp)
 {
 }
 
-void RedoAction::ReadActionParameters()
-{
-
-}
-
 void RedoAction::Execute()
 {
 	RedoCount++;

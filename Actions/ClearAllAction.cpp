@@ -9,10 +9,15 @@ ClearAllAction::ClearAllAction(ApplicationManager* pApp) : Action(pApp)
 
 void ClearAllAction::ReadActionParameters()
 {
+	Output* pOut = pManager->GetOutput();
+	pOut->PrintMessage("Clear All");
+	pOut->CreateDrawToolBar();
 }
 
 void ClearAllAction::Execute()
 {
+	ReadActionParameters();
+
 	// Reverting Changes of UI info
 	UI.DrawColor = BLUE;
 	UI.FillColor = GREEN;
@@ -20,6 +25,8 @@ void ClearAllAction::Execute()
 
 	// Deleting ALl Figures
 	pManager->DeleteAllFigures();
+	//Setting the selected figure to NULL
+	pManager->SetSelectedFig(NULL);
 
 
 	// Deleting undo & redo history

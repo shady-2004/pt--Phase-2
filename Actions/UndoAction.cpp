@@ -10,9 +10,6 @@ int UndoAction::UndoCount = 0;
 UndoAction::UndoAction(ApplicationManager* pApp) : Action(pApp)
 {
 }
-void UndoAction::ReadActionParameters()
-{
-}
 
 void UndoAction::Execute()
 {

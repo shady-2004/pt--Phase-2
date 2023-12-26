@@ -7,7 +7,7 @@ public:
 	static int RedoCount;
 	RedoAction(ApplicationManager* pApp);
 
-	void ReadActionParameters();
+	void ReadActionParameters() {};
 
 	virtual void Execute();
 };

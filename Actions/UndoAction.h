@@ -9,7 +9,7 @@ public:
 	static int UndoCount;
 	UndoAction(ApplicationManager* pApp);
 
-	void ReadActionParameters();
+	void ReadActionParameters() {};
 
 	virtual void Execute();
 };
