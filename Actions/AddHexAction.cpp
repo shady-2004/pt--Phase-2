@@ -3,7 +3,8 @@
 #include"../GUI/Input.h"
 #include"../GUI/Output.h"
 #include"../ApplicationManager.h"
-
+#include<Windows.h>
+#include<MMSystem.h>
 AddHexAction::AddHexAction(ApplicationManager* pApp):AddFigureAction(pApp)
 {
 }
@@ -45,6 +46,9 @@ bool AddHexAction::Execute()
 
 	//Add the hexagon to the list of figures
 	pManager->AddFigure(F);
+	//display figure`s sound if the sound is enabled
+	if(pManager->getEnableSound())          // check if the sound is enabled 
+	PlaySound(TEXT("hexagon.wav"), NULL, SND_ASYNC);
 	return 1;
 }
 

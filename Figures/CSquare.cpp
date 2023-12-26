@@ -1,5 +1,6 @@
 #include "CSquare.h"
 #include <fstream>
+#include<conio.h>
 
 CSquare::CSquare() {
 	ShapeType = "Square";
@@ -17,6 +18,7 @@ void CSquare::Draw(Output* pOut) const
 	//Call Output::DrawSqr to draw a square on the screen
 	if (!Hidden)
 	pOut->DrawSqr(Center, FigGfxInfo, Selected);
+	
 }
 
 void CSquare::Save(ofstream& OutFile) {
@@ -48,7 +50,6 @@ void CSquare::MoveFigure(int a, int b)  // a function that modify the center of 
 	PreviousCenter = Center;
 	Center.x = a;
 	Center.y = b;
-
 }
 
 void CSquare::ReturnFigure()
@@ -58,5 +59,6 @@ void CSquare::ReturnFigure()
 
 CSquare::~CSquare()
 {
+	PlaySound(0, 0, 0);
 }
 

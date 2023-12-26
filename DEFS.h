@@ -42,11 +42,11 @@ enum ActionType //The actions supported (you can add more if needed)
 	PICK_FIG_FILL_COLOR,
 	PICK_FIG_TYPE_AND_FILL_COLOR,
 
+	TO_SOUND,
 	TO_EXIT,			//Exit
 	EMPTY,			//A click on empty place in the toolbar
 	DRAWING_AREA,	//A click on the drawing area
-	STATUS			//A click on the status bar
-
+	STATUS,			//A click on the status bar
 	///TODO: Add the other action types of the two modes
 };
 

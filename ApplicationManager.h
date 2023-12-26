@@ -13,6 +13,7 @@ class ApplicationManager
 	enum { MaxFigCount = 200, MaxActions = 100 };	//Max no of figures , Max no of Actions
 
 private:
+	bool EnableSound;
 	int FigCount;		//Actual number of figures
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 
@@ -46,7 +47,7 @@ public:
 	int GetFigCount();						// Getter for figure count
 
 	void setRecording(bool);
-	
+	bool getRecording();
 	void DeleteFigure(CFigure* pFig);
 	void DeleteAllFigures();
 
@@ -75,6 +76,9 @@ public:
 	// -- Select Functions
 	void SetSelectedFig(CFigure*);			// Setter for Selected Figure
 	CFigure* GetSelectedFig();				// Getter for Selected Figure
+	
+	bool getEnableSound();
+	void setEnableSound(bool s);
 
 };
 #endif

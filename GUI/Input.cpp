@@ -75,6 +75,7 @@ ActionType Input::GetUserAction() const
 			case SAVE_GRAPH: return TO_SAVE_GRAPH;
 			case LOAD_GRAPH: return TO_LOAD_GRAPH;
 			case SWITCH_PLAY: return TO_PLAY;
+			case SOUND: return TO_SOUND;
 			case EXIT: return TO_EXIT;
 
 			default: return EMPTY;	//A click on empty place in desgin toolbar

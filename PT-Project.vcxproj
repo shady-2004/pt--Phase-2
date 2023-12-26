@@ -114,7 +114,7 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>odbc32.lib;odbccp32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>.\Debug/$(TargetName).exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -197,6 +197,8 @@
     <ClCompile Include="Actions\StopRecordingAction.cpp" />
     <ClCompile Include="Actions\UndoAction.cpp" />
     <ClCompile Include="Actions\MoveFigureAction.cpp" />
+    <ClCompile Include="Actions\PlayRecordingAction.cpp" />
+    <ClCompile Include="Actions\SoundAction.cpp" />
     <ClCompile Include="Actions\RedoAction.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -256,6 +258,8 @@
     <ClInclude Include="Actions\SaveAction.h" />
     <ClInclude Include="Actions\StartRecordingAction.h" />
     <ClInclude Include="Actions\StopRecordingAction.h" />
+    <ClInclude Include="Actions\PlayRecordingAction.h" />
+    <ClInclude Include="Actions\SoundAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

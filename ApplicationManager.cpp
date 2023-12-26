@@ -21,9 +21,10 @@
 #include "Actions/UndoAction.h"
 #include "Actions/DeleteFigureAction.h"
 #include "Actions\MoveFigureAction.h"
+#include "Actions/SoundAction.h"
+#include"Actions/PlayRecordingAction.h"
 #include "Actions/RedoAction.h"
 #include "Actions/ClearAllAction.h"
-
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -43,6 +44,7 @@ ApplicationManager::ApplicationManager()
 		FigList[i] = NULL;	
 	for (int i = 0; i < MaxActions; i++)
 		ActionList[i] = NULL;
+	EnableSound = true;
 }
 
 //==================================================================================//
@@ -135,6 +137,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case TO_DELETE:
 		pAct = new DeleteFigureAction(this);
 		break;
+	case TO_SOUND:
+		pAct = new SoundAction(this);
+		break;
+	case TO_PLAY_RECORDING :
+		pAct = new PlayRecordingAction(this);
+		break;
 	case TO_EXIT:
 		///create ExitAction here
 		pAct = new ExitAction(this);
@@ -211,6 +219,10 @@ int ApplicationManager::GetRecordCount() {
 
 void ApplicationManager::setRecording(bool s) {
 	isRecording = s;
+}
+bool ApplicationManager::getRecording()
+{
+	return isRecording;
 }
 //==================================================================================//
 //						Figures Management Functions								//
@@ -328,6 +340,16 @@ int ApplicationManager::getFigCountByFillAndType(string Type, string fill)
 			count++;
 	}
 	return count;
+}
+
+bool ApplicationManager::getEnableSound()
+{
+	return EnableSound;
+}
+
+void ApplicationManager::setEnableSound(bool s)
+{
+	EnableSound = s;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////

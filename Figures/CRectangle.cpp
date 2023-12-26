@@ -19,6 +19,7 @@ void CRectangle::Draw(Output* pOut) const
 	//Call Output::DrawRect to draw a rectangle on the screen
  if(!Hidden)	
 	pOut->DrawRect(Corner1, Corner2, FigGfxInfo, Selected);
+ //PlaySound(TEXT("rectangle.wav"), NULL, SND_SYNC);
 }
 
 void CRectangle::Save(ofstream& OutFile) {
@@ -50,10 +51,10 @@ void CRectangle::MoveFigure(int a, int b)  // a function that modify the center 
 	PreviousCorner1 = Corner1;
 	PreviousCorner2 = Corner2;
 	
-	// a and b represent the center of the moved triangle //
-// calculated the width of the triangle
+// a and b represent the center of the moved rectangle //
+    // calculated the width of the rectangle
 	int width = abs(Corner1.y - Corner2.y);
-	// calculated the length of the triangle
+	// calculated the length of the rectangle
 	int length = abs(Corner1.x - Corner2.x);
 	//set the first corner to the new corner
 	Corner1.x = a - length / 2.0;

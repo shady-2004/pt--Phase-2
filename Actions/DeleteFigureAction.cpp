@@ -14,19 +14,25 @@ void DeleteFigureAction::ReadActionParameters()
 
 bool DeleteFigureAction::Execute()
 {
+	Output* pOut = pManager->GetOutput();
 	temp = pManager->GetSelectedFig();
 	if (temp == NULL)
+	{
+		pOut->PrintMessage(" Error : Please select a figure first ");
+		Sleep(1000);
+		pOut->ClearStatusBar();
 		return 0;
-
+	}
 	ReadActionParameters();
 	
 	temp->SetSelected(0);
 	pManager->SetSelectedFig(NULL);
 	pManager->DeleteFigure(temp);
-
 	return 1;
 }
 
+
+	
 void DeleteFigureAction::UndoExecution()
 {
 	pManager->AddFigure(temp);

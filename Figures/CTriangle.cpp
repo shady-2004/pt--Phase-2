@@ -19,6 +19,7 @@ void CTriangle::Draw(Output* pOut) const
 	//Call Output::DrawTri to draw a triangle on the screen	
 	if (!Hidden)
 	pOut->DrawTri(vertex1, vertex2, vertex3, FigGfxInfo, Selected);
+	//PlaySound(TEXT("triangle.wav"), NULL, SND_SYNC);
 }
 
 
@@ -85,7 +86,27 @@ void CTriangle::MoveFigure(int a, int b)  // a function that modify the center o
 	// set vertex3 coordinates
 	vertex3.x = vertex3.x + c2x - c1x;
 	vertex3.y = vertex3.y + c2y - c1y;
-
+	// calculate max and min for x cord and y cord >> needed for validition
+	int MaxX = vertex1.x;
+	int MaxY = vertex1.y;
+	int MinX = vertex1.x;
+	int MinY = vertex1.y;
+	if (vertex2.x > MaxX)
+		MaxX = vertex2.x;
+	else if(vertex2.x < MinX)
+		MinX = vertex2.x;
+	if (vertex3.x > MaxX)
+		MaxX = vertex3.x;
+	else if (vertex3.x < MinX)
+		MinX = vertex3.x;
+	if (vertex2.y > MaxY)
+		MaxY = vertex2.y;
+	else if (vertex2.y < MinY)
+		MinY = vertex2.y;
+	if (vertex3.y > MaxY)
+		MaxY = vertex3.y;
+	else if (vertex3.y < MinY)
+		MinY = vertex3.y;
 }
 
 void CTriangle::ReturnFigure()

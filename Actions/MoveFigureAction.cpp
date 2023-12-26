@@ -18,10 +18,13 @@ void MoveFigureAction::ReadActionParameters()
 
 bool MoveFigureAction::Execute()
 {
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 	SelectedFig = pManager->GetSelectedFig();
-	if (SelectedFig == NULL)
+	if (SelectedFig == NULL) {
+		pOut->PrintMessage(" Error! Please select a figure first ");
 		return 0;
-
+	}
 	ReadActionParameters();
 	
 	SelectedFig->MoveFigure(x, y);

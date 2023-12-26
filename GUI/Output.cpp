@@ -104,8 +104,8 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[SAVE_GRAPH] = "images\\MenuItems\\save graph.jpg";
 	MenuItemImages[LOAD_GRAPH] = "images\\MenuItems\\load graph.jpg";
 	MenuItemImages[SWITCH_PLAY] = "images\\MenuItems\\switch to play mode.jpg";
+	MenuItemImages[SOUND] = "images\\MenuItems\\sound.jpg";
 	MenuItemImages[EXIT] = "images\\MenuItems\\exit.jpg";
-
 	//TODO: Prepare images for each menu item and add it to the list
 
 	//Draw menu item one image at a time
@@ -249,6 +249,7 @@ void Output::DrawRect(const Point P1,const Point P2, GfxInfo RectGfxInfo, bool s
 	else
 		style = FRAME;
 	pWind->DrawRectangle(P1.x, P1.y, P2.x, P2.y, style);
+
 
 }
 

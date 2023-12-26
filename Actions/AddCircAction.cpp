@@ -2,7 +2,10 @@
 #include"../GUI/Input.h"
 #include"../GUI/Output.h"
 #include"../ApplicationManager.h"
+#include<Windows.h>
+#include<MMSystem.h>
 #include<cmath>
+
 AddCircAction::AddCircAction(ApplicationManager* pApp) :AddFigureAction(pApp)
 {
 }
@@ -48,6 +51,9 @@ bool AddCircAction::Execute()
 
 	//Add the cirlce to the list of figures
 	pManager->AddFigure(F);
+	//display figure`s sound if the sound is enabled
+	if (pManager->getEnableSound())          // check if the sound is enabled 
+	PlaySound(TEXT("circle.wav"), NULL, SND_ASYNC);
 	return 1;
 }
 
