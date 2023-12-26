@@ -187,6 +187,10 @@ int ApplicationManager::GetRecordCount() {
 void ApplicationManager::setRecording(bool s) {
 	isRecording = s;
 }
+bool ApplicationManager::getRecording()
+{
+	return isRecording;
+}
 //==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//

@@ -52,7 +52,7 @@ public:
 	CFigure* GetSelectedFig();				// Getter for Selected Figure
 
 	void setRecording(bool);
-	
+	bool getRecording();
 	void DeleteFigure(CFigure* pFig);
 
 

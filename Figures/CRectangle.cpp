@@ -48,16 +48,13 @@ bool CRectangle::IsFound(int x, int y)
 
 void CRectangle::Move(int a, int b, Output* pOut,Input* pIn)  // a function that modify the center of the selected figure to the new center 
 {
-	//bool flag = true;
-	/*while (1)
-	{*/
 	PreviousCorner1 = Corner1;
 	PreviousCorner2 = Corner2;
 	
-// a and b represent the center of the moved triangle //
-    // calculated the width of the triangle
+// a and b represent the center of the moved rectangle //
+    // calculated the width of the rectangle
 	int width = abs(Corner1.y - Corner2.y);
-	// calculated the length of the triangle
+	// calculated the length of the rectangle
 	int length = abs(Corner1.x - Corner2.x);
 	//set the first corner to the new corner
 	Corner1.x = a - length / 2.0;
@@ -66,18 +63,19 @@ void CRectangle::Move(int a, int b, Output* pOut,Input* pIn)  // a function that
 	Corner2.x = a + length / 2.0;
 	Corner2.y = b + width / 2.0;
 	
-	 /*if (!(Corner1.y >= UI.ToolBarHeight && Corner1.y < UI.height - UI.StatusBarHeight && Corner2.y >= UI.ToolBarHeight && Corner2.y < UI.height - UI.StatusBarHeight))
-	 {
-		pOut->PrintMessage("Can't move the rectangle here!! Enter a valid point:");
-		pIn->GetPointClicked(a, b);*/
-		//flag = true;
-	 //}
-	 /*else
+	////////Move validation to check the rectangle will move to right position/////
+	if (!(Corner1.y >= UI.ToolBarHeight && Corner1.y < UI.height - UI.StatusBarHeight && Corner2.y >= UI.ToolBarHeight && Corner2.y < UI.height - UI.StatusBarHeight&&Corner1.x>=0&&Corner2.x>=0&&Corner1.x<=UI.width&&Corner2.x<=UI.width))
+	{
+		pOut->PrintMessage("Error! Can't move the rectangle here!!");
+		Corner1 = PreviousCorner1;
+		Corner2 = PreviousCorner2;
+	}
+	 
+	 else
 	 {
 		 pOut->ClearStatusBar();
-		 break;
-	 }*/
-	/*}*/
+		
+	 }
 
 }
 

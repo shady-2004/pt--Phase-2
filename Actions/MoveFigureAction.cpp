@@ -27,7 +27,7 @@ void MoveFigureAction::Execute()
 	}
 	ReadActionParameters();
 	
-	SelectedFig->MoveFigure(x, y, pOut, pIn);
+	SelectedFig->Move(x, y, pOut, pIn);
 }
 
 void MoveFigureAction::UndoExecution()
